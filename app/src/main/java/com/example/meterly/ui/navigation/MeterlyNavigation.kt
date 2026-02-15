@@ -4,39 +4,30 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.meterly.ui.screens.splashScreen.SplashScreen
-
-enum class Screen {
-    SPLASH,
-    AUTH_LOGIN,
-    HOME
+sealed class Screen(val route: String) {
+    object Splash : Screen("splash_screen")
+    object Home : Screen("home_screen")
 }
 
 @Composable
-fun MeterlyNavigation(
-    navController: NavHostController = rememberNavController()
-) {
+fun AppNavigation(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SPLASH.name
+        startDestination = Screen.Splash.route
     ) {
-        composable(route = Screen.SPLASH.name) {
+        // Екран Сплешу
+        composable(Screen.Splash.route) {
             SplashScreen(
-                onNavigateToNextScreen = {
-                    navController.navigate(Screen.AUTH_LOGIN.name) {
-                        popUpTo(Screen.SPLASH.name) { inclusive = true }
+                onAnimationFinished = {
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Splash.route) { inclusive = true }
                     }
                 }
             )
         }
 
-        composable(route = Screen.AUTH_LOGIN.name) {
-            // Поки пусто
-        }
-
-        composable(route = Screen.HOME.name) {
-            // Поки пусто
+        composable(Screen.Home.route) {
         }
     }
 }
