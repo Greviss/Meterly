@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.registrationScreen
+package com.example.meterly.ui.components.enterScreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TopSection(){
+fun TopSection2(){
     Column(
         modifier = Modifier
             .fillMaxWidth(),

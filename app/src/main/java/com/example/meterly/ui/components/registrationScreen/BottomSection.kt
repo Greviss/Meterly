@@ -49,7 +49,7 @@ fun BottomSection(
         ) {
             Text(
                 text = "Вже маєте акаунт?",
-                fontSize = 14.sp,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
             )
@@ -73,12 +73,13 @@ fun BottomSection(
             Text(
                 text = "Реєструючись, ви погоджуєтесь з",
                 fontSize = 14.sp,
-                color = Color.White.copy(alpha = 0.75f)
+                color = Color(0xFF9E9E9E)
             )
 
             Row(
                 horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.height(38.dp)
             ) {
                 TextButton(onClick = onTermsClick) {
                     Text(
@@ -91,13 +92,12 @@ fun BottomSection(
                 Text(
                     text = "та",
                     fontSize = 12.sp,
-                    color = Color.White.copy(alpha = 0.8f),
-                    modifier = Modifier.padding(horizontal = 4.dp)
+                    color = Color.White.copy(alpha = 0.8f)
                 )
                 TextButton(onClick = onPrivacyClick) {
                     Text(
                         text = "Політикою конфіденційності",
-                        fontSize = 12.sp,
+                        fontSize = 11.sp,
                         color = Color.Blue,
                         fontWeight = FontWeight.Bold
                     )

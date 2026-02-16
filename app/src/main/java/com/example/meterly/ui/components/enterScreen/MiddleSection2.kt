@@ -1,18 +1,18 @@
-package com.example.meterly.ui.components.registrationScreen
+package com.example.meterly.ui.components.enterScreen
 
+import android.R
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -31,79 +31,48 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun MiddleSection(
-    name: String = "",
-    address: String = "",
-    accountNumber: String = "",
-    onNameChange: (String) -> Unit = {},
+@Preview
+fun MiddleSection2(
+    address2: String = "",
+    phoneNumber: String = "",
     onAddressChange: (String) -> Unit = {},
-    onAccountChange: (String) -> Unit = {},
-    onRegisterClick: (String, String, String) -> Unit = { _, _, _ -> }
+    onPhoneNumberChange: (String) -> Unit = {},
+    OnEnterClick: (String, String) -> Unit = { _, _ ->}
 ){
     val focusManager = LocalFocusManager.current
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .wrapContentSize()
+        modifier = Modifier.fillMaxSize().padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Card(
-            modifier = Modifier.fillMaxWidth().height(400.dp),
+        Card(modifier = Modifier.fillMaxWidth().height(325.dp),
             shape = RoundedCornerShape(24.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White)
-
+            colors = CardDefaults.cardColors(Color.White)
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize().padding(16.dp)
-            ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize().padding(16.dp)) {
                 Text(
-                    text = "Реєстрація",
+                    text = "Вхід",
                     fontSize = 28.sp,
-                    color = Color.Black,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = name,
-                    onValueChange = onNameChange,
-                    label = { Text("ПІБ") },
-                    placeholder = { Text("Іванов Іван Іванович") },
-                    leadingIcon = {
-                        Icon(Icons.Default.Person, contentDescription = null)
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color(0xFF1E88E5),
-                        focusedLabelColor = Color(0xFF1E88E5)
-                    ),
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Next
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onNext = {focusManager.moveFocus(FocusDirection.Down)}
-                    ),
-                    singleLine = true
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                OutlinedTextField(
-                    value = address,
+                    value = address2,
                     onValueChange = onAddressChange,
-                    label = { Text("Адреса проживання") },
-                    placeholder = { Text("вул. Хрещатик, 1, кв. 10") },
+                    label = {Text("Адреса проживання")},
+                    placeholder = {Text("вул. Хрещатик, 1, кв. 10")},
                     leadingIcon = {
-                        Icon(Icons.Default.LocationOn, contentDescription = null)
+                        Icon(Icons.Default.Phone, null)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
@@ -124,12 +93,12 @@ fun MiddleSection(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = accountNumber,
-                    onValueChange = onAccountChange,
-                    label = { Text("Номер телефону") },
-                    placeholder = { Text("0971111111") },
+                    value = phoneNumber,
+                    onValueChange = onPhoneNumberChange,
+                    label = {Text("Номер телефону")},
+                    placeholder = {Text("+380971111111")},
                     leadingIcon = {
-                        Icon(Icons.Default.Phone, contentDescription = null)
+                        Icon(Icons.Default.LocationOn, null)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
@@ -137,9 +106,8 @@ fun MiddleSection(
                         focusedBorderColor = Color(0xFF1E88E5),
                         focusedLabelColor = Color(0xFF1E88E5)
                     ),
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Next
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
                     ),
                     keyboardActions = KeyboardActions(
                         onNext = {focusManager.moveFocus(FocusDirection.Down)}
@@ -149,13 +117,12 @@ fun MiddleSection(
 
                 Spacer(modifier = Modifier.height(36.dp))
 
-                Button(
-                    onClick = {
-                        if (name.isNotBlank() && address.isNotBlank() && accountNumber.length == 10) {
-                            onRegisterClick(name, address, accountNumber)
-                        }
-                    },
-                    enabled = name.isNotBlank() && address.isNotBlank() && accountNumber.length == 10,
+                Button(onClick = {
+                    if (address2.isNotBlank() && phoneNumber.length == 10){
+                        OnEnterClick(address2, phoneNumber)
+                    }
+                },
+                    enabled = address2.isNotBlank() && phoneNumber.length == 10,
                     modifier = Modifier.fillMaxWidth().height(60.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
@@ -169,8 +136,8 @@ fun MiddleSection(
                     )
                 ) {
                     Text(
-                        text = "Зареєструватися",
-                        fontSize = 18.sp,
+                        text = "Увійти",
+                        fontSize = 20.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White
                     )
