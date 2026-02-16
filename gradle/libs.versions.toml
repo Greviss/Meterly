@@ -9,9 +9,11 @@ activityCompose = "1.12.4"
 kotlin = "2.3.10"
 composeBom = "2026.02.00"
 lottieCompose = "6.7.1"
+materialIconsExtended = "1.7.8"
 navigationCompose = "2.9.7"
 
 [libraries]
+androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
