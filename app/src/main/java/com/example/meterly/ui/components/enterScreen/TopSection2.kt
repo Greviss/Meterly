@@ -20,8 +20,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun TopSection2(){
     Column(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(

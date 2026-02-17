@@ -1,4 +1,4 @@
-package com.example.meterly.ui.screens.authentification
+package com.example.meterly.ui.screens.authentication
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -31,9 +31,9 @@ fun RegisterScreen(
     onPrivacyClick: () -> Unit = {},
     onTermsClick: () -> Unit = {}
 ) {
-    var name by remember {mutableStateOf("")}
-    var address by remember {mutableStateOf("")}
-    var accountNumber by remember {mutableStateOf("")}
+    var nameReg by remember {mutableStateOf("")}
+    var addressReg by remember {mutableStateOf("")}
+    var phoneNumberReg by remember {mutableStateOf("")}
 
     Box(
         modifier = Modifier
@@ -52,22 +52,23 @@ fun RegisterScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             MiddleSection (
-                name = name,
-                address = address,
-                accountNumber = accountNumber,
-                onNameChange = { name = it },
-                onAddressChange = { address = it },
-                onAccountChange = {
-                    // Тільки цифри, максимум 10
+                nameReg = nameReg,
+                addressReg = addressReg,
+                phoneNumberReg = phoneNumberReg,
+                onNameRegChange = { nameReg = it },
+                onAddressRegChange = { addressReg = it },
+                onPhoneRegChange = {
                     if (it.length <= 10 && it.all { char -> char.isDigit() }) {
-                        accountNumber = it
+                        phoneNumberReg = it
                     }
                 }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            BottomSection()
+            BottomSection(
+                onLoginClick = onLoginClick
+            )
         }
     }
 }

@@ -28,6 +28,7 @@ fun BottomSection(
                 modifier = Modifier.weight(1f),
                 color = Color.White.copy(alpha = 0.5f)
             )
+
             Text(
                 text = "або",
                 modifier = Modifier.padding(horizontal = 16.dp),
@@ -35,6 +36,7 @@ fun BottomSection(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
+
             HorizontalDivider(
                 modifier = Modifier.weight(1f),
                 color = Color.White.copy(alpha = 0.5f)

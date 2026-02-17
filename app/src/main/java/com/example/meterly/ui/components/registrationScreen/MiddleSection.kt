@@ -36,12 +36,12 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun MiddleSection(
-    name: String = "",
-    address: String = "",
-    accountNumber: String = "",
-    onNameChange: (String) -> Unit = {},
-    onAddressChange: (String) -> Unit = {},
-    onAccountChange: (String) -> Unit = {},
+    nameReg: String = "",
+    addressReg: String = "",
+    phoneNumberReg: String = "",
+    onNameRegChange: (String) -> Unit = {},
+    onAddressRegChange: (String) -> Unit = {},
+    onPhoneRegChange: (String) -> Unit = {},
     onRegisterClick: (String, String, String) -> Unit = { _, _, _ -> }
 ){
     val focusManager = LocalFocusManager.current
@@ -72,8 +72,8 @@ fun MiddleSection(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = name,
-                    onValueChange = onNameChange,
+                    value = nameReg,
+                    onValueChange = onNameRegChange,
                     label = { Text("ПІБ") },
                     placeholder = { Text("Іванов Іван Іванович") },
                     leadingIcon = {
@@ -98,8 +98,8 @@ fun MiddleSection(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = address,
-                    onValueChange = onAddressChange,
+                    value = addressReg,
+                    onValueChange = onAddressRegChange,
                     label = { Text("Адреса проживання") },
                     placeholder = { Text("вул. Хрещатик, 1, кв. 10") },
                     leadingIcon = {
@@ -124,10 +124,10 @@ fun MiddleSection(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = accountNumber,
-                    onValueChange = onAccountChange,
+                    value = phoneNumberReg,
+                    onValueChange = onPhoneRegChange,
                     label = { Text("Номер телефону") },
-                    placeholder = { Text("0971111111") },
+                    placeholder = { Text("+380 00 000 00 00") },
                     leadingIcon = {
                         Icon(Icons.Default.Phone, contentDescription = null)
                     },
@@ -151,11 +151,11 @@ fun MiddleSection(
 
                 Button(
                     onClick = {
-                        if (name.isNotBlank() && address.isNotBlank() && accountNumber.length == 10) {
-                            onRegisterClick(name, address, accountNumber)
+                        if (nameReg.isNotBlank() && addressReg.isNotBlank() && phoneNumberReg.length == 10) {
+                            onRegisterClick(nameReg, addressReg, phoneNumberReg)
                         }
                     },
-                    enabled = name.isNotBlank() && address.isNotBlank() && accountNumber.length == 10,
+                    enabled = nameReg.isNotBlank() && addressReg.isNotBlank() && phoneNumberReg.length == 10,
                     modifier = Modifier.fillMaxWidth().height(60.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(

@@ -1,7 +1,5 @@
 package com.example.meterly.ui.components.enterScreen
 
-import android.R
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,17 +29,15 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-@Preview
 fun MiddleSection2(
-    address2: String = "",
-    phoneNumber: String = "",
-    onAddressChange: (String) -> Unit = {},
-    onPhoneNumberChange: (String) -> Unit = {},
+    addressEnt: String = "",
+    phoneNumberEnt: String = "",
+    onAddressEntChange: (String) -> Unit = {},
+    onPhoneEntChange: (String) -> Unit = {},
     OnEnterClick: (String, String) -> Unit = { _, _ ->}
 ){
     val focusManager = LocalFocusManager.current
@@ -67,8 +63,8 @@ fun MiddleSection2(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = address2,
-                    onValueChange = onAddressChange,
+                    value = addressEnt,
+                    onValueChange = onAddressEntChange,
                     label = {Text("Адреса проживання")},
                     placeholder = {Text("вул. Хрещатик, 1, кв. 10")},
                     leadingIcon = {
@@ -93,10 +89,10 @@ fun MiddleSection2(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = phoneNumber,
-                    onValueChange = onPhoneNumberChange,
+                    value = phoneNumberEnt,
+                    onValueChange = onPhoneEntChange,
                     label = {Text("Номер телефону")},
-                    placeholder = {Text("+380971111111")},
+                    placeholder = {Text("+380 00 000 00 00")},
                     leadingIcon = {
                         Icon(Icons.Default.LocationOn, null)
                     },
@@ -118,11 +114,11 @@ fun MiddleSection2(
                 Spacer(modifier = Modifier.height(36.dp))
 
                 Button(onClick = {
-                    if (address2.isNotBlank() && phoneNumber.length == 10){
-                        OnEnterClick(address2, phoneNumber)
+                    if (addressEnt.isNotBlank() && phoneNumberEnt.length == 10){
+                        OnEnterClick(addressEnt, phoneNumberEnt)
                     }
                 },
-                    enabled = address2.isNotBlank() && phoneNumber.length == 10,
+                    enabled = addressEnt.isNotBlank() && phoneNumberEnt.length == 10,
                     modifier = Modifier.fillMaxWidth().height(60.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
