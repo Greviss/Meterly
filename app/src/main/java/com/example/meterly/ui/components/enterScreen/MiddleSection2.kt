@@ -1,5 +1,6 @@
-package com.example.meterly.ui.components.enterScreen
+package com.example.meterly.ui.components.authentication.enterScreen
 
+import com.example.meterly.ui.components.authentication.registrationScreen.PhoneVisualTransformation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,16 +44,22 @@ fun MiddleSection2(
     val focusManager = LocalFocusManager.current
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Card(modifier = Modifier.fillMaxWidth().height(325.dp),
+        Card(modifier = Modifier
+            .fillMaxWidth()
+            .height(325.dp),
             shape = RoundedCornerShape(24.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             colors = CardDefaults.cardColors(Color.White)
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize().padding(16.dp)) {
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)) {
                 Text(
                     text = "Вхід",
                     fontSize = 28.sp,
@@ -64,11 +71,18 @@ fun MiddleSection2(
 
                 OutlinedTextField(
                     value = addressEnt,
-                    onValueChange = onAddressEntChange,
+                    onValueChange = { input ->
+                        val prefix = "Вул. "
+                        if(input.startsWith(prefix)){
+                            onAddressEntChange(input)
+                        } else if(input.length < prefix.length){
+                            onAddressEntChange(prefix)
+                        }
+                    },
                     label = {Text("Адреса проживання")},
                     placeholder = {Text("вул. Хрещатик, 1, кв. 10")},
                     leadingIcon = {
-                        Icon(Icons.Default.Phone, null)
+                        Icon(Icons.Default.LocationOn, null)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
@@ -90,11 +104,15 @@ fun MiddleSection2(
 
                 OutlinedTextField(
                     value = phoneNumberEnt,
-                    onValueChange = onPhoneEntChange,
+                    onValueChange = { input ->
+                        val digitOnly = input.filter { it.isDigit() }
+                        if (digitOnly.length <= 9){
+                            onPhoneEntChange(digitOnly)
+                        }
+                    },
                     label = {Text("Номер телефону")},
-                    placeholder = {Text("+380 00 000 00 00")},
                     leadingIcon = {
-                        Icon(Icons.Default.LocationOn, null)
+                        Icon(Icons.Default.Phone, null)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
@@ -102,24 +120,30 @@ fun MiddleSection2(
                         focusedBorderColor = Color(0xFF1E88E5),
                         focusedLabelColor = Color(0xFF1E88E5)
                     ),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next
                     ),
                     keyboardActions = KeyboardActions(
                         onNext = {focusManager.moveFocus(FocusDirection.Down)}
                     ),
-                    singleLine = true
+                    singleLine = true,
+                    visualTransformation = PhoneVisualTransformation()
                 )
 
                 Spacer(modifier = Modifier.height(36.dp))
 
+                val isFormValid = addressEnt.length >= 7 &&
+                        phoneNumberEnt.length == 9
+
                 Button(onClick = {
-                    if (addressEnt.isNotBlank() && phoneNumberEnt.length == 10){
-                        OnEnterClick(addressEnt, phoneNumberEnt)
+                    if (isFormValid){
+                        OnEnterClick(addressEnt, "+380$phoneNumberEnt")
                     }
                 },
-                    enabled = addressEnt.isNotBlank() && phoneNumberEnt.length == 10,
-                    modifier = Modifier.fillMaxWidth().height(60.dp),
+                    enabled = addressEnt.isNotBlank() && phoneNumberEnt.length == 9,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF1E88E5),

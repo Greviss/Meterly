@@ -52,7 +52,9 @@ fun MiddleSection(
             .wrapContentSize()
     ) {
         Card(
-            modifier = Modifier.fillMaxWidth().height(400.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(400.dp),
             shape = RoundedCornerShape(24.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
@@ -60,7 +62,9 @@ fun MiddleSection(
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize().padding(16.dp)
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
             ) {
                 Text(
                     text = "Реєстрація",
@@ -99,7 +103,14 @@ fun MiddleSection(
 
                 OutlinedTextField(
                     value = addressReg,
-                    onValueChange = onAddressRegChange,
+                    onValueChange = { input ->
+                        val prefix = "Вул. "
+                        if (input.startsWith(prefix)) {
+                            onAddressRegChange(input)
+                        } else if (input.length < prefix.length){
+                            onAddressRegChange(prefix)
+                        }
+                    },
                     label = { Text("Адреса проживання") },
                     placeholder = { Text("вул. Хрещатик, 1, кв. 10") },
                     leadingIcon = {
@@ -125,9 +136,13 @@ fun MiddleSection(
 
                 OutlinedTextField(
                     value = phoneNumberReg,
-                    onValueChange = onPhoneRegChange,
+                    onValueChange = { input ->
+                        val digitOnly = input.filter { it.isDigit() }
+                        if (digitOnly.length <= 9){
+                            onPhoneRegChange(digitOnly)
+                        }
+                    },
                     label = { Text("Номер телефону") },
-                    placeholder = { Text("+380 00 000 00 00") },
                     leadingIcon = {
                         Icon(Icons.Default.Phone, contentDescription = null)
                     },
@@ -138,25 +153,32 @@ fun MiddleSection(
                         focusedLabelColor = Color(0xFF1E88E5)
                     ),
                     keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
+                        keyboardType = KeyboardType.Number,
                         imeAction = ImeAction.Next
                     ),
                     keyboardActions = KeyboardActions(
                         onNext = {focusManager.moveFocus(FocusDirection.Down)}
                     ),
-                    singleLine = true
+                    singleLine = true,
+                    visualTransformation = PhoneVisualTransformation()
                 )
 
                 Spacer(modifier = Modifier.height(36.dp))
 
+                val isFormValid = nameReg.trim().split("").filter { it.isNotBlank() }.size >= 2 &&
+                        addressReg.length > 7 &&
+                        phoneNumberReg.length == 9
+
                 Button(
                     onClick = {
-                        if (nameReg.isNotBlank() && addressReg.isNotBlank() && phoneNumberReg.length == 10) {
-                            onRegisterClick(nameReg, addressReg, phoneNumberReg)
+                        if (isFormValid) {
+                            onRegisterClick(nameReg, addressReg, "+380$phoneNumberReg")
                         }
                     },
-                    enabled = nameReg.isNotBlank() && addressReg.isNotBlank() && phoneNumberReg.length == 10,
-                    modifier = Modifier.fillMaxWidth().height(60.dp),
+                    enabled = nameReg.isNotBlank() && addressReg.isNotBlank() && phoneNumberReg.length == 9,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF1E88E5),
