@@ -18,7 +18,6 @@ val Black = Color(0xFF000000)
 fun PrimaryGradient() = Brush.verticalGradient(
     colors = listOf(PrimaryBlue, LightBlue)
 )
-
-fun SecondaryGradient() = Brush.horizontalGradient(
-    colors = listOf(LightBlue, PrimaryBlue)
+fun SecondaryGradient() = Brush.verticalGradient(
+    colors = listOf(White, PrimaryBlue)
 )

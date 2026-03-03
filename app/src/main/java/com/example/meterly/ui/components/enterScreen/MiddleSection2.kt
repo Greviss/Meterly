@@ -1,6 +1,6 @@
-package com.example.meterly.ui.components.authentication.enterScreen
+package com.example.meterly.ui.components.enterScreen
 
-import com.example.meterly.ui.components.authentication.registrationScreen.PhoneVisualTransformation
+import com.example.meterly.ui.components.registrationScreen.PhoneVisualTransformation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
