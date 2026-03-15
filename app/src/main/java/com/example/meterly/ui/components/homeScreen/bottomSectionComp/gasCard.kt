@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -28,7 +29,7 @@ fun GasCard() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp, vertical = 8.dp),
+            .padding(horizontal = 20.dp, vertical = 5.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         colors = CardDefaults.cardColors(containerColor = Color.LightGray)
@@ -41,7 +42,7 @@ fun GasCard() {
                 Image(
                     painter = painterResource(id = R.drawable.icon_gas),
                     contentDescription = null,
-                    modifier = Modifier.size(50.dp)
+                    modifier = Modifier.size(35.dp)
                 )
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -49,19 +50,20 @@ fun GasCard() {
                 Column {
                     Text(
                         text = "Газ",
-                        fontSize = 24.sp,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.Black
+                        color = Color.Black,
+                        modifier = Modifier.padding(bottom = 8.dp)
                     )
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = "До сплати: ",
-                            fontSize = 16.sp,
+                            fontSize = 14.sp,
                             color = Color.DarkGray
                         )
                         Text(
                             text = "0 грн.",
-                            fontSize = 16.sp,
+                            fontSize = 14.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Color(0xFF4CAF50)
                         )
@@ -69,13 +71,23 @@ fun GasCard() {
                 }
             }
 
-            Text(
-                text = "Не оплачено",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Red,
-                modifier = Modifier.align(Alignment.TopEnd)
-            )
+            Card(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .align(Alignment.TopEnd),
+                shape = RoundedCornerShape(8.dp),
+                elevation = CardDefaults.cardElevation(4.dp),
+                colors = CardDefaults.cardColors(Color(0xFFEC8078))
+            ) {
+                Text(
+                    text = "Не оплачено",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Red,
+                    modifier = Modifier
+                        .padding(6.dp)
+                )
+            }
         }
     }
 }

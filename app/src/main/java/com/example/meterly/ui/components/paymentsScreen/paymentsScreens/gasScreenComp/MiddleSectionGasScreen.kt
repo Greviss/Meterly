@@ -47,8 +47,7 @@ fun MiddleSectionGasScreen(
     ) {
         Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(325.dp),
+                .wrapContentSize(),
             shape = RoundedCornerShape(24.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
@@ -61,7 +60,7 @@ fun MiddleSectionGasScreen(
             ) {
                 Text(
                     text = "Введіть дані показників",
-                    fontSize = 24.sp,
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black,
                     modifier = Modifier.padding(top = 16.dp)
@@ -120,7 +119,8 @@ fun MiddleSectionGasScreen(
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(65.dp),
+                        .height(65.dp)
+                        .padding(bottom = 16.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF1E88E5),

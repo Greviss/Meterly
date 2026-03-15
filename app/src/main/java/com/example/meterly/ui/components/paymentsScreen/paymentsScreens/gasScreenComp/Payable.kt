@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.sp
 fun Payable(){
     Card(
         modifier = Modifier
-            .width(140.dp)
-            .height(100.dp),
+            .width(120.dp)
+            .height(80.dp),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         colors = CardDefaults.cardColors(containerColor = Color.LightGray)
@@ -35,14 +35,14 @@ fun Payable(){
         ) {
             Text(
                 text = "До сплати:",
-                fontSize = 20.sp,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black,
                 modifier = Modifier.padding(top = 12.dp))
 
             Text(
                 text = "0 грн.",
-                fontSize = 20.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black,
                 modifier = Modifier.padding(top = 18.dp)

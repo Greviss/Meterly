@@ -123,6 +123,9 @@ fun MiddleSection2(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next
                     ),
+                    supportingText = {
+                        Text("${phoneNumberEnt.length}/9 цифр")
+                    },
                     keyboardActions = KeyboardActions(
                         onNext = {focusManager.moveFocus(FocusDirection.Down)}
                     ),
@@ -157,7 +160,7 @@ fun MiddleSection2(
                 ) {
                     Text(
                         text = "Увійти",
-                        fontSize = 20.sp,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White
                     )

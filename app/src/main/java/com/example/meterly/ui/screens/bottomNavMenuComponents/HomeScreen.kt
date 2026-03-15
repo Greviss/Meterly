@@ -53,8 +53,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = nu
             Card(
                 modifier = Modifier
                     .wrapContentSize()
-                    .height(575.dp)
-                    .padding(horizontal = 18.dp)
+                    .padding(horizontal = 20.dp)
                     .padding(bottom = 16.dp),
                 shape = RoundedCornerShape(size = 24.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
@@ -63,7 +62,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = nu
                 Text(
                     modifier = Modifier.padding(20.dp),
                     text = "Статус платежів",
-                    fontSize = 24.sp,
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
