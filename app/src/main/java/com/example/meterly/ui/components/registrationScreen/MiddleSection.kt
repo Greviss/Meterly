@@ -23,6 +23,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -43,13 +47,12 @@ fun MiddleSection(
     onAddressRegChange: (String) -> Unit = {},
     onPhoneRegChange: (String) -> Unit = {},
     onRegisterClick: (String, String, String) -> Unit = { _, _, _ -> }
-){
+) {
     val focusManager = LocalFocusManager.current
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .wrapContentSize()
+        modifier = Modifier.wrapContentSize()
     ) {
         Card(
             modifier = Modifier
@@ -58,7 +61,6 @@ fun MiddleSection(
             shape = RoundedCornerShape(24.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
-
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -94,7 +96,7 @@ fun MiddleSection(
                         imeAction = ImeAction.Next
                     ),
                     keyboardActions = KeyboardActions(
-                        onNext = {focusManager.moveFocus(FocusDirection.Down)}
+                        onNext = { focusManager.moveFocus(FocusDirection.Down) }
                     ),
                     singleLine = true
                 )
@@ -107,7 +109,7 @@ fun MiddleSection(
                         val prefix = "Вул. "
                         if (input.startsWith(prefix)) {
                             onAddressRegChange(input)
-                        } else if (input.length < prefix.length){
+                        } else if (input.length < prefix.length) {
                             onAddressRegChange(prefix)
                         }
                     },
@@ -127,7 +129,7 @@ fun MiddleSection(
                         imeAction = ImeAction.Next
                     ),
                     keyboardActions = KeyboardActions(
-                        onNext = {focusManager.moveFocus(FocusDirection.Down)}
+                        onNext = { focusManager.moveFocus(FocusDirection.Down) }
                     ),
                     singleLine = true
                 )
@@ -138,13 +140,16 @@ fun MiddleSection(
                     value = phoneNumberReg,
                     onValueChange = { input ->
                         val digitOnly = input.filter { it.isDigit() }
-                        if (digitOnly.length <= 9){
+                        if (digitOnly.length <= 9) {
                             onPhoneRegChange(digitOnly)
                         }
                     },
                     label = { Text("Номер телефону") },
                     leadingIcon = {
                         Icon(Icons.Default.Phone, contentDescription = null)
+                    },
+                    supportingText = {
+                        Text("${phoneNumberReg.length}/9 цифр")
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
@@ -154,18 +159,18 @@ fun MiddleSection(
                     ),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
-                        imeAction = ImeAction.Next
+                        imeAction = ImeAction.Done
                     ),
                     keyboardActions = KeyboardActions(
-                        onNext = {focusManager.moveFocus(FocusDirection.Down)}
+                        onDone = { focusManager.clearFocus() }
                     ),
                     singleLine = true,
                     visualTransformation = PhoneVisualTransformation()
                 )
 
-                Spacer(modifier = Modifier.height(36.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
-                val isFormValid = nameReg.trim().split("").filter { it.isNotBlank() }.size >= 2 &&
+                val isFormValid = nameReg.trim().split(" ").filter { it.isNotBlank() }.size >= 2 &&
                         addressReg.length > 7 &&
                         phoneNumberReg.length == 9
 
@@ -175,14 +180,14 @@ fun MiddleSection(
                             onRegisterClick(nameReg, addressReg, "+380$phoneNumberReg")
                         }
                     },
-                    enabled = nameReg.isNotBlank() && addressReg.isNotBlank() && phoneNumberReg.length == 9,
+                    enabled = isFormValid,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(60.dp),
+                        .height(75.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF1E88E5),
-                        contentColor = Color.Gray,
+                        contentColor = Color.White,
                         disabledContainerColor = Color(0xFFBDBDBD),
                         disabledContentColor = Color(0xFF9E9E9E)
                     ),

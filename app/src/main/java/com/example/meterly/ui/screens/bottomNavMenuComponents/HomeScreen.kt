@@ -23,17 +23,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.meterly.ui.components.homeScreen.bottomSectionComp.BottomSectionHomeScreen
 import com.example.meterly.ui.components.homeScreen.middleSectionComp.MiddleSectionHomeScreen
 import com.example.meterly.ui.components.homeScreen.TopSectionHomeScreen
 import com.example.meterly.ui.theme.SecondaryGradient
 
-@Preview
 @Composable
-
-fun HomeScreen(){
+@Preview
+fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = null){
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(SecondaryGradient())
     ) {
@@ -47,13 +48,14 @@ fun HomeScreen(){
 
             MiddleSectionHomeScreen()
 
-            Spacer(modifier = Modifier.height(28.dp))
+            Spacer(modifier = Modifier.height(15.dp))
 
             Card(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .wrapContentSize()
                     .height(575.dp)
-                    .padding(horizontal = 18.dp),
+                    .padding(horizontal = 18.dp)
+                    .padding(bottom = 16.dp),
                 shape = RoundedCornerShape(size = 24.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
                 colors = CardDefaults.cardColors(Color.White)

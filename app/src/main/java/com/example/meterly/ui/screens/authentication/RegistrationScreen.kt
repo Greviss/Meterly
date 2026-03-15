@@ -61,7 +61,8 @@ fun RegisterScreen(
                     if (it.length <= 10 && it.all { char -> char.isDigit() }) {
                         phoneNumberReg = it
                     }
-                }
+                },
+                onRegisterClick = onRegisterClick
             )
 
             Spacer(modifier = Modifier.height(16.dp))
