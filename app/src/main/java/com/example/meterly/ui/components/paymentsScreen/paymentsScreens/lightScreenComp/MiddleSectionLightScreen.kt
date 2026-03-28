@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp
+package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.lightScreenComp
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,11 +31,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun MiddleSectionGasScreen(
-    monthBegin: String = "",
-    onMonthBeginChange: (String) -> Unit = {},
-    monthEnd: String = "",
-    onMonthEndChange: (String) -> Unit = {}
+fun MiddleSectionLightScreen(
+    monthBegin3: String = "",
+    onMonthBeginChange3: (String) -> Unit = {},
+    monthEnd3: String = "",
+    onMonthEndChange3: (String) -> Unit = {}
 ){
     Column(
         modifier = Modifier.wrapContentSize(),
@@ -65,8 +65,8 @@ fun MiddleSectionGasScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 OutlinedTextField(
-                    value = monthBegin,
-                    onValueChange = onMonthBeginChange,
+                    value = monthBegin3,
+                    onValueChange = onMonthBeginChange3,
                     label = { Text("Початок місяця") },
                     placeholder = { Text("00000") },
                     leadingIcon = {
@@ -88,8 +88,8 @@ fun MiddleSectionGasScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = monthEnd,
-                    onValueChange = onMonthEndChange,
+                    value = monthEnd3,
+                    onValueChange = onMonthEndChange3,
                     label = { Text("Кінець місяця") },
                     placeholder = { Text("00000") },
                     leadingIcon = { Icon(Icons.Default.CalendarMonth, contentDescription = null) },
@@ -131,7 +131,7 @@ fun MiddleSectionGasScreen(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White
-                ) }
+                    ) }
             }
         }
     }

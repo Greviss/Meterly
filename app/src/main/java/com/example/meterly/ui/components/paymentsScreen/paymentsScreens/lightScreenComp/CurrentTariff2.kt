@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp
+package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.lightScreenComp
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun currentTariff(){
+fun currentTariff2(){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -55,7 +55,7 @@ fun currentTariff(){
                     modifier = Modifier.padding(top = 10.dp, start = 6.dp, bottom = 10.dp))
 
                 Text(
-                    text = "7,96 грн./м³",
+                    text = "4.32 грн./Кв",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color(0xFF4CAF50),

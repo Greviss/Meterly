@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp
+package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.sewerageScreenComp
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,11 +31,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun MiddleSectionGasScreen(
-    monthBegin: String = "",
-    onMonthBeginChange: (String) -> Unit = {},
-    monthEnd: String = "",
-    onMonthEndChange: (String) -> Unit = {}
+fun MiddleSectionSewerageScreen(
+    monthBegin4: String = "",
+    onMonthBeginChange4: (String) -> Unit = {},
+    monthEnd4: String = "",
+    onMonthEndChange4: (String) -> Unit = {}
 ){
     Column(
         modifier = Modifier.wrapContentSize(),
@@ -65,8 +65,8 @@ fun MiddleSectionGasScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 OutlinedTextField(
-                    value = monthBegin,
-                    onValueChange = onMonthBeginChange,
+                    value = monthBegin4,
+                    onValueChange = onMonthBeginChange4,
                     label = { Text("Початок місяця") },
                     placeholder = { Text("00000") },
                     leadingIcon = {
@@ -88,8 +88,8 @@ fun MiddleSectionGasScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = monthEnd,
-                    onValueChange = onMonthEndChange,
+                    value = monthEnd4,
+                    onValueChange = onMonthEndChange4,
                     label = { Text("Кінець місяця") },
                     placeholder = { Text("00000") },
                     leadingIcon = { Icon(Icons.Default.CalendarMonth, contentDescription = null) },
@@ -131,7 +131,7 @@ fun MiddleSectionGasScreen(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White
-                ) }
+                    ) }
             }
         }
     }

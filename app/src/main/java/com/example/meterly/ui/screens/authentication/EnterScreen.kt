@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -21,8 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.example.meterly.ui.components.enterScreen.BottomSection2
 import com.example.meterly.ui.components.enterScreen.MiddleSection2
 import com.example.meterly.ui.components.enterScreen.TopSection2
-import com.example.meterly.ui.components.registrationScreen.BottomSection
-import com.example.meterly.ui.theme.PrimaryGradient
+import com.example.meterly.ui.theme.primaryGradient
 
 @Composable
 @Preview
@@ -40,7 +38,7 @@ fun EnterScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(PrimaryGradient())
+            .background(primaryGradient())
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

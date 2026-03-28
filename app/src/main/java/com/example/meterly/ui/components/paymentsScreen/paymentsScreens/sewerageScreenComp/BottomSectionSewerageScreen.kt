@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp
+package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.sewerageScreenComp
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun BottomSectionGasScreen(){
+fun BottomSectionSewerageScreen(){
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -59,7 +59,7 @@ fun BottomSectionGasScreen(){
                             .wrapContentSize(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        costs()
+                        costs3()
                     }
 
                     Column(
@@ -67,10 +67,10 @@ fun BottomSectionGasScreen(){
                             .wrapContentSize(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        payable()
+                        payable3()
                     }
                 }
-                currentTariff()
+                currentTariff3()
             }
         }
     }

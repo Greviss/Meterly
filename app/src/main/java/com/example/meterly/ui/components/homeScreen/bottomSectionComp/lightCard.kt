@@ -1,10 +1,13 @@
 package com.example.meterly.ui.components.homeScreen.bottomSectionComp
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,18 +26,26 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meterly.R
+import com.example.meterly.ui.theme.whiteButtonGradient
 
 @Composable
 fun LightCard() {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp, vertical = 5.dp),
+            .fillMaxSize()
+            .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 5.dp)
+            .border(
+                width = 2.dp,
+                color = Color.LightGray.copy(0.75f),
+                shape = RoundedCornerShape(16.dp)
+            ),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
-        Box(modifier = Modifier.padding(16.dp)) {
+        Box(modifier = Modifier
+            .background(brush = whiteButtonGradient())
+            .padding(16.dp)) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
@@ -42,7 +53,7 @@ fun LightCard() {
                 Image(
                     painter = painterResource(id = R.drawable.icon_light),
                     contentDescription = null,
-                    modifier = Modifier.size(35.dp)
+                    modifier = Modifier.size(40.dp)
                 )
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -50,20 +61,20 @@ fun LightCard() {
                 Column {
                     Text(
                         text = "Світло",
-                        fontSize = 18.sp,
+                        fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black,
-                        modifier = Modifier.padding(bottom = 8.dp)
+                        modifier = Modifier.padding(bottom = 4.dp)
                     )
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = "До сплати: ",
-                            fontSize = 14.sp,
+                            fontSize = 15.sp,
                             color = Color.DarkGray
                         )
                         Text(
                             text = "0 грн.",
-                            fontSize = 14.sp,
+                            fontSize = 15.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Color(0xFF4CAF50)
                         )
@@ -81,11 +92,11 @@ fun LightCard() {
             ) {
                 Text(
                     text = "Не оплачено",
-                    fontSize = 12.sp,
+                    fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Red,
                     modifier = Modifier
-                        .padding(6.dp)
+                        .padding(start = 5.dp, end = 5.dp, top = 3.dp, bottom = 3.dp)
                 )
             }
         }

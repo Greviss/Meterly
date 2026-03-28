@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.example.meterly.ui.components.registrationScreen.BottomSection
 import com.example.meterly.ui.components.registrationScreen.MiddleSection
 import com.example.meterly.ui.components.registrationScreen.TopSection
-import com.example.meterly.ui.theme.PrimaryGradient
+import com.example.meterly.ui.theme.primaryGradient
 
 @Composable
 @Preview
@@ -38,7 +38,7 @@ fun RegisterScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(PrimaryGradient())
+            .background(primaryGradient())
     ) {
         Column(
             modifier = Modifier

@@ -36,7 +36,7 @@ fun MiddleSectionHomeScreen() {
             .background(Color.Transparent)
     ) {
         Image(
-            painter = painterResource(R.drawable.home2),
+            painter = painterResource(R.drawable.home4),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
@@ -47,7 +47,7 @@ fun MiddleSectionHomeScreen() {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .wrapContentSize()
-                .padding(top = 75.dp)
+                .padding(top = 125.dp)
         ) {
             Row(
                 horizontalArrangement = Arrangement.Center,

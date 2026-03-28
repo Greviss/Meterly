@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
@@ -24,11 +23,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.meterly.ui.components.homeScreen.bottomSectionComp.BottomSectionHomeScreen
 import com.example.meterly.ui.components.homeScreen.middleSectionComp.MiddleSectionHomeScreen
 import com.example.meterly.ui.components.homeScreen.TopSectionHomeScreen
-import com.example.meterly.ui.theme.SecondaryGradient
+import com.example.meterly.ui.theme.secondaryGradient
 
 @Composable
 @Preview
@@ -36,7 +34,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = nu
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(SecondaryGradient())
+            .background(secondaryGradient())
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -48,7 +46,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = nu
 
             MiddleSectionHomeScreen()
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             Card(
                 modifier = Modifier
@@ -62,7 +60,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = nu
                 Text(
                     modifier = Modifier.padding(20.dp),
                     text = "Статус платежів",
-                    fontSize = 20.sp,
+                    fontSize = 22.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )

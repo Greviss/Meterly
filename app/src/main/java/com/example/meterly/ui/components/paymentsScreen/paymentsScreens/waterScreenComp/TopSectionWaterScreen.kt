@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp
+package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.waterScreenComp
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -22,10 +22,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meterly.R
+import com.example.meterly.ui.navigation.Screen
 
 @Composable
-fun TopSectionGasScreen(onLeftArrowGas: () -> Unit = {},
-                        onRightArrowGas: () -> Unit = {}){
+fun TopSectionWaterScreen(onLeftArrowWater: () -> Unit = {},
+                          onRightArrowWater: () -> Unit = {}){
     Column(
         modifier = Modifier
             .wrapContentSize()
@@ -33,7 +34,7 @@ fun TopSectionGasScreen(onLeftArrowGas: () -> Unit = {},
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(R.drawable.icon_gas),
+            painter = painterResource(R.drawable.icon_water),
             modifier = Modifier
                 .size(100.dp)
                 .padding(bottom = 16.dp),
@@ -47,7 +48,7 @@ fun TopSectionGasScreen(onLeftArrowGas: () -> Unit = {},
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
-                onClick = onLeftArrowGas,
+                onClick = onLeftArrowWater,
                 modifier = Modifier.size(50.dp)
             ) {
                 Icon(
@@ -57,14 +58,14 @@ fun TopSectionGasScreen(onLeftArrowGas: () -> Unit = {},
             }
 
             Text(
-                text = "Газ",
+                text = "Вода",
                 fontSize = 32.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black
             )
 
             IconButton(
-                onClick = onRightArrowGas,
+                onClick = onRightArrowWater,
                 modifier = Modifier.size(50.dp)
             ) {
                 Icon(

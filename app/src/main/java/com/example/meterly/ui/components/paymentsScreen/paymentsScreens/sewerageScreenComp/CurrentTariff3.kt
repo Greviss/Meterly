@@ -1,7 +1,9 @@
-package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp
+package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.sewerageScreenComp
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,9 +21,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.ui.theme.whiteButtonGradient
 
 @Composable
-fun currentTariff(){
+fun currentTariff3(){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -42,25 +45,31 @@ fun currentTariff(){
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             colors = CardDefaults.cardColors(containerColor = Color.Transparent)
         ) {
-            Row(
-                modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(brush = whiteButtonGradient())
             ) {
-                Text(
-                    text = "Поточний тариф:",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.Black,
-                    modifier = Modifier.padding(top = 10.dp, start = 6.dp, bottom = 10.dp))
+                Row(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Поточний тариф:",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.Black,
+                        modifier = Modifier.padding(top = 10.dp, start = 6.dp, bottom = 10.dp))
 
-                Text(
-                    text = "7,96 грн./м³",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color(0xFF4CAF50),
-                    modifier = Modifier.padding(top = 12.dp, end = 6.dp, bottom = 10.dp)
-                )
+                    Text(
+                        text = "31,8 грн./м³",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF4CAF50),
+                        modifier = Modifier.padding(top = 12.dp, end = 6.dp, bottom = 10.dp)
+                    )
+                }
             }
         }
     }

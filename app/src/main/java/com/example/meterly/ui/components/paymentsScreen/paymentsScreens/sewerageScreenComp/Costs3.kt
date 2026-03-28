@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp
+package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.sewerageScreenComp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.example.meterly.ui.theme.whiteButtonGradient
 
 @Composable
-fun costs(){
+fun costs3(){
     Card(
         modifier = Modifier
             .width(130.dp)
@@ -36,11 +36,10 @@ fun costs(){
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(brush = whiteButtonGradient())
-        ) {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .background(brush = whiteButtonGradient())) {
+
             Column(
                 modifier = Modifier
                     .fillMaxSize(),

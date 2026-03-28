@@ -18,24 +18,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp.BottomSectionGasScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp.MiddleSectionGasScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp.TopSectionGasScreen
-import com.example.meterly.ui.theme.SecondaryGradient
+import com.example.meterly.ui.theme.secondaryGradient
 
 @Composable
-fun GasScreen(navController: NavHostController? = null,
-                   onMonthBeginChange: (String) -> Unit = { _ -> },
-                   onMonthEndChange: (String) -> Unit = { _ -> }) {
+@Preview
+fun GasScreen(
+    onLeftArrowGas: () -> Unit = {},
+    onRightArrowGas: () -> Unit = {}
+) {
     var monthBegin by remember { mutableStateOf("") }
     var monthEnd by remember { mutableStateOf("") }
-
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(SecondaryGradient())
+            .background(secondaryGradient())
     ) {
         Column(
             modifier = Modifier
@@ -44,15 +44,18 @@ fun GasScreen(navController: NavHostController? = null,
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TopSectionGasScreen()
+            TopSectionGasScreen(
+                onLeftArrowGas = onLeftArrowGas,
+                onRightArrowGas = onRightArrowGas
+            )
 
             Spacer(modifier = Modifier.height(24.dp))
 
             MiddleSectionGasScreen(
                 monthBegin = monthBegin,
-                onMonthBeginChange = onMonthBeginChange,
+                onMonthBeginChange = { monthBegin = it },
                 monthEnd = monthEnd,
-                onMonthEndChange = onMonthEndChange
+                onMonthEndChange = { monthEnd = it }
             )
 
             Spacer(modifier = Modifier.height(16.dp))

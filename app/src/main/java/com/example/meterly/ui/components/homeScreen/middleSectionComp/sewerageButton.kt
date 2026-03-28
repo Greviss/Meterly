@@ -28,7 +28,7 @@ fun sewerageButton(){
         modifier = Modifier.size(110.dp),
         shape = RoundedCornerShape(20.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF6941AF),
+            containerColor = Color(0xFF73CAFF),
             contentColor = Color.White
         )
     ) {

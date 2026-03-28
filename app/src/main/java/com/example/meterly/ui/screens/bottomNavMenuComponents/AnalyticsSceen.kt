@@ -6,14 +6,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.example.meterly.ui.theme.SecondaryGradient
+import com.example.meterly.ui.theme.secondaryGradient
 
 @Composable
 fun AnalyticsScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(SecondaryGradient())
+            .background(secondaryGradient())
     ) {
         null
     }

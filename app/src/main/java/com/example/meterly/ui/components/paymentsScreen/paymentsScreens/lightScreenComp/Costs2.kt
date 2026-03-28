@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp
+package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.lightScreenComp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.example.meterly.ui.theme.whiteButtonGradient
 
 @Composable
-fun costs(){
+fun costs2(){
     Card(
         modifier = Modifier
             .width(130.dp)
@@ -54,7 +54,7 @@ fun costs(){
                     modifier = Modifier.padding(top = 12.dp))
 
                 Text(
-                    text = "0 м³",
+                    text = "0 Кв",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color(0xFF4FA6EC),
