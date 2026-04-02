@@ -20,7 +20,7 @@ fun TopSectionHomeScreen(){
     ) {
         Text(
             text = "userName",
-            fontSize = 32.sp,
+            fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black
         )

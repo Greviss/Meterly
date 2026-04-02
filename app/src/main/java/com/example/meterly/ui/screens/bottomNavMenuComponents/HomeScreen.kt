@@ -23,8 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.meterly.ui.components.homeScreen.bottomSectionComp.BottomSectionHomeScreen
-import com.example.meterly.ui.components.homeScreen.middleSectionComp.MiddleSectionHomeScreen
+import com.example.meterly.ui.components.homeScreen.BottomSectionHomeScreen
+import com.example.meterly.ui.components.homeScreen.MiddleSectionHomeScreen
 import com.example.meterly.ui.components.homeScreen.TopSectionHomeScreen
 import com.example.meterly.ui.theme.secondaryGradient
 
@@ -60,7 +60,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = nu
                 Text(
                     modifier = Modifier.padding(20.dp),
                     text = "Статус платежів",
-                    fontSize = 22.sp,
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )

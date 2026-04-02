@@ -17,7 +17,7 @@ import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 
 @Composable
-fun TopSectionProfileScreen(imageUrl: String? = null, navController: NavHostController?){
+fun TopSectionProfileScreen(imageUrl: String? = null){
     AsyncImage(
         model = imageUrl,
         contentDescription = null,

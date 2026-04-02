@@ -58,7 +58,7 @@ fun TopSectionGasScreen(onLeftArrowGas: () -> Unit = {},
 
             Text(
                 text = "Газ",
-                fontSize = 32.sp,
+                fontSize = 24.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black
             )

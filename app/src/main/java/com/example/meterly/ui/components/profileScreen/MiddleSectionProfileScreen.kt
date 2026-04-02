@@ -1,6 +1,5 @@
 package com.example.meterly.ui.components.profileScreen
 
-import android.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +17,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.meterly.ui.components.profileScreen.personalDatacomponents.PersonalDataComp
+import com.example.meterly.ui.components.profileScreen.middleSectionComponents.MyObjects
+import com.example.meterly.ui.components.profileScreen.middleSectionComponents.Other
+import com.example.meterly.ui.components.profileScreen.middleSectionComponents.PersonalDataComp
+import com.example.meterly.ui.components.profileScreen.middleSectionComponents.Settings
 
 @Composable
 fun MiddleSectionProfileScreen(){
@@ -41,7 +43,7 @@ fun MiddleSectionProfileScreen(){
             ) {
                 Text(
                     text = "Особисті дані",
-                    fontSize = 24.sp,
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
@@ -49,6 +51,90 @@ fun MiddleSectionProfileScreen(){
                 Spacer(modifier = Modifier.height(16.dp))
 
                 PersonalDataComp()
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Card(
+            modifier = Modifier
+                .wrapContentSize(),
+            shape = RoundedCornerShape(size = 24.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = "Налаштування",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Settings()
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Card(
+            modifier = Modifier
+                .fillMaxSize(),
+            shape = RoundedCornerShape(size = 24.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = "Моє житло",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                MyObjects()
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Card(
+            modifier = Modifier
+                .fillMaxSize(),
+            shape = RoundedCornerShape(size = 24.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = "Інше",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Other()
             }
         }
     }

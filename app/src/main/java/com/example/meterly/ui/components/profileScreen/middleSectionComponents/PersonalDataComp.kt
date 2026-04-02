@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.profileScreen.personalDatacomponents
+package com.example.meterly.ui.components.profileScreen.middleSectionComponents
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -28,13 +28,13 @@ fun PersonalDataComp(){
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.wrapContentSize()
     ) {
-        Name()
-        SecondName()
-        ThirdName()
+        PIB()
+        PhoneNumber()
+        Address()
     }
 }
 @Composable
-fun Name(){
+fun PIB(){
     Card(
         modifier = Modifier
             .wrapContentSize()
@@ -50,32 +50,33 @@ fun Name(){
     ) {
         Box(modifier = Modifier
             .background(brush = whiteButtonGradient())
-            .padding(16.dp)) {
+            .padding(13.dp)) {
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Ім'я",
-                    fontSize = 16.sp,
+                    text = "ПІБ",
+                    fontSize = 15.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(3.dp))
 
                 Text(
-                    text = "userName",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium,
+                    text = "userPIB",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Normal,
                     color = Color.Black
                 )
             }
         }
     }
 }
+
 @Composable
-fun SecondName(){
+fun PhoneNumber(){
     Card(
         modifier = Modifier
             .wrapContentSize()
@@ -91,32 +92,33 @@ fun SecondName(){
     ) {
         Box(modifier = Modifier
             .background(brush = whiteButtonGradient())
-            .padding(16.dp)) {
+            .padding(13.dp)) {
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Прізвище",
-                    fontSize = 16.sp,
+                    text = "Номер телефону",
+                    fontSize = 15.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(3.dp))
 
                 Text(
-                    text = "userSecondName",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium,
+                    text = "userPhoneNumber",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Normal,
                     color = Color.Black
                 )
             }
         }
     }
 }
+
 @Composable
-fun ThirdName(){
+fun Address(){
     Card(
         modifier = Modifier
             .wrapContentSize()
@@ -132,24 +134,24 @@ fun ThirdName(){
     ) {
         Box(modifier = Modifier
             .background(brush = whiteButtonGradient())
-            .padding(16.dp)) {
+            .padding(13.dp)) {
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "По батькові",
-                    fontSize = 16.sp,
+                    text = "Адреса проживання",
+                    fontSize = 15.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(3.dp))
 
                 Text(
-                    text = "userThirdName",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium,
+                    text = "userAddress",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Normal,
                     color = Color.Black
                 )
             }

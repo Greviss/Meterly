@@ -52,24 +52,26 @@ fun TopSectionSewerageScreen(onLeftArrowSewerage: () -> Unit = {},
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowCircleLeft,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.Black
                 )
             }
 
             Text(
                 text = "Каналізація",
-                fontSize = 28.sp,
+                fontSize = 22.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black
             )
 
             IconButton(
                 onClick = onRightArrowSewerage,
-                modifier = Modifier.size(50.dp)
+                modifier = Modifier.size(50.dp),
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowCircleRight,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.Black
                 )
             }
         }
