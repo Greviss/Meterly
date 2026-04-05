@@ -18,8 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.waterScreenComp.BottomSectionWaterScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.waterScreenComp.MiddleSectionWaterScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.waterScreenComp.TopSectionWaterScreen
