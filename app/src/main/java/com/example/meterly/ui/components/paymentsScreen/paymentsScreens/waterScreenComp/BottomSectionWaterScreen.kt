@@ -41,8 +41,7 @@ fun BottomSectionWaterScreen(){
     ) {
         Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(275.dp)
+                .wrapContentSize()
                 .padding(vertical = 16.dp),
             shape = RoundedCornerShape(24.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
@@ -79,27 +78,25 @@ fun BottomSectionWaterScreen(){
 }
 
 @Composable
-fun Costs4(){
+fun Costs4() {
     Column(
-        horizontalAlignment = Alignment.Start,
-        modifier = Modifier.wrapContentSize()
+        modifier = Modifier.fillMaxWidth()
     ) {
         Row(
-            modifier = Modifier.wrapContentSize(),
-            horizontalArrangement = Arrangement.Start
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
                 text = "Витрачено:",
-                fontSize = 18.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black,
-                modifier = Modifier.padding(top = 5.dp))
-
-            Spacer(modifier = Modifier.width(184.dp))
+                modifier = Modifier.padding(top = 5.dp)
+            )
 
             Text(
                 text = "0 м³",
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF4FA6EC),
                 modifier = Modifier.padding(top = 6.dp)
@@ -107,8 +104,8 @@ fun Costs4(){
         }
 
         Row(
-            modifier = Modifier.wrapContentSize(),
-            horizontalArrangement = Arrangement.Start
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
                 text = "Минулого місяця:",
@@ -118,11 +115,9 @@ fun Costs4(){
                 modifier = Modifier.padding(top = 3.dp, bottom = 2.dp)
             )
 
-            Spacer(modifier = Modifier.width(135.dp))
-
             Text(
-                text = "13 м³",
-                fontSize = 16.sp,
+                text = "18 м³",
+                fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF4FA6EC),
                 modifier = Modifier.padding(top = 3.dp, bottom = 2.dp)
@@ -141,26 +136,22 @@ fun Costs4(){
 @Composable
 fun Payable4(){
     Column(
-        horizontalAlignment = Alignment.Start,
-        modifier = Modifier.wrapContentSize()
+        modifier = Modifier.fillMaxWidth()
     ) {
-
         Row(
-            modifier = Modifier.wrapContentSize(),
-            horizontalArrangement = Arrangement.Start
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
                 text = "До сплати:",
-                fontSize = 18.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black,
                 modifier = Modifier.padding(top = 5.dp))
 
-            Spacer(modifier = Modifier.width(180.dp))
-
             Text(
                 text = "0 грн.",
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF4FA6EC),
                 modifier = Modifier.padding(top = 6.dp)
@@ -168,8 +159,8 @@ fun Payable4(){
         }
 
         Row(
-            modifier = Modifier.wrapContentSize(),
-            horizontalArrangement = Arrangement.Start
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
                 text = "Минулого місяця:",
@@ -179,11 +170,9 @@ fun Payable4(){
                 modifier = Modifier.padding(top = 3.dp, bottom = 4.dp)
             )
 
-            Spacer(modifier = Modifier.width(120.dp))
-
             Text(
                 text = "655 грн.",
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF4FA6EC),
                 modifier = Modifier.padding(top = 3.dp, bottom = 4.dp)
@@ -202,13 +191,11 @@ fun Payable4(){
 @Composable
 fun СurrentTariff4(){
     Column(
-        horizontalAlignment = Alignment.Start,
-        modifier = Modifier.wrapContentSize()
+        modifier = Modifier.fillMaxWidth()
     ) {
-
         Row(
-            modifier = Modifier.wrapContentSize(),
-            horizontalArrangement = Arrangement.Start
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
                 text = "Поточний тариф:",
@@ -216,8 +203,6 @@ fun СurrentTariff4(){
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black,
                 modifier = Modifier.padding(top = 5.dp))
-
-            Spacer(modifier = Modifier.width(98.dp))
 
             Text(
                 text = "31.8 грн./м³",
@@ -242,7 +227,7 @@ fun ReceiptPickerItem4(hasReceipt: Boolean, fileName: String? = null) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 12.dp)
-            .clickable { onClick },
+            .clickable{},
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(6.dp),
         colors = CardDefaults.cardColors(
@@ -297,7 +282,7 @@ fun ReceiptPickerItem4(hasReceipt: Boolean, fileName: String? = null) {
             Icon(
                 imageVector = Icons.Default.ArrowForwardIos,
                 contentDescription = null,
-                tint = Color.Gray,
+                tint = Color.Black,
                 modifier = Modifier.size(16.dp)
             )
         }

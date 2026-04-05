@@ -89,56 +89,40 @@ fun AppNavigation(navController: NavHostController) {
         composable(Screen.GasScreenPay.route){
             GasScreen(
                 onLeftArrowGas = {
-                    navController.navigate(Screen.SewerageScreenPay.route) {
-                        popUpTo(Screen.GasScreenPay.route) { inclusive = true }
-                    }
+                    navController.navigate(Screen.SewerageScreenPay.route)
                 },
                 onRightArrowGas = {
-                    navController.navigate(Screen.WaterScreenPay.route){
-                        popUpTo(Screen.GasScreenPay.route) { inclusive = true }
-                    }
+                    navController.navigate(Screen.WaterScreenPay.route)
                 }
             )
         }
         composable(Screen.WaterScreenPay.route){
             WaterScreen(
                 onLeftArrowWater = {
-                    navController.navigate(Screen.GasScreenPay.route) {
-                        popUpTo(Screen.WaterScreenPay.route) { inclusive = true }
-                    }
+                    navController.navigate(Screen.GasScreenPay.route)
                 },
                 onRightArrowWater = {
-                    navController.navigate(Screen.LightScreenPay.route) {
-                        popUpTo(Screen.WaterScreenPay.route) { inclusive = true }
-                    }
+                    navController.navigate(Screen.LightScreenPay.route)
                 },
             )
         }
         composable(Screen.LightScreenPay.route){
             LightScreen(
                 onLeftArrowLight = {
-                    navController.navigate(Screen.WaterScreenPay.route) {
-                        popUpTo(Screen.LightScreenPay.route) { inclusive = true }
-                    }
+                    navController.navigate(Screen.WaterScreenPay.route)
                 },
                 onRightArrowLight = {
-                    navController.navigate(Screen.SewerageScreenPay.route) {
-                        popUpTo(Screen.LightScreenPay.route) { inclusive = true }
-                    }
+                    navController.navigate(Screen.SewerageScreenPay.route)
                 }
             )
         }
         composable(Screen.SewerageScreenPay.route){
             SewerageScreen(
                 onLeftArrowSewerage = {
-                    navController.navigate(Screen.LightScreenPay.route) {
-                        popUpTo(Screen.SewerageScreenPay.route) { inclusive = true }
-                    }
+                    navController.navigate(Screen.LightScreenPay.route)
                 },
                 onRightArrowSewerage = {
-                    navController.navigate(Screen.GasScreenPay.route) {
-                        popUpTo(Screen.SewerageScreenPay.route) { inclusive = true }
-                    }
+                    navController.navigate(Screen.GasScreenPay.route)
                 }
             )
         }
