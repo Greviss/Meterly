@@ -67,7 +67,7 @@ fun MiddleSectionSewerageScreen(
                 OutlinedTextField(
                     value = monthBegin4,
                     onValueChange = onMonthBeginChange4,
-                    label = { Text("Лічильник на початку місяця") },
+                    label = { Text("Лічильник (поч.)") },
                     placeholder = { Text("00000") },
                     leadingIcon = {
                         Icon(Icons.Default.CalendarToday, contentDescription = null)
@@ -90,7 +90,7 @@ fun MiddleSectionSewerageScreen(
                 OutlinedTextField(
                     value = monthEnd4,
                     onValueChange = onMonthEndChange4,
-                    label = { Text("Лічильник на кінці місяця") },
+                    label = { Text("Лічильник (кін.)") },
                     placeholder = { Text("00000") },
                     leadingIcon = { Icon(Icons.Default.CalendarMonth, contentDescription = null) },
                     modifier = Modifier.fillMaxWidth(),

@@ -52,7 +52,8 @@ fun TopSectionLightScreen(onLeftArrowLight: () -> Unit = {},
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowCircleLeft,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.Black
                 )
             }
 
@@ -69,7 +70,8 @@ fun TopSectionLightScreen(onLeftArrowLight: () -> Unit = {},
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowCircleRight,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.Black
                 )
             }
         }

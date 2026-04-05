@@ -64,7 +64,7 @@ fun ReminderBegin(){
         Box(
             modifier = Modifier
                 .background(brush = whiteButtonGradient())
-                .padding(13.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -82,7 +82,7 @@ fun ReminderBegin(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
                         text = "Увімкнено",
@@ -121,7 +121,7 @@ fun ReminderEnd() {
         Box(
             modifier = Modifier
                 .background(brush = whiteButtonGradient())
-                .padding(13.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -139,7 +139,7 @@ fun ReminderEnd() {
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
                         text = "Увімкнено",
@@ -178,7 +178,7 @@ fun Rounding(){
         Box(
             modifier = Modifier
                 .background(brush = whiteButtonGradient())
-                .padding(13.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -196,7 +196,7 @@ fun Rounding(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
                         text = "Вимкнено",
@@ -235,7 +235,7 @@ fun ReminderTimeBegin(){
         Box(
             modifier = Modifier
                 .background(brush = whiteButtonGradient())
-                .padding(13.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -253,7 +253,7 @@ fun ReminderTimeBegin(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
                         text = "20:00",
@@ -291,7 +291,7 @@ fun ReminderTimeEnd(){
         Box(
             modifier = Modifier
                 .background(brush = whiteButtonGradient())
-                .padding(13.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -309,7 +309,7 @@ fun ReminderTimeEnd(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
                         text = "18:00",
@@ -347,7 +347,7 @@ fun Theme(){
         Box(
             modifier = Modifier
                 .background(brush = whiteButtonGradient())
-                .padding(13.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -365,7 +365,7 @@ fun Theme(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
                         text = "Як у системі",
@@ -403,7 +403,7 @@ fun ProfileControl(){
         Box(
             modifier = Modifier
                 .background(brush = whiteButtonGradient())
-                .padding(13.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -421,7 +421,7 @@ fun ProfileControl(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
                         text = "Керувати",

@@ -268,14 +268,15 @@ fun ReceiptPickerItem4(hasReceipt: Boolean, fileName: String? = null) {
                     else
                         "Прикріпити квитанцію",
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black
                 )
 
                 if (hasReceipt && fileName != null) {
                     Text(
                         text = fileName,
                         fontSize = 14.sp,
-                        color = Color.Gray
+                        color = Color.DarkGray
                     )
                 }
             }

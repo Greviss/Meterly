@@ -67,7 +67,7 @@ fun MiddleSectionGasScreen(
                 OutlinedTextField(
                     value = monthBegin,
                     onValueChange = onMonthBeginChange,
-                    label = { Text("Початок місяця") },
+                    label = { Text("Лічильник (поч.)") },
                     placeholder = { Text("00000") },
                     leadingIcon = {
                         Icon(Icons.Default.CalendarToday, contentDescription = null)
@@ -90,7 +90,7 @@ fun MiddleSectionGasScreen(
                 OutlinedTextField(
                     value = monthEnd,
                     onValueChange = onMonthEndChange,
-                    label = { Text("Кінець місяця") },
+                    label = { Text("Лічильник (кін.)") },
                     placeholder = { Text("00000") },
                     leadingIcon = { Icon(Icons.Default.CalendarMonth, contentDescription = null) },
                     modifier = Modifier.fillMaxWidth(),

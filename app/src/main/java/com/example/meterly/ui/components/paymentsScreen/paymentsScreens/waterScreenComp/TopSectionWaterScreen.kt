@@ -53,7 +53,8 @@ fun TopSectionWaterScreen(onLeftArrowWater: () -> Unit = {},
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowCircleLeft,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.Black
                 )
             }
 
@@ -70,7 +71,8 @@ fun TopSectionWaterScreen(onLeftArrowWater: () -> Unit = {},
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowCircleRight,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.Black
                 )
             }
         }

@@ -243,7 +243,7 @@ fun ReceiptPickerItem3(hasReceipt: Boolean, fileName: String? = null) {
                 modifier = Modifier
                     .size(48.dp)
                     .background(
-                        color = if (hasReceipt) Color(0xFF4CAF50) else Color(0xFFE0E0E0),
+                        color = if (hasReceipt) Color(0xFF4CAF50) else Color(0xFFD9D9D9),
                         shape = RoundedCornerShape(12.dp)
                     ),
                 contentAlignment = Alignment.Center
@@ -267,14 +267,15 @@ fun ReceiptPickerItem3(hasReceipt: Boolean, fileName: String? = null) {
                     else
                         "Прикріпити квитанцію",
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black
                 )
 
                 if (hasReceipt && fileName != null) {
                     Text(
                         text = fileName,
                         fontSize = 14.sp,
-                        color = Color.Gray
+                        color = Color.DarkGray
                     )
                 }
             }

@@ -67,7 +67,7 @@ fun MiddleSectionWaterScreen(
                 OutlinedTextField(
                     value = monthBegin2,
                     onValueChange = onMonthBeginChange2,
-                    label = { Text("Початок місяця") },
+                    label = { Text("Лічильник (поч.)") },
                     placeholder = { Text("00000") },
                     leadingIcon = {
                         Icon(Icons.Default.CalendarToday, contentDescription = null)
@@ -90,7 +90,7 @@ fun MiddleSectionWaterScreen(
                 OutlinedTextField(
                     value = monthEnd2,
                     onValueChange = onMonthEndChange2,
-                    label = { Text("Кінець місяця") },
+                    label = { Text("Лічильник (кін.)") },
                     placeholder = { Text("00000") },
                     leadingIcon = { Icon(Icons.Default.CalendarMonth, contentDescription = null) },
                     modifier = Modifier.fillMaxWidth(),

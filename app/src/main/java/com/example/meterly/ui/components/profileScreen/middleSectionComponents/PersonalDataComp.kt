@@ -50,19 +50,19 @@ fun PIB(){
     ) {
         Box(modifier = Modifier
             .background(brush = whiteButtonGradient())
-            .padding(13.dp)) {
+            .padding(horizontal = 16.dp, vertical = 10.dp)) {
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
                     text = "ПІБ",
-                    fontSize = 15.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(3.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
                     text = "userPIB",
@@ -92,19 +92,19 @@ fun PhoneNumber(){
     ) {
         Box(modifier = Modifier
             .background(brush = whiteButtonGradient())
-            .padding(13.dp)) {
+            .padding(horizontal = 16.dp, vertical = 10.dp)) {
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
                     text = "Номер телефону",
-                    fontSize = 15.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(3.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
                     text = "userPhoneNumber",
@@ -134,19 +134,19 @@ fun Address(){
     ) {
         Box(modifier = Modifier
             .background(brush = whiteButtonGradient())
-            .padding(13.dp)) {
+            .padding(horizontal = 16.dp, vertical = 10.dp)) {
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
                     text = "Адреса проживання",
-                    fontSize = 15.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(3.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
                     text = "userAddress",

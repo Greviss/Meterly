@@ -53,7 +53,7 @@ fun Version(){
         Box(
             modifier = Modifier
                 .background(brush = whiteButtonGradient())
-                .padding(13.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Column(
                 horizontalAlignment = Alignment.Start,
@@ -61,12 +61,12 @@ fun Version(){
             ) {
                 Text(
                     text = "Версія",
-                    fontSize = 15.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(3.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
                     text = "v1.0.0",
@@ -97,7 +97,7 @@ fun PrivacyPolicy(){
         Box(
             modifier = Modifier
                 .background(brush = whiteButtonGradient())
-                .padding(13.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -115,7 +115,7 @@ fun PrivacyPolicy(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
                         text = "Відкрити",
@@ -153,7 +153,7 @@ fun Support(){
         Box(
             modifier = Modifier
                 .background(brush = whiteButtonGradient())
-                .padding(13.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -171,7 +171,7 @@ fun Support(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
                         text = "Зв'язатися з нами",
