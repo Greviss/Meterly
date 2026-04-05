@@ -16,15 +16,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.sewerageScreenComp.BottomSectionSewerageScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.sewerageScreenComp.MiddleSectionSewerageScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.sewerageScreenComp.TopSectionSewerageScreen
 import com.example.meterly.ui.theme.secondaryGradient
 
 @Composable
+@Preview
 fun SewerageScreen(onLeftArrowSewerage: () -> Unit = {},
                    onRightArrowSewerage: () -> Unit = {}) {
     var monthBegin4 by remember { mutableStateOf("") }
