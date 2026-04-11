@@ -40,6 +40,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.compose)
+    implementation(libs.compose.m3)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.lottie.compose)
     implementation(libs.androidx.navigation.compose)
