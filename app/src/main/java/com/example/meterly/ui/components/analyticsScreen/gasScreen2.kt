@@ -23,11 +23,11 @@ import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProdu
 
 @Composable
 @Preview
-fun gasScreen2(onLeftArrowGas2: () -> Unit = {},
+fun GasScreen2(onLeftArrowGas2: () -> Unit = {},
                onRightArrowGas2: () -> Unit = {},
-               startAxis: Axis<Axis.Position.Vertical.Start>? = null,
-               bottomAxis: Axis<Axis.Position.Horizontal.Bottom>? = null,
-               modelProducer: CartesianChartModelProducer = CartesianChartModelProducer()
+               startAxisGas: Axis<Axis.Position.Vertical.Start>? = null,
+               bottomAxisGas: Axis<Axis.Position.Horizontal.Bottom>? = null,
+               modelProducerGas: CartesianChartModelProducer = CartesianChartModelProducer()
 ){
     Box(
         modifier = Modifier
@@ -41,14 +41,17 @@ fun gasScreen2(onLeftArrowGas2: () -> Unit = {},
                 .padding(horizontal = 20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            TopSectionGasScreen2(onLeftArrowGas2 = onLeftArrowGas2,
-                onRightArrowGas2 = onRightArrowGas2)
+            TopSectionGasScreen2(
+                onLeftArrowGas2 = onLeftArrowGas2,
+                onRightArrowGas2 = onRightArrowGas2
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            MiddleSectionGasScreen2(startAxis = { startAxis },
-                bottomAxis = { bottomAxis },
-                modelProducer = modelProducer
+            MiddleSectionGasScreen2(
+                startAxisGas = { startAxisGas },
+                bottomAxisGas = { bottomAxisGas },
+                modelProducerGas = modelProducerGas,
             )
 
             Spacer(modifier = Modifier.height(24.dp))

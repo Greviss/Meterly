@@ -4,6 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.meterly.ui.components.analyticsScreen.GasScreen2
+import com.example.meterly.ui.components.analyticsScreen.LightScreen2
+import com.example.meterly.ui.components.analyticsScreen.SewerageScreen2
+import com.example.meterly.ui.components.analyticsScreen.WaterScreen2
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.GasScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.LightScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.SewerageScreen
@@ -27,6 +31,10 @@ sealed class Screen(val route: String) {
     object LightScreenPay: Screen("light_screen_pay")
     object SewerageScreenPay: Screen("sewerage_screen_pay")
     object Analytics: Screen("analytics_screen")
+    object GasScreenAnalytics: Screen("gas_screen_analytics")
+    object WaterScreenAnalytics: Screen("water_screen_analytics")
+    object LightScreenAnalytics: Screen("light_screen_analytics")
+    object SewerageScreenAnalytics: Screen("sewerage_screen_analytics")
     object Profile: Screen("profile_screen")
 
 }
@@ -123,6 +131,46 @@ fun AppNavigation(navController: NavHostController) {
                 },
                 onRightArrowSewerage = {
                     navController.navigate(Screen.GasScreenPay.route)
+                }
+            )
+        }
+        composable(Screen.SewerageScreenAnalytics.route){
+            GasScreen2(
+                onLeftArrowGas2 = {
+                    navController.navigate(Screen.SewerageScreenAnalytics.route)
+                },
+                onRightArrowGas2 = {
+                    navController.navigate(Screen.WaterScreenAnalytics.route)
+                }
+            )
+        }
+        composable(Screen.WaterScreenAnalytics.route){
+            WaterScreen2(
+                onLeftArrowWater2 = {
+                    navController.navigate(Screen.GasScreenAnalytics.route)
+                },
+                onRightArrowWater2 = {
+                    navController.navigate(Screen.LightScreenAnalytics.route)
+                }
+            )
+        }
+        composable(Screen.LightScreenAnalytics.route){
+            LightScreen2(
+                onLeftArrowLight2 = {
+                    navController.navigate(Screen.WaterScreenAnalytics.route)
+                },
+                onRightArrowLight2 = {
+                    navController.navigate(Screen.SewerageScreenAnalytics.route)
+                }
+            )
+        }
+        composable(Screen.SewerageScreenAnalytics.route){
+            SewerageScreen2(
+                onLeftArrowSewerage2 = {
+                    navController.navigate(Screen.LightScreenAnalytics.route)
+                },
+                onRightArrowSewerage2 = {
+                    navController.navigate(Screen.GasScreenAnalytics.route)
                 }
             )
         }

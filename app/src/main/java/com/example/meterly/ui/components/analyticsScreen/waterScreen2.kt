@@ -1,2 +1,60 @@
 package com.example.meterly.ui.components.analyticsScreen
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.meterly.ui.components.analyticsScreen.waterScreen2.BottomSectionWaterScreen2
+import com.example.meterly.ui.components.analyticsScreen.waterScreen2.MiddleSectionWaterScreen2
+import com.example.meterly.ui.components.analyticsScreen.waterScreen2.TopSectionWaterScreen2
+import com.example.meterly.ui.theme.secondaryGradient
+import com.patrykandpatrick.vico.compose.cartesian.axis.Axis
+import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProducer
+
+@Composable
+@Preview
+fun WaterScreen2(onLeftArrowWater2: () -> Unit = {},
+               onRightArrowWater2: () -> Unit = {},
+               startAxisWater: Axis<Axis.Position.Vertical.Start>? = null,
+               bottomAxisWater: Axis<Axis.Position.Horizontal.Bottom>? = null,
+               modelProducerWater: CartesianChartModelProducer = CartesianChartModelProducer()
+){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(secondaryGradient())
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 20.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+            TopSectionWaterScreen2(onLeftArrowWater2 = onLeftArrowWater2,
+                onRightArrowWater2 = onRightArrowWater2)
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            MiddleSectionWaterScreen2(
+                startAxisWater = { startAxisWater },
+                bottomAxisWater = { bottomAxisWater },
+                modelProducerWater = modelProducerWater
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            BottomSectionWaterScreen2()
+        }
+    }
+}

@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.analyticsScreen.gasScreen2
+package com.example.meterly.ui.components.analyticsScreen.waterScreen2
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun BottomSectionGasScreen2(){
+fun BottomSectionWaterScreen2(){
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -51,26 +51,26 @@ fun BottomSectionGasScreen2(){
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                PercentGas()
+                PercentWater()
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                EveryDayGas()
+                EveryDayWater()
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                PickGas()
+                PickWater()
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                YearGas()
+                YearWater()
             }
         }
     }
 }
 
 @Composable
-fun PercentGas(){
+fun PercentWater(){
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -131,7 +131,7 @@ fun PercentGas(){
 }
 
 @Composable
-fun EveryDayGas(){
+fun EveryDayWater(){
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -147,7 +147,7 @@ fun EveryDayGas(){
                 modifier = Modifier.padding(top = 5.dp))
 
             Text(
-                text = "2,4 м³",
+                text = "0,26 м³",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF8BC34A),
@@ -168,7 +168,7 @@ fun EveryDayGas(){
             )
 
             Text(
-                text = "19,104 грн.",
+                text = "3,62 грн.",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF2196F3),
@@ -186,7 +186,7 @@ fun EveryDayGas(){
 }
 
 @Composable
-fun PickGas(){
+fun PickWater(){
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -202,7 +202,7 @@ fun PickGas(){
                 modifier = Modifier.padding(top = 5.dp))
 
             Text(
-                text = "1250 грн.",
+                text = "496 грн.",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF8BC34A),
@@ -219,7 +219,7 @@ fun PickGas(){
 }
 
 @Composable
-fun YearGas() {
+fun YearWater() {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -236,7 +236,7 @@ fun YearGas() {
             )
 
             Text(
-                text = "3502 грн.",
+                text = "1248 грн.",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFFF44336),

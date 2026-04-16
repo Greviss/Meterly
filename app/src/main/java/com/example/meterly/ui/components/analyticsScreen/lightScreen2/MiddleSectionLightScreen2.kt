@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.analyticsScreen.gasScreen2
+package com.example.meterly.ui.components.analyticsScreen.lightScreen2
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,10 +28,10 @@ import com.patrykandpatrick.vico.compose.cartesian.layer.rememberLineCartesianLa
 import com.patrykandpatrick.vico.compose.cartesian.rememberCartesianChart
 
 @Composable
-fun MiddleSectionGasScreen2(
-    startAxisGas: () -> Axis<Axis.Position.Vertical.Start>?,
-    bottomAxisGas: () -> Axis<Axis.Position.Horizontal.Bottom>?,
-    modelProducerGas: CartesianChartModelProducer
+fun MiddleSectionLightScreen2(
+    startAxisLight: () -> Axis<Axis.Position.Vertical.Start>?,
+    bottomAxisLight: () -> Axis<Axis.Position.Horizontal.Bottom>?,
+    modelProducerLight: CartesianChartModelProducer
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -62,10 +62,10 @@ fun MiddleSectionGasScreen2(
                 CartesianChartHost(
                     chart = rememberCartesianChart(
                         rememberLineCartesianLayer(),
-                        startAxis = startAxisGas(),
-                        bottomAxis = bottomAxisGas(),
+                        startAxis = startAxisLight(),
+                        bottomAxis = bottomAxisLight(),
                     ),
-                    modelProducer = modelProducerGas,
+                    modelProducer = modelProducerLight,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)
@@ -75,11 +75,11 @@ fun MiddleSectionGasScreen2(
     }
     Spacer(modifier = Modifier.height(16.dp))
 
-    CostsGas()
+    CostsLight()
 }
 
 @Composable
-fun CostsGas(){
+fun CostsLight(){
     Card(
         modifier = Modifier
             .fillMaxWidth(),
@@ -127,7 +127,7 @@ fun CostsGas(){
                     )
 
                     Text(
-                        text = "82 м³",
+                        text = "65 кВт",
                         fontWeight = FontWeight.Normal,
                         fontSize = 12.sp,
                         color = Color.Black
@@ -155,7 +155,7 @@ fun CostsGas(){
                     )
 
                     Text(
-                        text = "655 грн.",
+                        text = "272 грн.",
                         fontWeight = FontWeight.Normal,
                         fontSize = 12.sp,
                         color = Color.Black
@@ -183,9 +183,9 @@ fun CostsGas(){
                     )
 
                     Text(
-                        text = "7.96 грн./м³",
+                        text = "4.32 грн./кВт",
                         fontWeight = FontWeight.Normal,
-                        fontSize = 12.sp,
+                        fontSize = 10.sp,
                         color = Color.Black
                     )
                 }

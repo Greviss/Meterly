@@ -1,4 +1,4 @@
-package com.example.meterly.ui.components.analyticsScreen.gasScreen2
+package com.example.meterly.ui.components.analyticsScreen.waterScreen2
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.sp
 import com.example.meterly.R
 
 @Composable
-fun TopSectionGasScreen2(
-    onLeftArrowGas2: () -> Unit = {},
-    onRightArrowGas2: () -> Unit = {}
+fun TopSectionWaterScreen2(
+    onLeftArrowWater2: () -> Unit,
+    onRightArrowWater2: () -> Unit
 ){
     Column(
         modifier = Modifier
@@ -35,7 +35,7 @@ fun TopSectionGasScreen2(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(R.drawable.icon_gas),
+            painter = painterResource(R.drawable.icon_water),
             modifier = Modifier
                 .size(100.dp)
                 .padding(bottom = 16.dp),
@@ -49,7 +49,7 @@ fun TopSectionGasScreen2(
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
-                onClick = onLeftArrowGas2,
+                onClick = onLeftArrowWater2,
                 modifier = Modifier.size(50.dp)
             ) {
                 Icon(
@@ -60,14 +60,14 @@ fun TopSectionGasScreen2(
             }
 
             Text(
-                text = "Газ",
+                text = "Вода",
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 24.sp,
                 color = Color.Black
             )
 
             IconButton(
-                onClick = onRightArrowGas2,
+                onClick = onRightArrowWater2,
                 modifier = Modifier.size(50.dp)
             ) {
                 Icon(
