@@ -61,16 +61,16 @@ fun Version(){
             ) {
                 Text(
                     text = "Версія",
-                    fontSize = 15.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(3.dp))
+                Spacer(modifier = Modifier.height(1.dp))
 
                 Text(
                     text = "v1.0.0",
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color.DarkGray
                 )
@@ -115,11 +115,11 @@ fun PrivacyPolicy(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(1.dp))
 
                     Text(
                         text = "Відкрити",
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.DarkGray
                     )
@@ -171,11 +171,11 @@ fun Support(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(1.dp))
 
                     Text(
                         text = "Зв'язатися з нами",
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.DarkGray
                     )

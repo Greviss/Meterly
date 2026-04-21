@@ -86,7 +86,7 @@ fun ReminderBegin(){
 
                     Text(
                         text = "Увімкнено",
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.DarkGray
                     )
@@ -139,11 +139,11 @@ fun ReminderEnd() {
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(1.dp))
 
                     Text(
                         text = "Увімкнено",
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.DarkGray
                     )
@@ -191,16 +191,16 @@ fun Rounding(){
                 ) {
                     Text(
                         text = "Округлення суми",
-                        fontSize = 14.sp,
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(1.dp))
 
                     Text(
                         text = "Вимкнено",
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.DarkGray
                     )
@@ -253,11 +253,11 @@ fun ReminderTimeBegin(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(1.dp))
 
                     Text(
                         text = "20:00",
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.DarkGray
                     )
@@ -309,11 +309,11 @@ fun ReminderTimeEnd(){
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(1.dp))
 
                     Text(
                         text = "18:00",
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.DarkGray
                     )
@@ -360,16 +360,16 @@ fun Theme(){
                 ) {
                     Text(
                         text = "Тема додатка",
-                        fontSize = 14.sp,
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(1.dp))
 
                     Text(
                         text = "Як у системі",
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.DarkGray
                     )
@@ -416,16 +416,16 @@ fun ProfileControl(){
                 ) {
                     Text(
                         text = "Керування профілем",
-                        fontSize = 14.sp,
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.Black
                     )
 
-                    Spacer(modifier = Modifier.height(3.dp))
+                    Spacer(modifier = Modifier.height(1.dp))
 
                     Text(
                         text = "Керувати",
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.DarkGray
                     )

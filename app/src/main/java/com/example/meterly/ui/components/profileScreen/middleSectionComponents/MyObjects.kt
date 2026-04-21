@@ -25,9 +25,9 @@ fun AddObjects() {
             onClick = {},
             containerColor = Color(0xFF6200EE),
             contentColor = Color.White,
-            modifier = Modifier.padding(top = 16.dp)
+            modifier = Modifier.padding(top = 8.dp)
         ) {
-            Icon(Icons.Filled.Add, contentDescription = "Додати об'єкт")
+            Icon(Icons.Filled.Add, contentDescription = null)
         }
     }
 }

@@ -57,16 +57,16 @@ fun PIB(){
             ) {
                 Text(
                     text = "ПІБ",
-                    fontSize = 15.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(3.dp))
+                Spacer(modifier = Modifier.height(1.dp))
 
                 Text(
                     text = "userPIB",
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color.Black
                 )
@@ -99,16 +99,16 @@ fun PhoneNumber(){
             ) {
                 Text(
                     text = "Номер телефону",
-                    fontSize = 15.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(3.dp))
+                Spacer(modifier = Modifier.height(1.dp))
 
                 Text(
                     text = "userPhoneNumber",
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color.Black
                 )
@@ -141,16 +141,16 @@ fun Address(){
             ) {
                 Text(
                     text = "Адреса проживання",
-                    fontSize = 15.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(3.dp))
+                Spacer(modifier = Modifier.height(1.dp))
 
                 Text(
                     text = "userAddress",
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color.Black
                 )
