@@ -1,6 +1,8 @@
 package com.example.meterly.ui.components.analyticsScreen.sewerageScreen2
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,9 +12,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Money
+import androidx.compose.material.icons.filled.PriceChange
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -81,8 +88,7 @@ fun MiddleSectionSewerageScreen2(
 @Composable
 fun CostsSewerage(){
     Card(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -102,34 +108,58 @@ fun CostsSewerage(){
         }
 
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(top = 10.dp, bottom = 16.dp)
         ) {
             Card(
-                modifier = Modifier
-                    .size(width = 100.dp, height = 65.dp),
+                modifier = Modifier.size(width = 102.dp, height = 80.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFA9D96F)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .padding(16.dp)
+                        .padding(horizontal = 8.dp, vertical = 16.dp)
                         .fillMaxSize()
                 ) {
-                    Text(
-                        text = "Витрачено:",
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 13.sp,
-                        color = Color.Black
-                    )
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(24.dp)
+                                .background(Color(0xFF7BAD41), CircleShape)
+                        ) {
+                            Column(
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Money,
+                                    contentDescription = null,
+                                    tint = Color(0xFF276829),
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                        }
+                        Text(
+                            text = "Розхід",
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 12.sp,
+                            color = Color.Black
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "272 грн./м³",
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 12.sp,
+                        text = "8 м³",
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 15.sp,
                         color = Color.Black
                     )
                 }
@@ -137,27 +167,52 @@ fun CostsSewerage(){
 
             Card(
                 modifier = Modifier
-                    .size(width = 100.dp, height = 65.dp),
+                    .size(width = 102.dp, height = 80.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFE28078)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .padding(16.dp)
+                        .padding(horizontal = 8.dp, vertical = 16.dp)
                         .fillMaxSize()
                 ) {
-                    Text(
-                        text = "Сплачено:",
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 14.sp,
-                        color = Color.Black
-                    )
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(24.dp)
+                                .background(Color(0xFFB64840), CircleShape)
+                        ) {
+                            Column(
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Money,
+                                    contentDescription = null,
+                                    tint = Color(0xFF722E28),
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                        }
+                        Text(
+                            text = "Сплата",
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 12.sp,
+                            color = Color.Black
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
                         text = "272 грн.",
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 15.sp,
                         color = Color.Black
                     )
                 }
@@ -165,27 +220,53 @@ fun CostsSewerage(){
 
             Card(
                 modifier = Modifier
-                    .size(width = 100.dp, height = 65.dp),
+                    .size(width = 102.dp, height = 80.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFF8090E5)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .padding(16.dp)
+                        .padding(horizontal = 8.dp, vertical = 16.dp)
                         .fillMaxSize()
                 ) {
-                    Text(
-                        text = "Курс:",
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 14.sp,
-                        color = Color.Black
-                    )
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(24.dp)
+                                .background(Color(0xFF3F51B5), CircleShape)
+                        ){
+                            Column(
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.PriceChange,
+                                    contentDescription = null,
+                                    tint = Color(0xFF293576),
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                        }
+
+                        Text(
+                            text = "Курс",
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 15.sp,
+                            color = Color.Black
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
                         text = "34 грн./м³",
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 13.sp,
                         color = Color.Black
                     )
                 }
