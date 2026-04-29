@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.Eco
 import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material.icons.filled.Payments
 import androidx.compose.material.icons.filled.Percent
+import androidx.compose.material.icons.filled.Plumbing
 import androidx.compose.material.icons.filled.Wallet
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -88,7 +89,7 @@ fun BottomSectionSewerageScreen2(){
                 RowElementSewerage(titleSewerage1 = "Витрачено (кВт)",
                     subtitleSewerage1 = "Щоденні витрати",
                     valueSewerage1 = "2,1 кВт",
-                    iconSewerage1 = Icons.Default.LocalFireDepartment, iconTintSewerage1 = Color(0xFF447EAC), iconBgColorSewerage1 = Color(0xFFC9D0FF),
+                    iconSewerage1 = Icons.Default.Plumbing, iconTintSewerage1 = Color(0xFF447EAC), iconBgColorSewerage1 = Color(0xFFC9D0FF),
                     modifierSewerage1 = Modifier.weight(1f)
                 )
 

@@ -18,10 +18,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowCircleDown
 import androidx.compose.material.icons.filled.ArrowCircleUp
 import androidx.compose.material.icons.filled.Eco
+import androidx.compose.material.icons.filled.EnergySavingsLeaf
 import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material.icons.filled.Payments
 import androidx.compose.material.icons.filled.Percent
 import androidx.compose.material.icons.filled.Wallet
+import androidx.compose.material.icons.filled.WaterDrop
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -88,7 +90,7 @@ fun BottomSectionLightScreen2(){
                 RowElementLight(titleLight1 = "Витрачено (кВт)",
                     subtitleLight1 = "Щоденні витрати",
                     valueLight1 = "2,1 кВт",
-                    iconLight1 = Icons.Default.LocalFireDepartment, iconTintLight1 = Color(0xFF447EAC), iconBgColorLight1 = Color(0xFFC9D0FF),
+                    iconLight1 = Icons.Default.EnergySavingsLeaf, iconTintLight1 = Color(0xFF447EAC), iconBgColorLight1 = Color(0xFFC9D0FF),
                     modifierLight1 = Modifier.weight(1f)
                 )
 

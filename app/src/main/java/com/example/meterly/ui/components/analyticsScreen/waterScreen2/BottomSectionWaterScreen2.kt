@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material.icons.filled.Payments
 import androidx.compose.material.icons.filled.Percent
 import androidx.compose.material.icons.filled.Wallet
+import androidx.compose.material.icons.filled.WaterDrop
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -88,7 +89,7 @@ fun BottomSectionWaterScreen2(){
                 RowElementWater(titleWater1 = "Витрачено (м³)",
                     subtitleWater1 = "Щоденні витрати",
                     valueWater1 = "0,26 м³",
-                    iconWater1 = Icons.Default.LocalFireDepartment, iconTintWater1 = Color(0xFF447EAC), iconBgColorWater1 = Color(0xFFC9D0FF),
+                    iconWater1 = Icons.Default.WaterDrop, iconTintWater1 = Color(0xFF447EAC), iconBgColorWater1 = Color(0xFFC9D0FF),
                     modifierWater1 = Modifier.weight(1f)
                 )
 
