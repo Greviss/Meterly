@@ -42,9 +42,8 @@ fun MiddleSectionWaterScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Card(
-            modifier = Modifier
-                .wrapContentSize(),
-            shape = RoundedCornerShape(24.dp),
+            modifier = Modifier.wrapContentSize(),
+            shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
@@ -85,7 +84,7 @@ fun MiddleSectionWaterScreen(
                     singleLine = true
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 OutlinedTextField(
                     value = monthEnd2,
@@ -110,7 +109,7 @@ fun MiddleSectionWaterScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = {->
+                    onClick = { ->
                         null
                     },
                     modifier = Modifier
@@ -131,7 +130,8 @@ fun MiddleSectionWaterScreen(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White
-                    ) }
+                    )
+                }
             }
         }
     }
