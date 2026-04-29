@@ -114,7 +114,7 @@ fun CostsLight(){
                 .padding(top = 10.dp, bottom = 16.dp)
         ) {
             Card(
-                modifier = Modifier.size(width = 102.dp, height = 80.dp),
+                modifier = Modifier.size(width = 102.dp, height = 85.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFA9D96F)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
@@ -167,7 +167,7 @@ fun CostsLight(){
 
             Card(
                 modifier = Modifier
-                    .size(width = 102.dp, height = 80.dp),
+                    .size(width = 102.dp, height = 85.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFE28078)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
@@ -220,7 +220,7 @@ fun CostsLight(){
 
             Card(
                 modifier = Modifier
-                    .size(width = 102.dp, height = 80.dp),
+                    .size(width = 102.dp, height = 85.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFF8090E5)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {

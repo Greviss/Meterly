@@ -38,7 +38,9 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun BottomSectionWaterScreen2(){
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 12.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
         colors = CardDefaults.cardColors(Color.White)
@@ -142,7 +144,7 @@ fun RowElementWater(titleWater1: String,
                iconWater1: ImageVector, iconTintWater1: Color, iconBgColorWater1: Color,
                modifierWater1: Modifier = Modifier){
     Card(
-        modifier = Modifier.size(width = 150.dp, height = 115.dp),
+        modifier = Modifier.size(width = 150.dp, height = 125.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
         colors = CardDefaults.cardColors(Color.LightGray)
@@ -195,7 +197,7 @@ fun RowElementWater(titleWater1: String,
 
             Text(
                 text = subtitleWater1,
-                fontSize = 12.sp,
+                fontSize = 10.sp,
                 color = Color.Gray,
                 fontWeight = FontWeight.Normal
             )

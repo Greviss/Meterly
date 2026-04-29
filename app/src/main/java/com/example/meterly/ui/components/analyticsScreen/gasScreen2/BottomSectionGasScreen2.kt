@@ -38,7 +38,9 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun BottomSectionGasScreen2() {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 12.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
         colors = CardDefaults.cardColors(Color.White)
@@ -84,14 +86,14 @@ fun BottomSectionGasScreen2() {
                     .padding(top = 12.dp)
             ){
                 RowElementGas(titleGas1 = "Витрачено (м³)",
-                    subtitleGas1 = "Витрачено за місяць",
+                    subtitleGas1 = "Щоденні витрати",
                     valueGas1 = "0 м³",
                     iconGas1 = Icons.Default.LocalFireDepartment, iconTintGas1 = Color(0xFF447EAC), iconBgColorGas1 = Color(0xFFC9D0FF),
                     modifierGas1 = Modifier.weight(1f)
                 )
 
                 RowElementGas(titleGas1 = "Витрачено (грн.)",
-                    subtitleGas1 = "Витрачено за місяць",
+                    subtitleGas1 = "Щоденні витрати",
                     valueGas1 = "0 грн.",
                     iconGas1 = Icons.Default.Payments, iconTintGas1 = Color(0xFF9E8744), iconBgColorGas1 = Color(0xFFFFF0D7),
                     modifierGas1 = Modifier.weight(1f)
@@ -142,7 +144,7 @@ fun RowElementGas(titleGas1: String,
                iconGas1: ImageVector, iconTintGas1: Color, iconBgColorGas1: Color,
                modifierGas1: Modifier = Modifier){
     Card(
-        modifier = Modifier.size(width = 150.dp, height = 115.dp),
+        modifier = Modifier.size(width = 150.dp, height = 125.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
         colors = CardDefaults.cardColors(Color.LightGray)
@@ -191,11 +193,9 @@ fun RowElementGas(titleGas1: String,
                 fontWeight = FontWeight.Medium
             )
 
-            Spacer(modifier = Modifier.height(4.dp))
-
             Text(
                 text = subtitleGas1,
-                fontSize = 12.sp,
+                fontSize = 10.sp,
                 color = Color.Gray,
                 fontWeight = FontWeight.Normal
             )
