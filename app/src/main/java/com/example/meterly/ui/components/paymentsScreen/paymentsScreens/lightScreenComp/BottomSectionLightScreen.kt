@@ -14,11 +14,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material.icons.filled.AttachFile
+import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Money
+import androidx.compose.material.icons.filled.Wallet
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -28,9 +32,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp.ColumnElem
 
 @Composable
 fun BottomSectionLightScreen(){
@@ -42,7 +48,7 @@ fun BottomSectionLightScreen(){
             modifier = Modifier
                 .wrapContentSize()
                 .padding(vertical = 16.dp),
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
@@ -61,15 +67,68 @@ fun BottomSectionLightScreen(){
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Costs2()
+                ColumnElem(
+                    titleLight = "Витрачено",
+                    subtitleLight = "В цьому місяці",
+                    iconLight = Icons.Default.Wallet,
+                    iconBgColorLight = Color(0xFFFFBFBD),
+                    iconTintLight = Color(0xFFF44336),
+                    valueLight = "0 Квт",
+                    textColorLight = Color(0xFFF44336),
+                    cardColorLight = Color(0xFFDC8E89),
+                )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Payable2()
+                ColumnElem(
+                    titleLight = "Витрачено",
+                    subtitleLight = "В попередньому місяці",
+                    iconLight = Icons.Default.Wallet,
+                    iconBgColorLight = Color(0xFFFFEFC1),
+                    iconTintLight = Color(0xFFFF9800),
+                    valueLight = "115 кВт",
+                    textColorLight = Color(0xFFFF9800),
+                    cardColorLight = Color(0xFFFFD797),
+                )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                СurrentTariff2()
+                ColumnElem(
+                    titleLight = "До сплати",
+                    subtitleLight = "В цьому місяці",
+                    iconLight = Icons.Default.Money,
+                    iconBgColorLight = Color(0xFFE2FFBE),
+                    iconTintLight = Color(0xFF4CAF50),
+                    valueLight = "0 грн.",
+                    textColorLight = Color(0xFF4CAF50),
+                    cardColorLight = Color(0xFFB6DB8B),
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                ColumnElem(
+                    titleLight = "До сплати",
+                    subtitleLight = "В попередньому місяці",
+                    iconLight = Icons.Default.Money,
+                    iconBgColorLight = Color(0xFF4CAF50),
+                    iconTintLight = Color(0xFFE2FFBE),
+                    valueLight = "500 грн.",
+                    textColorLight = Color(0xFFB6DB8B),
+                    cardColorLight = Color(0xFF4CAF50),
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                ColumnElem(
+                    titleLight = "Тариф",
+                    subtitleLight = "Актуальна ціна тарифа",
+                    iconLight = Icons.Default.AutoGraph,
+                    iconBgColorLight = Color(0xFFBBE0FF),
+                    iconTintLight = Color(0xFF3F51B5),
+                    valueLight = "4,32 грн./кВт",
+                    textColorLight = Color(0xFF3F51B5),
+                    cardColorLight = Color(0xFF87B4D7),
+                )
             }
         }
         ReceiptPickerItem2(hasReceipt = false, fileName = null)
@@ -77,146 +136,72 @@ fun BottomSectionLightScreen(){
 }
 
 @Composable
-fun Costs2() {
-    Column(
-        modifier = Modifier.fillMaxWidth()
+fun ColumnElem(titleLight: String,
+               subtitleLight: String,
+               iconLight: ImageVector, iconBgColorLight: Color, iconTintLight: Color,
+               valueLight: String,
+               textColorLight: Color,
+               cardColorLight: Color) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        elevation = CardDefaults.cardElevation(2.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "Витрачено:",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black,
-                modifier = Modifier.padding(top = 5.dp)
-            )
-
-            Text(
-                text = "0 кВт",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF4FA6EC),
-                modifier = Modifier.padding(top = 6.dp)
-            )
-        }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "Минулого місяця:",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black,
-                modifier = Modifier.padding(top = 3.dp, bottom = 2.dp)
-            )
-
-            Text(
-                text = "115 кВт",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF4FA6EC),
-                modifier = Modifier.padding(top = 3.dp, bottom = 2.dp)
-            )
-        }
-
-        HorizontalDivider(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .height(3.dp)
-                .padding(top = 6.dp),
-            color = Color.DarkGray.copy(alpha = 0.5f)
-        )
-    }
-}
-
-@Composable
-fun Payable2(){
-    Column(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+                .padding(16.dp)
+                .fillMaxWidth()
         ) {
-            Text(
-                text = "До сплати:",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black,
-                modifier = Modifier.padding(top = 5.dp))
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(40.dp)
+                    .background(iconBgColorLight, CircleShape)
+            ) {
+                Icon(
+                    imageVector = iconLight,
+                    contentDescription = null,
+                    tint = iconTintLight,
+                    modifier = Modifier.size(22.dp)
+                )
+            }
 
-            Text(
-                text = "0 грн.",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF4FA6EC),
-                modifier = Modifier.padding(top = 6.dp)
-            )
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = titleLight,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF1A1C1E)
+                )
+                Text(
+                    text = subtitleLight,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Gray
+                )
+            }
+
+            Card(
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = cardColorLight
+                )
+            ) {
+                Text(
+                    text = valueLight,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = textColorLight,
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+                )
+            }
         }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "Минулого місяця:",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black,
-                modifier = Modifier.padding(top = 3.dp, bottom = 4.dp)
-            )
-
-            Text(
-                text = "500 грн.",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF4FA6EC),
-                modifier = Modifier.padding(top = 3.dp, bottom = 4.dp)
-            )
-        }
-
-        HorizontalDivider(
-            modifier = Modifier
-                .height(3.dp)
-                .padding(top = 6.dp),
-            color = Color.DarkGray.copy(alpha = 0.5f)
-        )
-    }
-}
-
-@Composable
-fun СurrentTariff2(){
-    Column(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "Поточний тариф:",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black,
-                modifier = Modifier.padding(top = 5.dp))
-
-            Text(
-                text = "4.32 грн./кВт",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF4CAF50),
-                modifier = Modifier.padding(top = 6.dp)
-            )
-        }
-        HorizontalDivider(
-            modifier = Modifier
-                .height(3.dp)
-                .padding(top = 6.dp),
-            color = Color.DarkGray.copy(alpha = 0.5f)
-        )
     }
 }
 
@@ -227,7 +212,7 @@ fun ReceiptPickerItem2(hasReceipt: Boolean, fileName: String? = null) {
             .fillMaxWidth()
             .padding(vertical = 12.dp)
             .clickable{},
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(6.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFFF5F5F5)

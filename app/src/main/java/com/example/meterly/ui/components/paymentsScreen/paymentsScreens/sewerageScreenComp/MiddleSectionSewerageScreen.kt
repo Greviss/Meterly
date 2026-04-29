@@ -44,7 +44,7 @@ fun MiddleSectionSewerageScreen(
         Card(
             modifier = Modifier
                 .wrapContentSize(),
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
@@ -85,7 +85,7 @@ fun MiddleSectionSewerageScreen(
                     singleLine = true
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 OutlinedTextField(
                     value = monthEnd4,
@@ -110,7 +110,7 @@ fun MiddleSectionSewerageScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = {->
+                    onClick = { ->
                         null
                     },
                     modifier = Modifier
@@ -131,7 +131,8 @@ fun MiddleSectionSewerageScreen(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White
-                    ) }
+                    )
+                }
             }
         }
     }
