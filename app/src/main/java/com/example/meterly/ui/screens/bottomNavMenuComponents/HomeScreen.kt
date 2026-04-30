@@ -23,8 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.meterly.ui.components.homeScreen.bottomSectionComp.BottomSectionHomeScreen
-import com.example.meterly.ui.components.homeScreen.middleSectionComp.MiddleSectionHomeScreen
+import com.example.meterly.ui.components.homeScreen.BottomSectionHomeScreen
+import com.example.meterly.ui.components.homeScreen.MiddleSectionHomeScreen
 import com.example.meterly.ui.components.homeScreen.TopSectionHomeScreen
 import com.example.meterly.ui.theme.secondaryGradient
 
@@ -51,9 +51,8 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = nu
             Card(
                 modifier = Modifier
                     .wrapContentSize()
-                    .padding(horizontal = 20.dp)
                     .padding(bottom = 16.dp),
-                shape = RoundedCornerShape(size = 24.dp),
+                shape = RoundedCornerShape(size = 32.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
                 colors = CardDefaults.cardColors(Color.White)
             ) {
