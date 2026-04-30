@@ -51,9 +51,8 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = nu
             Card(
                 modifier = Modifier
                     .wrapContentSize()
-                    .padding(horizontal = 20.dp)
                     .padding(bottom = 16.dp),
-                shape = RoundedCornerShape(size = 24.dp),
+                shape = RoundedCornerShape(size = 32.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
                 colors = CardDefaults.cardColors(Color.White)
             ) {

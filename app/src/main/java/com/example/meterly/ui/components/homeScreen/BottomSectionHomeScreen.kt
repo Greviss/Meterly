@@ -2,12 +2,10 @@ package com.example.meterly.ui.components.homeScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,337 +15,134 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meterly.R
-import com.example.meterly.ui.theme.whiteButtonGradient
 
 @Composable
 fun BottomSectionHomeScreen(){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .wrapContentSize()
+        modifier = Modifier.wrapContentSize()
     ) {
-        GasCard()
+        CardUtil(icon = painterResource(R.drawable.icon_gas),
+            title = "Газ",
+            subTitle = "0 грн.",
+            cardColor = Color(0xFFEC8078),
+            colorBg = Color(0xFF89C3F1),
+            payment = "Не оплачено")
 
         Spacer(modifier = Modifier.height(4.dp))
 
-        WaterCard()
+        CardUtil(icon = painterResource(R.drawable.icon_water),
+            title = "Вода",
+            subTitle = "0 грн.",
+            cardColor = Color(0xFFEC8078),
+            colorBg = Color(0xFF74C9D4),
+            payment = "Не оплачено")
 
         Spacer(modifier = Modifier.height(4.dp))
 
-        LightCard()
+        CardUtil(icon = painterResource(R.drawable.icon_light),
+            title = "Світло",
+            subTitle = "0 грн.",
+            cardColor = Color(0xFFEC8078),
+            colorBg = Color(0xFFEEE384),
+            payment = "Не оплачено")
 
         Spacer(modifier = Modifier.height(4.dp))
 
-        SewerageCard()
+        CardUtil(icon = painterResource(R.drawable.icon_sewerage),
+            title = "Канал.",
+            subTitle = "0 грн.",
+            cardColor = Color(0xFFEC8078),
+            colorBg = Color(0xFF589788),
+            payment = "Не оплачено")
     }
 }
 
 @Composable
-fun GasCard() {
+fun CardUtil(
+    icon: Painter,
+    title: String,
+    subTitle: String,
+    cardColor: Color,
+    colorBg: Color,
+    payment: String
+) {
     Card(
         modifier = Modifier
-            .wrapContentSize()
-            .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 5.dp)
-            .border(
-                width = 2.dp,
-                color = Color.LightGray.copy(0.75f),
-                shape = RoundedCornerShape(16.dp)
-            ),
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp, vertical = 6.dp),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
     ) {
-        Box(modifier = Modifier
-            .background(brush = whiteButtonGradient())
-            .padding(14.dp)) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Box(modifier = Modifier
+                .size(40.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(color = colorBg)) {
                 Image(
-                    painter = painterResource(id = R.drawable.icon_gas),
+                    painter = icon,
                     contentDescription = null,
-                    modifier = Modifier.size(40.dp)
+                    modifier = Modifier
+                        .size(40.dp)
+                        .padding(4.dp)
                 )
-
-                Spacer(modifier = Modifier.width(14.dp))
-
-                Column {
-                    Text(
-                        text = "Газ",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier.padding(bottom = 2.dp)
-                    )
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "До сплати: ",
-                            fontSize = 14.sp,
-                            color = Color.DarkGray
-                        )
-                        Text(
-                            text = "0 грн.",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF4CAF50)
-                        )
-                    }
-                }
             }
 
-            Card(
-                modifier = Modifier
-                    .wrapContentSize()
-                    .align(Alignment.TopEnd),
-                shape = RoundedCornerShape(8.dp),
-                elevation = CardDefaults.cardElevation(4.dp),
-                colors = CardDefaults.cardColors(Color(0xFFEC8078))
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Column(
+                modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "Не оплачено",
-                    fontSize = 8.sp,
+                    text = title,
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Red,
-                    modifier = Modifier
-                        .padding(start = 5.dp, end = 5.dp, top = 3.dp, bottom = 3.dp)
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun WaterCard() {
-    Card(
-        modifier = Modifier
-            .wrapContentSize()
-            .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 5.dp)
-            .border(
-                width = 2.dp,
-                color = Color.LightGray.copy(0.75f),
-                shape = RoundedCornerShape(16.dp)
-            ),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
-    ) {
-        Box(modifier = Modifier
-            .background(brush = whiteButtonGradient())
-            .padding(14.dp)) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.icon_water),
-                    contentDescription = null,
-                    modifier = Modifier.size(40.dp)
+                    color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Column {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "Вода",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier.padding(bottom = 4.dp)
+                        text = "До сплати: ",
+                        fontSize = 13.sp,
+                        color = Color.DarkGray
                     )
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "До сплати: ",
-                            fontSize = 14.sp,
-                            color = Color.DarkGray
-                        )
-                        Text(
-                            text = "0 грн.",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF4CAF50)
-                        )
-                    }
+                    Text(
+                        text = subTitle,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF4CAF50)
+                    )
                 }
             }
-
-            Card(
-                modifier = Modifier
-                    .wrapContentSize()
-                    .align(Alignment.TopEnd),
-                shape = RoundedCornerShape(8.dp),
-                elevation = CardDefaults.cardElevation(4.dp),
-                colors = CardDefaults.cardColors(Color(0xFFEC8078))
+            Surface(
+                color = cardColor,
+                shape = RoundedCornerShape(8.dp)
             ) {
                 Text(
-                    text = "Не оплачено",
-                    fontSize = 8.sp,
+                    text = payment,
+                    fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Red,
-                    modifier = Modifier
-                        .padding(start = 5.dp, end = 5.dp, top = 3.dp, bottom = 3.dp)
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun LightCard() {
-    Card(
-        modifier = Modifier
-            .wrapContentSize()
-            .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 5.dp)
-            .border(
-                width = 2.dp,
-                color = Color.LightGray.copy(0.75f),
-                shape = RoundedCornerShape(16.dp)
-            ),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
-    ) {
-        Box(modifier = Modifier
-            .background(brush = whiteButtonGradient())
-            .padding(13.dp)) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.icon_light),
-                    contentDescription = null,
-                    modifier = Modifier.size(40.dp)
-                )
-
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Column {
-                    Text(
-                        text = "Світло",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier.padding(bottom = 4.dp)
-                    )
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "До сплати: ",
-                            fontSize = 14.sp,
-                            color = Color.DarkGray
-                        )
-                        Text(
-                            text = "0 грн.",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF4CAF50)
-                        )
-                    }
-                }
-            }
-
-            Card(
-                modifier = Modifier
-                    .wrapContentSize()
-                    .align(Alignment.TopEnd),
-                shape = RoundedCornerShape(8.dp),
-                elevation = CardDefaults.cardElevation(4.dp),
-                colors = CardDefaults.cardColors(Color(0xFFEC8078))
-            ) {
-                Text(
-                    text = "Не оплачено",
-                    fontSize = 8.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Red,
-                    modifier = Modifier
-                        .padding(start = 5.dp, end = 5.dp, top = 3.dp, bottom = 3.dp)
-                )
-            }
-        }
-    }
-}
-
-@Composable
-@Preview
-fun SewerageCard() {
-    Card(
-        modifier = Modifier
-            .wrapContentSize()
-            .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 16.dp)
-            .border(
-                width = 2.dp,
-                color = Color.LightGray.copy(0.75f),
-                shape = RoundedCornerShape(16.dp)
-            ),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
-    ) {
-        Box(modifier = Modifier
-            .background(brush = whiteButtonGradient())
-            .padding(13.dp)) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.icon_sewerage),
-                    contentDescription = null,
-                    modifier = Modifier.size(40.dp)
-                )
-
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Column {
-                    Text(
-                        text = "Каналізація",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier.padding(bottom = 4.dp)
-                    )
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "До сплати: ",
-                            fontSize = 14.sp,
-                            color = Color.DarkGray
-                        )
-                        Text(
-                            text = "0 грн.",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF4CAF50)
-                        )
-                    }
-                }
-            }
-
-            Card(
-                modifier = Modifier
-                    .wrapContentSize()
-                    .align(Alignment.TopEnd),
-                shape = RoundedCornerShape(8.dp),
-                elevation = CardDefaults.cardElevation(4.dp),
-                colors = CardDefaults.cardColors(Color(0xFFEC8078))
-            ) {
-                Text(
-                    text = "Не оплачено",
-                    fontSize = 8.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Red,
-                    modifier = Modifier
-                        .padding(start = 5.dp, end = 5.dp, top = 3.dp, bottom = 3.dp)
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                 )
             }
         }

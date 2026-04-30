@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -41,8 +42,7 @@ fun MiddleSectionHomeScreen() {
         Image(
             painter = painterResource(R.drawable.home4),
             contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         )
 
         Column(
@@ -56,11 +56,19 @@ fun MiddleSectionHomeScreen() {
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.wrapContentSize()
             ) {
-                gasButton()
+                ButtonUtil(
+                    image = painterResource(R.drawable.icon_gas),
+                    text = "Газ",
+                    contentColor = Color(0xFF89C3F1)
+                )
 
                 Spacer(modifier = Modifier.width(20.dp))
 
-                waterButton()
+                ButtonUtil(
+                    image = painterResource(R.drawable.icon_water),
+                    text = "Вода",
+                    contentColor = Color(0xFF74C9D4)
+                )
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -69,26 +77,32 @@ fun MiddleSectionHomeScreen() {
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.wrapContentSize()
             ) {
-                lightButton()
+                ButtonUtil(
+                    image = painterResource(R.drawable.icon_light),
+                    text = "Світло",
+                    contentColor = Color(0xFFEEE384)
+                )
 
                 Spacer(modifier = Modifier.width(20.dp))
 
-                sewerageButton()
+                ButtonUtil(
+                    image = painterResource(R.drawable.icon_sewerage),
+                    text = "Канал.",
+                    contentColor = Color(0xFF589788)
+                )
             }
         }
     }
 }
-
 @Composable
-fun gasButton(){
+fun ButtonUtil(image: Painter,
+               text: String,
+               contentColor: Color){
     Button (
         onClick = {},
         modifier = Modifier.size(110.dp),
         shape = RoundedCornerShape(20.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF73CAFF),
-            contentColor = Color.White
-        )
+        colors = ButtonDefaults.buttonColors(containerColor = contentColor)
     ) {
         Column (
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -96,121 +110,18 @@ fun gasButton(){
             modifier = Modifier.fillMaxHeight()
         ) {
             Image(
-                painter = painterResource(R.drawable.icon_gas),
+                painter = image,
                 contentDescription = null,
-                modifier = Modifier
-                    .size(70.dp)
+                modifier = Modifier.size(70.dp)
             )
 
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                text = "Газ",
+                text = text,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black,
-            )
-        }
-    }
-}
-
-@Composable
-fun waterButton(){
-    Button(
-        onClick = {},
-        modifier = Modifier.size(110.dp),
-        shape = RoundedCornerShape(20.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF73CAFF),
-            contentColor = Color.White
-        )
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom,
-            modifier = Modifier.fillMaxHeight()
-        ) {
-            Image(
-                painter = painterResource(R.drawable.icon_water),
-                contentDescription = null,
-                modifier = Modifier.size(70.dp)
-            )
-
-            Spacer(modifier = Modifier.height(4.dp))
-
-            Text(
-                text = "Вода",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black
-            )
-        }
-    }
-}
-
-@Composable
-fun lightButton(){
-    Button(
-        onClick = {},
-        modifier = Modifier.size(110.dp),
-        shape = RoundedCornerShape(20.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF73CAFF),
-            contentColor = Color.White
-        )
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom,
-            modifier = Modifier.fillMaxHeight()
-        ) {
-            Image(
-                painter = painterResource(R.drawable.icon_light),
-                contentDescription = null,
-                modifier = Modifier.size(70.dp)
-            )
-
-            Spacer(modifier = Modifier.height(4.dp))
-
-            Text(
-                text = "Світло",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black
-            )
-        }
-    }
-}
-
-@Composable
-fun sewerageButton(){
-    Button(
-        onClick = {},
-        modifier = Modifier.size(110.dp),
-        shape = RoundedCornerShape(20.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF73CAFF),
-            contentColor = Color.White
-        )
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom,
-            modifier = Modifier.fillMaxHeight()
-        ) {
-            Image(
-                painter = painterResource(R.drawable.icon_sewerage),
-                contentDescription = null,
-                modifier = Modifier.size(70.dp)
-            )
-
-            Spacer(modifier = Modifier.height(4.dp))
-
-            Text(
-                text = "Каналізація",
-                fontSize = 11.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black
             )
         }
     }
