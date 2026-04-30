@@ -25,7 +25,7 @@ import com.example.meterly.ui.theme.primaryGradient
 @Composable
 @Preview
 fun EnterScreen(
-    OnEnterClick: (String, String) -> Unit = { _, _ ->},
+    onEnterClick: (String, String) -> Unit = { _, _ ->},
     addressEnt: String = "",
     phoneNumberEnt: String = "",
     onAddressEntChange: (String) -> Unit = {},
@@ -46,8 +46,6 @@ fun EnterScreen(
         ) {
             TopSection2()
 
-            Spacer(modifier = Modifier.height(16.dp))
-
             MiddleSection2(
                 addressEnt = addressEnt,
                 phoneNumberEnt = phoneNumberEnt,
@@ -57,7 +55,7 @@ fun EnterScreen(
                         phoneNumberEnt = it
                     }
                 },
-                OnEnterClick = OnEnterClick
+                onEnterClick = onEnterClick
             )
 
             Spacer(modifier = Modifier.height(16.dp))

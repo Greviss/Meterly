@@ -39,7 +39,7 @@ fun MiddleSection2(
     phoneNumberEnt: String = "",
     onAddressEntChange: (String) -> Unit = {},
     onPhoneEntChange: (String) -> Unit = {},
-    OnEnterClick: (String, String) -> Unit = { _, _ ->}
+    onEnterClick: (String, String) -> Unit = { _, _ ->}
 ){
     val focusManager = LocalFocusManager.current
 
@@ -62,7 +62,7 @@ fun MiddleSection2(
                     .padding(16.dp)) {
                 Text(
                     text = "Вхід",
-                    fontSize = 28.sp,
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
@@ -133,20 +133,20 @@ fun MiddleSection2(
                     visualTransformation = PhoneVisualTransformation()
                 )
 
-                Spacer(modifier = Modifier.height(36.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
                 val isFormValid = addressEnt.length >= 7 &&
                         phoneNumberEnt.length == 9
 
                 Button(onClick = {
                     if (isFormValid){
-                        OnEnterClick(addressEnt, "+380$phoneNumberEnt")
+                        onEnterClick(addressEnt, "+380$phoneNumberEnt")
                     }
                 },
                     enabled = addressEnt.isNotBlank() && phoneNumberEnt.length == 9,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(60.dp),
+                        .height(55.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF1E88E5),

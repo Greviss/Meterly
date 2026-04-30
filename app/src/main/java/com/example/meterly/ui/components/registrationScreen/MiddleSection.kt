@@ -70,12 +70,12 @@ fun MiddleSection(
             ) {
                 Text(
                     text = "Реєстрація",
-                    fontSize = 28.sp,
+                    fontSize = 24.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
                 OutlinedTextField(
                     value = nameReg,
@@ -101,7 +101,7 @@ fun MiddleSection(
                     singleLine = true
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 OutlinedTextField(
                     value = addressReg,
@@ -134,7 +134,7 @@ fun MiddleSection(
                     singleLine = true
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 OutlinedTextField(
                     value = phoneNumberReg,
@@ -168,7 +168,7 @@ fun MiddleSection(
                     visualTransformation = PhoneVisualTransformation()
                 )
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 val isFormValid = nameReg.trim().split(" ").filter { it.isNotBlank() }.size >= 2 &&
                         addressReg.length > 7 &&
@@ -183,7 +183,7 @@ fun MiddleSection(
                     enabled = isFormValid,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(75.dp),
+                        .height(65.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF1E88E5),

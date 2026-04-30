@@ -67,7 +67,7 @@ fun BottomSection(
             }
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(4.dp))
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
@@ -75,13 +75,13 @@ fun BottomSection(
             Text(
                 text = "Реєструючись, ви погоджуєтесь з",
                 fontSize = 14.sp,
-                color = Color(0xFF9E9E9E)
+                color = Color.Gray
             )
 
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.height(38.dp)
+                modifier = Modifier.wrapContentSize()
             ) {
                 TextButton(onClick = onTermsClick) {
                     Text(
