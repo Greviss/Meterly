@@ -84,7 +84,7 @@ fun BottomSectionWaterScreen2(){
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp)
+                    .padding(top = 16.dp)
             ){
                 RowElementWater(titleWater1 = "Витрачено (м³)",
                     subtitleWater1 = "Щоденні витрати",
@@ -101,7 +101,7 @@ fun BottomSectionWaterScreen2(){
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -116,6 +116,8 @@ fun BottomSectionWaterScreen2(){
                     textColorWater2 = Color(0xFFF44336)
                 )
 
+                Spacer(modifier = Modifier.height(2.dp))
+
                 ColumnElementWater(
                     titleWater2 = "Мін. витрат",
                     subtitleWater2 = "За липень 2025",
@@ -124,6 +126,8 @@ fun BottomSectionWaterScreen2(){
                     cardColorWater2 = Color(0xFFF1FFDE),
                     textColorWater2 = Color(0xFF4CAF50)
                 )
+
+                Spacer(modifier = Modifier.height(2.dp))
 
                 ColumnElementWater(
                     titleWater2 = "За увесь рік",
@@ -148,7 +152,7 @@ fun RowElementWater(titleWater1: String,
         modifier = Modifier.size(width = 150.dp, height = 125.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(Color.LightGray)
+        colors = CardDefaults.cardColors(Color(0xFFE7E7E7))
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -218,7 +222,7 @@ fun ColumnElementWater(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

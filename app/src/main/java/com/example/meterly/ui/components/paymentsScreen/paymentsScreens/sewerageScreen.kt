@@ -29,6 +29,7 @@ fun SewerageScreen(onLeftArrowSewerage: () -> Unit = {},
                    onRightArrowSewerage: () -> Unit = {}) {
     var monthBegin4 by remember { mutableStateOf("") }
     var monthEnd4 by remember { mutableStateOf("") }
+    var rate4 by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
@@ -51,7 +52,9 @@ fun SewerageScreen(onLeftArrowSewerage: () -> Unit = {},
                 monthBegin4 = monthBegin4,
                 onMonthBeginChange4 = { monthBegin4 = it },
                 monthEnd4 = monthEnd4,
-                onMonthEndChange4 = { monthEnd4 = it }
+                onMonthEndChange4 = { monthEnd4 = it },
+                rate4 = rate4,
+                onRateEndChange4 = { rate4 = it }
             )
 
             Spacer(modifier = Modifier.height(16.dp))

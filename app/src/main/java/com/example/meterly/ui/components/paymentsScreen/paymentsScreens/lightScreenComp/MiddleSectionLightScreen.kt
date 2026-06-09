@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material3.Button
@@ -35,7 +36,9 @@ fun MiddleSectionLightScreen(
     monthBegin3: String = "",
     onMonthBeginChange3: (String) -> Unit = {},
     monthEnd3: String = "",
-    onMonthEndChange3: (String) -> Unit = {}
+    onMonthEndChange3: (String) -> Unit = {},
+    rate3: String = "",
+    onRateChange3: (String) -> Unit = {}
 ){
     Column(
         modifier = Modifier.wrapContentSize(),
@@ -92,6 +95,30 @@ fun MiddleSectionLightScreen(
                     label = { Text("Лічильник (кін.)") },
                     placeholder = { Text("00000") },
                     leadingIcon = { Icon(Icons.Default.CalendarMonth, contentDescription = null) },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFF1E88E5),
+                        focusedLabelColor = Color(0xFF1E88E5)
+                    ),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number,
+                        imeAction = ImeAction.Next
+                    ),
+                    maxLines = 5,
+                    singleLine = true
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                OutlinedTextField(
+                    value = rate3,
+                    onValueChange = onRateChange3,
+                    label = { Text("Тарифи") },
+                    placeholder = { Text("0.00") },
+                    leadingIcon = {
+                        Icon(Icons.Default.AutoGraph, contentDescription = null)
+                    },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
                     colors = OutlinedTextFieldDefaults.colors(

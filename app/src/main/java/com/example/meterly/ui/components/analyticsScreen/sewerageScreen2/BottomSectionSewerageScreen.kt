@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -84,11 +85,11 @@ fun BottomSectionSewerageScreen2(){
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp)
+                    .padding(top = 16.dp)
             ){
                 RowElementSewerage(titleSewerage1 = "Витрачено (кВт)",
                     subtitleSewerage1 = "Щоденні витрати",
-                    valueSewerage1 = "2,1 кВт",
+                    valueSewerage1 = "2,1 м³",
                     iconSewerage1 = Icons.Default.Plumbing, iconTintSewerage1 = Color(0xFF447EAC), iconBgColorSewerage1 = Color(0xFFC9D0FF),
                     modifierSewerage1 = Modifier.weight(1f)
                 )
@@ -101,7 +102,7 @@ fun BottomSectionSewerageScreen2(){
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -118,6 +119,8 @@ fun BottomSectionSewerageScreen2(){
                     textColorSewerage2 = Color(0xFFF44336)
                 )
 
+                Spacer(modifier = Modifier.height(2.dp))
+
                 ColumnElementSewerage(
                     titleSewerage2 = "Мін. витрат",
                     subtitleSewerage2 = "За липень 2025",
@@ -126,6 +129,8 @@ fun BottomSectionSewerageScreen2(){
                     cardColorSewerage2 = Color(0xFFF1FFDE),
                     textColorSewerage2 = Color(0xFF4CAF50)
                 )
+
+                Spacer(modifier = Modifier.height(2.dp))
 
                 ColumnElementSewerage(
                     titleSewerage2 = "За увесь рік",
@@ -150,7 +155,7 @@ fun RowElementSewerage(titleSewerage1: String,
         modifier = Modifier.size(width = 150.dp, height = 125.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(Color.LightGray)
+        colors = CardDefaults.cardColors(Color(0xFFE7E7E7))
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -220,7 +225,7 @@ fun ColumnElementSewerage(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

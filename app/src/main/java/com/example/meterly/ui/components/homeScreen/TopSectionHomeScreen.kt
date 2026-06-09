@@ -19,7 +19,7 @@ fun TopSectionHomeScreen(){
         modifier = Modifier.fillMaxWidth().padding(24.dp)
     ) {
         Text(
-            text = "userName",
+            text = "Вітаю, userName",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black

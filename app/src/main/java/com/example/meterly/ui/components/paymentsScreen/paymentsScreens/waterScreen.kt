@@ -29,6 +29,7 @@ fun WaterScreen(onLeftArrowWater: () -> Unit = {},
                 onRightArrowWater: () -> Unit = {}) {
     var monthBegin2 by remember { mutableStateOf("") }
     var monthEnd2 by remember { mutableStateOf("") }
+    var rate2 by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
@@ -51,7 +52,9 @@ fun WaterScreen(onLeftArrowWater: () -> Unit = {},
                 monthBegin2 = monthBegin2,
                 onMonthBeginChange2 = { monthBegin2 = it },
                 monthEnd2 = monthEnd2,
-                onMonthEndChange2 = { monthEnd2 = it }
+                onMonthEndChange2 = { monthEnd2 = it },
+                rate2 = rate2,
+                onRateEndChange2 = { rate2 = it },
             )
 
             Spacer(modifier = Modifier.height(16.dp))

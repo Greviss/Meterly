@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Money
+import androidx.compose.material.icons.filled.Plumbing
 import androidx.compose.material.icons.filled.Wallet
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -70,7 +71,7 @@ fun BottomSectionSewerageScreen(){
                 ColumnElem(
                     titleSewerage = "Витрачено",
                     subtitleSewerage = "В цьому місяці",
-                    iconSewerage = Icons.Default.Wallet,
+                    iconSewerage = Icons.Default.Plumbing,
                     iconBgColorSewerage = Color(0xFFFFBFBD),
                     iconTintSewerage = Color(0xFFF44336),
                     valueSewerage = "0 м³",
@@ -78,12 +79,12 @@ fun BottomSectionSewerageScreen(){
                     cardColorSewerage = Color(0xFFDC8E89),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleSewerage = "Витрачено",
                     subtitleSewerage = "В попередньому місяці",
-                    iconSewerage = Icons.Default.Wallet,
+                    iconSewerage = Icons.Default.Plumbing,
                     iconBgColorSewerage = Color(0xFFFFEFC1),
                     iconTintSewerage = Color(0xFFFF9800),
                     valueSewerage = "11 м³",
@@ -91,7 +92,7 @@ fun BottomSectionSewerageScreen(){
                     cardColorSewerage = Color(0xFFFFD797),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleSewerage = "До сплати",
@@ -104,7 +105,7 @@ fun BottomSectionSewerageScreen(){
                     cardColorSewerage = Color(0xFFB6DB8B),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleSewerage = "До сплати",
@@ -117,7 +118,7 @@ fun BottomSectionSewerageScreen(){
                     cardColorSewerage = Color(0xFF4CAF50),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleSewerage = "Тариф",
@@ -146,12 +147,12 @@ fun ColumnElem(titleSewerage: String,
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(2.dp),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .padding(16.dp)
+                .padding(14.dp)
                 .fillMaxWidth()
         ) {
             Box(
@@ -182,6 +183,7 @@ fun ColumnElem(titleSewerage: String,
                 Text(
                     text = subtitleSewerage,
                     fontSize = 12.sp,
+                    lineHeight = 11.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color.Gray
                 )
@@ -221,7 +223,7 @@ fun ReceiptPickerItem3(hasReceipt: Boolean, fileName: String? = null) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(

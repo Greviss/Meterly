@@ -3,9 +3,9 @@ package com.example.meterly.ui.components.profileScreen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -29,27 +29,24 @@ fun MiddleSectionProfileScreen(){
         modifier = Modifier.fillMaxSize()
     ) {
         Card(
-            modifier = Modifier
-                .wrapContentSize(),
-            shape = RoundedCornerShape(size = 24.dp),
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier
-                    .wrapContentSize()
-                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .padding(20.dp)
             ) {
                 Text(
                     text = "Особисті дані",
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold,
+                    fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
-
                 Spacer(modifier = Modifier.height(16.dp))
-
                 PersonalDataComp()
             }
         }
@@ -57,27 +54,24 @@ fun MiddleSectionProfileScreen(){
         Spacer(modifier = Modifier.height(16.dp))
 
         Card(
-            modifier = Modifier
-                .wrapContentSize(),
-            shape = RoundedCornerShape(size = 24.dp),
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier
-                    .wrapContentSize()
-                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .padding(20.dp)
             ) {
                 Text(
                     text = "Налаштування",
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold,
+                    fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
-
                 Spacer(modifier = Modifier.height(16.dp))
-
                 Settings()
             }
         }
@@ -85,27 +79,24 @@ fun MiddleSectionProfileScreen(){
         Spacer(modifier = Modifier.height(16.dp))
 
         Card(
-            modifier = Modifier
-                .fillMaxSize(),
-            shape = RoundedCornerShape(size = 24.dp),
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier
-                    .wrapContentSize()
-                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .padding(20.dp)
             ) {
                 Text(
                     text = "Моє житло",
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold,
+                    fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
-
                 Spacer(modifier = Modifier.height(16.dp))
-
                 MyObjects()
             }
         }
@@ -113,27 +104,24 @@ fun MiddleSectionProfileScreen(){
         Spacer(modifier = Modifier.height(16.dp))
 
         Card(
-            modifier = Modifier
-                .fillMaxSize(),
-            shape = RoundedCornerShape(size = 24.dp),
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier
-                    .wrapContentSize()
-                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .padding(20.dp)
             ) {
                 Text(
                     text = "Інше",
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold,
+                    fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
-
                 Spacer(modifier = Modifier.height(16.dp))
-
                 Other()
             }
         }

@@ -43,11 +43,10 @@ fun MiddleSectionGasScreen2(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxWidth() //  Змінено з fillMaxSize()
     ) {
         Card(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -76,7 +75,7 @@ fun MiddleSectionGasScreen2(
                     modelProducer = modelProducerGas,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .height(200.dp) // Тепер ця висота спрацює коректно
                 )
             }
         }
@@ -116,7 +115,7 @@ fun CostsGas(){
         ) {
             Card(
                 modifier = Modifier.size(width = 102.dp, height = 85.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFFA9D96F)),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFD6EAB7)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(
@@ -169,7 +168,7 @@ fun CostsGas(){
             Card(
                 modifier = Modifier
                     .size(width = 102.dp, height = 85.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFFE28078)),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFF5BEBA)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(
@@ -222,7 +221,7 @@ fun CostsGas(){
             Card(
                 modifier = Modifier
                     .size(width = 102.dp, height = 85.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF8090E5)),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFB3BEF5)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(

@@ -31,6 +31,7 @@ fun GasScreen(
 ) {
     var monthBegin by remember { mutableStateOf("") }
     var monthEnd by remember { mutableStateOf("") }
+    var rate by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
@@ -55,7 +56,9 @@ fun GasScreen(
                 monthBegin = monthBegin,
                 onMonthBeginChange = { monthBegin = it },
                 monthEnd = monthEnd,
-                onMonthEndChange = { monthEnd = it }
+                onMonthEndChange = { monthEnd = it },
+                rate = rate,
+                onRateChange = { rate = it },
             )
 
             Spacer(modifier = Modifier.height(16.dp))

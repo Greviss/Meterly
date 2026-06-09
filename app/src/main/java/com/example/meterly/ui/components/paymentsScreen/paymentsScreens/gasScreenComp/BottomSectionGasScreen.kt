@@ -21,6 +21,8 @@ import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.GasMeter
+import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material.icons.filled.Money
 import androidx.compose.material.icons.filled.Wallet
 import androidx.compose.material3.Card
@@ -68,7 +70,7 @@ fun BottomSectionGasScreen(){
                 ColumnElem(
                     titleGas = "Витрачено",
                     subtitleGas = "В цьому місяці",
-                    iconGas = Icons.Default.Wallet,
+                    iconGas = Icons.Default.LocalFireDepartment,
                     iconBgColorGas = Color(0xFFFFBFBD),
                     iconTintGas = Color(0xFFF44336),
                     valueGas = "0 м³",
@@ -76,12 +78,12 @@ fun BottomSectionGasScreen(){
                     cardColorGas = Color(0xFFDC8E89),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleGas = "Витрачено",
                     subtitleGas = "В попередньому місяці",
-                    iconGas = Icons.Default.Wallet,
+                    iconGas = Icons.Default.GasMeter,
                     iconBgColorGas = Color(0xFFFFEFC1),
                     iconTintGas = Color(0xFFFF9800),
                     valueGas = "82 м³",
@@ -89,7 +91,7 @@ fun BottomSectionGasScreen(){
                     cardColorGas = Color(0xFFFFD797),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleGas = "До сплати",
@@ -102,7 +104,7 @@ fun BottomSectionGasScreen(){
                     cardColorGas = Color(0xFFB6DB8B),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleGas = "До сплати",
@@ -115,7 +117,7 @@ fun BottomSectionGasScreen(){
                     cardColorGas = Color(0xFF4CAF50),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleGas = "Тариф",
@@ -144,12 +146,12 @@ fun ColumnElem(titleGas: String,
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(2.dp),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .padding(16.dp)
+                .padding(14.dp)
                 .fillMaxWidth()
         ) {
             Box(
@@ -180,6 +182,7 @@ fun ColumnElem(titleGas: String,
                 Text(
                     text = subtitleGas,
                     fontSize = 12.sp,
+                    lineHeight = 11.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color.Gray
                 )

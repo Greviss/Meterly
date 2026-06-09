@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -16,8 +17,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowCircleRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -40,7 +44,7 @@ fun MiddleSectionHomeScreen() {
             .background(Color.Transparent)
     ) {
         Image(
-            painter = painterResource(R.drawable.home4),
+            painter = painterResource(R.drawable.home5),
             contentDescription = null,
             modifier = Modifier.fillMaxSize()
         )
@@ -50,7 +54,7 @@ fun MiddleSectionHomeScreen() {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .wrapContentSize()
-                .padding(top = 125.dp)
+                .padding(top = 100.dp)
         ) {
             Row(
                 horizontalArrangement = Arrangement.Center,
@@ -59,19 +63,19 @@ fun MiddleSectionHomeScreen() {
                 ButtonUtil(
                     image = painterResource(R.drawable.icon_gas),
                     text = "Газ",
-                    contentColor = Color(0xFF89C3F1)
+                    contentColor = Color(0xFFC2DEF5)
                 )
 
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(12.dp))
 
                 ButtonUtil(
                     image = painterResource(R.drawable.icon_water),
                     text = "Вода",
-                    contentColor = Color(0xFF74C9D4)
+                    contentColor = Color(0xFFC1E9EE)
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             Row(
                 horizontalArrangement = Arrangement.Center,
@@ -80,48 +84,74 @@ fun MiddleSectionHomeScreen() {
                 ButtonUtil(
                     image = painterResource(R.drawable.icon_light),
                     text = "Світло",
-                    contentColor = Color(0xFFEEE384)
+                    contentColor = Color(0xFFECE7C1)
                 )
 
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(12.dp))
 
                 ButtonUtil(
                     image = painterResource(R.drawable.icon_sewerage),
                     text = "Канал.",
-                    contentColor = Color(0xFF589788)
+                    contentColor = Color(0xFFC1EED2)
                 )
             }
         }
     }
 }
 @Composable
-fun ButtonUtil(image: Painter,
-               text: String,
-               contentColor: Color){
-    Button (
+fun ButtonUtil(
+    image: Painter,
+    text: String,
+    contentColor: Color
+) {
+    Button(
         onClick = {},
-        modifier = Modifier.size(110.dp),
-        shape = RoundedCornerShape(20.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = contentColor)
+        modifier = Modifier.size(120.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = contentColor),
+        contentPadding = PaddingValues(12.dp)
     ) {
-        Column (
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom,
-            modifier = Modifier.fillMaxHeight()
+        Box(
+            modifier = Modifier.fillMaxSize()
         ) {
-            Image(
-                painter = image,
+            Column(
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.Top,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Image(
+                    painter = image,
+                    contentDescription = null,
+                    modifier = Modifier.size(45.dp)
+                )
+
+                Spacer(modifier = Modifier.height(2.dp))
+
+                Text(
+                    text = text,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black,
+                )
+
+                Spacer(modifier = Modifier.height(2.dp))
+
+                Text(
+                    text = "Переглянути платежі",
+                    fontSize = 10.sp,
+                    lineHeight = 11.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Gray,
+                )
+            }
+
+            Icon(
+                imageVector = Icons.Default.ArrowCircleRight,
                 contentDescription = null,
-                modifier = Modifier.size(70.dp)
-            )
-
-            Spacer(modifier = Modifier.height(4.dp))
-
-            Text(
-                text = text,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black,
+                tint = Color(0xFF808080),
+                modifier = Modifier
+                    .size(24.dp)
+                    .align(Alignment.BottomEnd)
             )
         }
     }

@@ -83,7 +83,7 @@ fun BottomSectionGasScreen2() {
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp)
+                    .padding(top = 16.dp)
             ){
                 RowElementGas(titleGas1 = "Витрачено (м³)",
                     subtitleGas1 = "Щоденні витрати",
@@ -100,7 +100,7 @@ fun BottomSectionGasScreen2() {
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -115,6 +115,8 @@ fun BottomSectionGasScreen2() {
                     textColorGas2 = Color(0xFFF44336)
                 )
 
+                Spacer(modifier = Modifier.height(2.dp))
+
                 ColumnElementGas(
                     titleGas2 = "Мін. витрат",
                     subtitleGas2 = "За липень 2025",
@@ -123,6 +125,8 @@ fun BottomSectionGasScreen2() {
                     cardColorGas2 = Color(0xFFF1FFDE),
                     textColorGas2 = Color(0xFF4CAF50)
                 )
+
+                Spacer(modifier = Modifier.height(2.dp))
 
                 ColumnElementGas(
                     titleGas2 = "За увесь рік",
@@ -147,13 +151,13 @@ fun RowElementGas(titleGas1: String,
         modifier = Modifier.size(width = 150.dp, height = 125.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(Color.LightGray)
+        colors = CardDefaults.cardColors(Color(0xFFE7E7E7))
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(14.dp)
         ) {
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -215,7 +219,7 @@ fun ColumnElementGas(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

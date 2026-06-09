@@ -60,7 +60,7 @@ fun TopSectionWaterScreen(onLeftArrowWater: () -> Unit = {},
 
             Text(
                 text = "Вода",
-                fontSize = 32.sp,
+                fontSize = 24.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black
             )

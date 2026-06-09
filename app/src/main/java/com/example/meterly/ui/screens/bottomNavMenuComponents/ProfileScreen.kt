@@ -22,30 +22,38 @@ import com.example.meterly.ui.theme.secondaryGradient
 
 @Composable
 @Preview
-fun ProfileScreen(navController: NavHostController ?= null) {
+fun ProfileScreen(
+    navController: NavHostController? = null
+) {
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(secondaryGradient())
     ) {
+
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 24.dp)
                 .verticalScroll(rememberScrollState())
+                .padding(16.dp),
+
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TopSectionProfileScreen(
-                imageUrl = null
-            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            TopSectionProfileScreen()
 
             Spacer(modifier = Modifier.height(24.dp))
 
             MiddleSectionProfileScreen()
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             BottomSectionProfileScreen()
+
+            Spacer(modifier = Modifier.height(80.dp))
         }
     }
 }

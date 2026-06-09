@@ -21,6 +21,8 @@ import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.ElectricMeter
+import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.Money
 import androidx.compose.material.icons.filled.Wallet
 import androidx.compose.material3.Card
@@ -70,7 +72,7 @@ fun BottomSectionLightScreen(){
                 ColumnElem(
                     titleLight = "Витрачено",
                     subtitleLight = "В цьому місяці",
-                    iconLight = Icons.Default.Wallet,
+                    iconLight = Icons.Default.Lightbulb,
                     iconBgColorLight = Color(0xFFFFBFBD),
                     iconTintLight = Color(0xFFF44336),
                     valueLight = "0 Квт",
@@ -78,12 +80,12 @@ fun BottomSectionLightScreen(){
                     cardColorLight = Color(0xFFDC8E89),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleLight = "Витрачено",
                     subtitleLight = "В попередньому місяці",
-                    iconLight = Icons.Default.Wallet,
+                    iconLight = Icons.Default.ElectricMeter,
                     iconBgColorLight = Color(0xFFFFEFC1),
                     iconTintLight = Color(0xFFFF9800),
                     valueLight = "115 кВт",
@@ -91,7 +93,7 @@ fun BottomSectionLightScreen(){
                     cardColorLight = Color(0xFFFFD797),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleLight = "До сплати",
@@ -104,7 +106,7 @@ fun BottomSectionLightScreen(){
                     cardColorLight = Color(0xFFB6DB8B),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleLight = "До сплати",
@@ -117,7 +119,7 @@ fun BottomSectionLightScreen(){
                     cardColorLight = Color(0xFF4CAF50),
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 ColumnElem(
                     titleLight = "Тариф",
@@ -146,12 +148,12 @@ fun ColumnElem(titleLight: String,
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(2.dp),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .padding(16.dp)
+                .padding(14.dp)
                 .fillMaxWidth()
         ) {
             Box(
@@ -182,6 +184,7 @@ fun ColumnElem(titleLight: String,
                 Text(
                     text = subtitleLight,
                     fontSize = 12.sp,
+                    lineHeight = 11.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color.Gray
                 )

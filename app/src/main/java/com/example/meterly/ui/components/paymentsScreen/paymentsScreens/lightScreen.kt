@@ -31,6 +31,7 @@ fun LightScreen(onLeftArrowLight: () -> Unit = {},
                 onRightArrowLight: () -> Unit = {}) {
     var monthBegin3 by remember { mutableStateOf("") }
     var monthEnd3 by remember { mutableStateOf("") }
+    var rate3 by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
@@ -55,7 +56,9 @@ fun LightScreen(onLeftArrowLight: () -> Unit = {},
                 monthBegin3 = monthBegin3,
                 onMonthBeginChange3 = { monthBegin3 = it },
                 monthEnd3 = monthEnd3,
-                onMonthEndChange3 = { monthEnd3 = it }
+                onMonthEndChange3 = { monthEnd3 = it },
+                rate3 = rate3,
+                onRateChange3 = { rate3 = it }
             )
 
             Spacer(modifier = Modifier.height(16.dp))

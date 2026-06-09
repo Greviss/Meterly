@@ -59,7 +59,7 @@ fun TopSectionLightScreen(onLeftArrowLight: () -> Unit = {},
 
             Text(
                 text = "Світло",
-                fontSize = 32.sp,
+                fontSize = 24.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black
             )

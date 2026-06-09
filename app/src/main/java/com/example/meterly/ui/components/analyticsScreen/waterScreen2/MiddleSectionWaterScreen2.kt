@@ -115,7 +115,7 @@ fun CostsWater(){
         ) {
             Card(
                 modifier = Modifier.size(width = 102.dp, height = 85.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFFA9D96F)),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFD6EAB7)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(
@@ -168,7 +168,7 @@ fun CostsWater(){
             Card(
                 modifier = Modifier
                     .size(width = 102.dp, height = 85.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFFE28078)),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFF5BEBA)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(
@@ -221,7 +221,7 @@ fun CostsWater(){
             Card(
                 modifier = Modifier
                     .size(width = 102.dp, height = 85.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF8090E5)),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFB3BEF5)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(

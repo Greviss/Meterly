@@ -85,7 +85,7 @@ fun BottomSectionLightScreen2(){
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp)
+                    .padding(top = 16.dp)
             ){
                 RowElementLight(titleLight1 = "Витрачено (кВт)",
                     subtitleLight1 = "Щоденні витрати",
@@ -102,7 +102,7 @@ fun BottomSectionLightScreen2(){
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -117,6 +117,8 @@ fun BottomSectionLightScreen2(){
                     textColorLight2 = Color(0xFFF44336)
                 )
 
+                Spacer(modifier = Modifier.height(2.dp))
+
                 ColumnElementLight(
                     titleLight2 = "Мін. витрат",
                     subtitleLight2 = "За липень 2025",
@@ -125,6 +127,8 @@ fun BottomSectionLightScreen2(){
                     cardColorLight2 = Color(0xFFF1FFDE),
                     textColorLight2 = Color(0xFF4CAF50)
                 )
+
+                Spacer(modifier = Modifier.height(2.dp))
 
                 ColumnElementLight(
                     titleLight2 = "За увесь рік",
@@ -149,7 +153,7 @@ fun RowElementLight(titleLight1: String,
         modifier = Modifier.size(width = 150.dp, height = 125.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(Color.LightGray)
+        colors = CardDefaults.cardColors(Color(0xFFE7E7E7))
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -217,7 +221,7 @@ fun ColumnElementLight(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

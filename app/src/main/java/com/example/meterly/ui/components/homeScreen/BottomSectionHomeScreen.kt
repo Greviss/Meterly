@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,6 +25,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,13 +36,15 @@ import com.example.meterly.R
 fun BottomSectionHomeScreen(){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.wrapContentSize()
+        modifier = Modifier
+            .wrapContentSize()
+            .padding(bottom = 16.dp)
     ) {
         CardUtil(icon = painterResource(R.drawable.icon_gas),
             title = "Газ",
             subTitle = "0 грн.",
             cardColor = Color(0xFFEC8078),
-            colorBg = Color(0xFF89C3F1),
+            colorBg = Color(0xFFC2DEF5),
             payment = "Не оплачено")
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -48,7 +53,7 @@ fun BottomSectionHomeScreen(){
             title = "Вода",
             subTitle = "0 грн.",
             cardColor = Color(0xFFEC8078),
-            colorBg = Color(0xFF74C9D4),
+            colorBg = Color(0xFFC1E9EE),
             payment = "Не оплачено")
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -57,7 +62,7 @@ fun BottomSectionHomeScreen(){
             title = "Світло",
             subTitle = "0 грн.",
             cardColor = Color(0xFFEC8078),
-            colorBg = Color(0xFFEEE384),
+            colorBg = Color(0xFFECE7C1),
             payment = "Не оплачено")
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -66,7 +71,7 @@ fun BottomSectionHomeScreen(){
             title = "Канал.",
             subTitle = "0 грн.",
             cardColor = Color(0xFFEC8078),
-            colorBg = Color(0xFF589788),
+            colorBg = Color(0xFFC1EED2),
             payment = "Не оплачено")
     }
 }
@@ -83,15 +88,15 @@ fun CardUtil(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp, vertical = 6.dp),
+            .padding(top = 6.dp, bottom = 6.dp, start = 16.dp, end = 16.dp),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .padding(16.dp)
         ) {
             Box(modifier = Modifier

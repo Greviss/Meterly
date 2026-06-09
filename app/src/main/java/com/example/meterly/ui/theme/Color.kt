@@ -10,19 +10,23 @@ val Pink80 = Color(0xFFEFB8C8)
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
-val PrimaryBlue = Color(0xFF4CA1AF)
-val LightGray = Color(0xFFEFEFEF)
+val PrimaryBlue = Color(0xFF4A9FE7)
+val LightGray = Color(0xFFECECEC)
 val Gray = Color(0xFFD5D5D5)
-val Blue = Color(0xFF2196F3)
 val White = Color(0xFFFFFFFF)
-val LightBlue = Color(0xFFC4E0E5)
+val LightBlue = Color(0xFFBFE9F4)
 val Black = Color(0xFF000000)
 
 fun primaryGradient() = Brush.verticalGradient(
-    colors = listOf(PrimaryBlue, Blue)
+    colors = listOf(Color(0xFF1E4D8F),
+        Color(0xFF3678C9),
+        Color(0xFFB6D8F7))
 )
 fun secondaryGradient() = Brush.verticalGradient(
-    colors = listOf(LightBlue, PrimaryBlue)
+    colors = listOf(Color(0xFF4A90D9),
+        Color(0xFF87C0E8),
+        Color(0xFFEBF9FF)
+    )
 )
 
 fun whiteButtonGradient() = Brush.verticalGradient(
