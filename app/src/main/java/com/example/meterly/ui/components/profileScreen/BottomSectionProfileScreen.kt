@@ -23,7 +23,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun BottomSectionProfileScreen(){
+fun BottomSectionProfileScreen(
+    onSingOutClick: () -> Unit = {}
+){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.wrapContentSize()
@@ -36,7 +38,7 @@ fun BottomSectionProfileScreen(){
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedButton(
-            onClick = {},
+            onClick = onSingOutClick,
             border = BorderStroke(1.dp, Color(0xFFF44336)),
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.size(width = 150.dp, height = 45.dp)

@@ -23,10 +23,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -37,6 +33,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.util.Validator
 
 @Composable
 fun MiddleSection(
@@ -46,7 +43,8 @@ fun MiddleSection(
     onNameRegChange: (String) -> Unit = {},
     onAddressRegChange: (String) -> Unit = {},
     onPhoneRegChange: (String) -> Unit = {},
-    onRegisterClick: (String, String, String) -> Unit = { _, _, _ -> }
+    onRegisterClick: (String, String, String) -> Unit = { _, _, _ -> },
+    errorMessage: String? = null,
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -57,7 +55,12 @@ fun MiddleSection(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(400.dp),
+                .height(
+                    if (errorMessage != null)
+                        430.dp
+                    else
+                        400.dp
+                ),
             shape = RoundedCornerShape(24.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
@@ -105,14 +108,7 @@ fun MiddleSection(
 
                 OutlinedTextField(
                     value = addressReg,
-                    onValueChange = { input ->
-                        val prefix = "Вул. "
-                        if (input.startsWith(prefix)) {
-                            onAddressRegChange(input)
-                        } else if (input.length < prefix.length) {
-                            onAddressRegChange(prefix)
-                        }
-                    },
+                    onValueChange = onAddressRegChange,
                     label = { Text("Адреса проживання") },
                     placeholder = { Text("вул. Хрещатик, 1, кв. 10") },
                     leadingIcon = {
@@ -168,11 +164,20 @@ fun MiddleSection(
                     visualTransformation = PhoneVisualTransformation()
                 )
 
+                if (errorMessage != null) {
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = errorMessage,
+                        color = Color(0xFFF5A7A1),
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+
                 Spacer(modifier = Modifier.height(16.dp))
 
-                val isFormValid = nameReg.trim().split(" ").filter { it.isNotBlank() }.size >= 2 &&
-                        addressReg.length > 7 &&
-                        phoneNumberReg.length == 9
+                val isFormValid = Validator.isValidFullName(nameReg) && Validator.isValidAddress(addressReg) && phoneNumberReg.length == 9
 
                 Button(
                     onClick = {

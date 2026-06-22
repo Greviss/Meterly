@@ -29,7 +29,8 @@ fun RegisterScreen(
     onRegisterClick: (String, String, String) -> Unit = { _, _, _ -> },
     onLoginClick: () -> Unit = {},
     onPrivacyClick: () -> Unit = {},
-    onTermsClick: () -> Unit = {}
+    onTermsClick: () -> Unit = {},
+    errorMessage: String? = null
 ) {
     var nameReg by remember {mutableStateOf("")}
     var addressReg by remember {mutableStateOf("")}
@@ -51,18 +52,19 @@ fun RegisterScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            MiddleSection (
+            MiddleSection(
                 nameReg = nameReg,
                 addressReg = addressReg,
                 phoneNumberReg = phoneNumberReg,
                 onNameRegChange = { nameReg = it },
                 onAddressRegChange = { addressReg = it },
                 onPhoneRegChange = {
-                    if (it.length <= 10 && it.all { char -> char.isDigit() }) {
+                    if (it.length <= 9 && it.all { char -> char.isDigit() }) {
                         phoneNumberReg = it
                     }
                 },
-                onRegisterClick = onRegisterClick
+                onRegisterClick = onRegisterClick,
+                errorMessage = errorMessage
             )
 
             Spacer(modifier = Modifier.height(16.dp))

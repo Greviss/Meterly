@@ -26,11 +26,8 @@ import com.example.meterly.ui.theme.primaryGradient
 @Preview
 fun EnterScreen(
     onEnterClick: (String, String) -> Unit = { _, _ ->},
-    addressEnt: String = "",
-    phoneNumberEnt: String = "",
-    onAddressEntChange: (String) -> Unit = {},
-    onPhoneEntChange: (String) -> Unit = {},
-    onSignIn: () -> Unit = {}
+    onSignIn: () -> Unit = {},
+    errorMessage: String? = null
 ){
     var addressEnt by remember { mutableStateOf("") }
     var phoneNumberEnt by remember { mutableStateOf("") }
@@ -51,11 +48,13 @@ fun EnterScreen(
                 phoneNumberEnt = phoneNumberEnt,
                 onAddressEntChange = { addressEnt = it },
                 onPhoneEntChange = {
-                    if (it.length <= 10 && it.all { char -> char.isDigit() }){
+                    if (it.length <= 9 && it.all { char -> char.isDigit() }
+                    ){
                         phoneNumberEnt = it
                     }
                 },
-                onEnterClick = onEnterClick
+                onEnterClick = onEnterClick,
+                errorMessage = errorMessage
             )
 
             Spacer(modifier = Modifier.height(16.dp))

@@ -23,7 +23,8 @@ import com.example.meterly.ui.theme.secondaryGradient
 @Composable
 @Preview
 fun ProfileScreen(
-    navController: NavHostController? = null
+    navController: NavHostController? = null,
+    onSignOutClick: () -> Unit = {}
 ) {
 
     Box(
@@ -51,7 +52,9 @@ fun ProfileScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            BottomSectionProfileScreen()
+            BottomSectionProfileScreen(
+                onSingOutClick = onSignOutClick
+            )
 
             Spacer(modifier = Modifier.height(80.dp))
         }

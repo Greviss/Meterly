@@ -32,6 +32,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.util.Validator
 
 @Composable
 fun MiddleSection2(
@@ -39,7 +40,8 @@ fun MiddleSection2(
     phoneNumberEnt: String = "",
     onAddressEntChange: (String) -> Unit = {},
     onPhoneEntChange: (String) -> Unit = {},
-    onEnterClick: (String, String) -> Unit = { _, _ ->}
+    onEnterClick: (String, String) -> Unit = { _, _ ->},
+    errorMessage: String? = null
 ){
     val focusManager = LocalFocusManager.current
 
@@ -71,14 +73,7 @@ fun MiddleSection2(
 
                 OutlinedTextField(
                     value = addressEnt,
-                    onValueChange = { input ->
-                        val prefix = "Вул. "
-                        if(input.startsWith(prefix)){
-                            onAddressEntChange(input)
-                        } else if(input.length < prefix.length){
-                            onAddressEntChange(prefix)
-                        }
-                    },
+                    onValueChange = onAddressEntChange,
                     label = {Text("Адреса проживання")},
                     placeholder = {Text("вул. Хрещатик, 1, кв. 10")},
                     leadingIcon = {
@@ -133,17 +128,27 @@ fun MiddleSection2(
                     visualTransformation = PhoneVisualTransformation()
                 )
 
+                if (errorMessage != null) {
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = errorMessage,
+                        color = Color(0xFFF5A7A1),
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+
                 Spacer(modifier = Modifier.height(24.dp))
 
-                val isFormValid = addressEnt.length >= 7 &&
-                        phoneNumberEnt.length == 9
+                val isFormValid = Validator.isValidAddress(addressEnt) && phoneNumberEnt.length == 9
 
                 Button(onClick = {
                     if (isFormValid){
                         onEnterClick(addressEnt, "+380$phoneNumberEnt")
                     }
                 },
-                    enabled = addressEnt.isNotBlank() && phoneNumberEnt.length == 9,
+                    enabled = isFormValid,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(55.dp),
