@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "336022014778",
+    "project_id": "meterly-7d08b",
+    "storage_bucket": "meterly-7d08b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336022014778:android:686ab45548bd960e925e03",
+        "android_client_info": {
+          "package_name": "com.example.meterly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_WzmQeU3IJvm5oQVP7PSlNI6Hjk9hT5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
