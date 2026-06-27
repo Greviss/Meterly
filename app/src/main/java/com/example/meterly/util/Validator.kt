@@ -7,15 +7,12 @@ object Validator {
     }
 
     fun isValidAddress(address: String): Boolean {
-        val trimmed = address.trim()
+        val text = address.trim()
 
-        if (trimmed.length < 8) {
-            return false
-        }
-
-        return Regex("^(Вул\\.|вул\\.|Пр\\.|пр\\.|Пров\\.|пров\\.)\\s.+").matches(trimmed)
+        return text.length >= 8 &&
+                text.any { it.isDigit() } &&
+                text.any { it.isLetter() }
     }
-
     fun isValidPhone(phone: String) : Boolean {
         val cleaned = phone.replace(" ", "").replace("-", "")
         return cleaned.matches(Regex("^(\\+380|0)\\d{9}\$"))

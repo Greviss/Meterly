@@ -3,14 +3,13 @@ package com.example.meterly.repository
 import android.app.Activity
 import com.example.meterly.model.User
 import com.example.meterly.state.AuthState
-import com.google.firebase.Firebase
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestore
+import android.util.Log
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,21 +29,35 @@ class AuthRepository {
         phone: String,
         activity: Activity
     ) {
+        Log.d("AUTH_DEBUG", "sendVerificationCode: $phone")
         _authState.value = AuthState.Loading
 
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                Log.d("AUTH_DEBUG", "onVerificationCompleted")
                 signInWithCredential(credential)
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
-                _authState.value = AuthState.Error(e.message ?: "Помилка верифікації")
+                Log.e(
+                    "AUTH_DEBUG",
+                    "onVerificationFailed",
+                    e
+                )
+
+                _authState.value =
+                    AuthState.Error(
+                        e.localizedMessage
+                            ?: "Помилка верифікації"
+                    )
             }
 
-            override fun onCodeSent(
-                verificationId: String,
-                token: PhoneAuthProvider.ForceResendingToken
-            ) {
+            override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+                Log.d(
+                    "AUTH_DEBUG",
+                    "onCodeSent"
+                )
+
                 storedVerificationId = verificationId
                 _authState.value = AuthState.CodeSent(verificationId)
             }
@@ -97,93 +110,80 @@ class AuthRepository {
         address: String,
         phone: String
     ) {
-        val uid = auth.currentUser?.uid ?: return
-        val doc =
-            firestore.collection("users")
-                .document(uid)
-                .get()
+        val fcmToken = try {
+            FirebaseMessaging.getInstance()
+                .token
                 .await()
+        } catch (_: Exception) {
+            ""
+        }
 
-        if (doc.exists()) return
+        val docRef = firestore.collection("users").document(phone)
+        val snapshot = docRef.get().await()
 
-        val fcmToken =
-            try {
-                FirebaseMessaging.getInstance()
-                    .token
-                    .await()
-            } catch (_: Exception) {
-                ""
+        if (!snapshot.exists()) {
+            val user = User(
+                uid = auth.currentUser?.uid ?: "",
+                fullName = fullName,
+                phoneNumber = phone,
+                addresses = listOf(address),
+                fcmToken = fcmToken
+            )
+
+            docRef.set(user).await()
+        } else {
+            val addresses = snapshot.get("addresses") as? List<String> ?: emptyList()
+
+            if (addresses.none {
+                    it.trim().equals(address.trim(), ignoreCase = true)
+                }) {
+                docRef.update(
+                    "addresses",
+                    addresses + address
+                ).await()
             }
 
-        val user = User(
-            uid = uid,
-            fullName = fullName,
-            address = address,
-            phoneNumber = phone,
-            fcmToken = fcmToken
-        )
-
-        firestore.collection("users")
-            .document(uid)
-            .set(user)
-            .await()
-    }
-
-    suspend fun checkUserExists(phone: String): Boolean {
-        val snapshot = firestore.collection("users")
-            .whereEqualTo(
-                "phoneNumber",
-                phone
-            )
-            .get()
-            .await()
-
-        return !snapshot.isEmpty
+            docRef.update(
+                "fcmToken",
+                fcmToken
+            ).await()
+        }
     }
 
     suspend fun checkUserByAddressAndPhone(
         address: String,
         phone: String
     ): Boolean {
-        val snapshot = firestore.collection("users")
-            .whereEqualTo(
-                "address",
-                address)
-            .whereEqualTo(
-                "phoneNumber",
-                phone)
+
+        val snapshot = firestore
+            .collection("users")
+            .document(phone)
             .get()
             .await()
 
-        return !snapshot.isEmpty
-    }
+        if (!snapshot.exists())
+            return false
 
-    suspend fun checkFullNameExists(fullName: String): Boolean {
-        val snapshot = firestore.collection("users")
-            .whereEqualTo(
-                    "fullName",
-                    fullName
-            )
-            .get()
-            .await()
+        val addresses =
+            snapshot.get("addresses") as? List<String>
+                ?: emptyList()
 
-        return !snapshot.isEmpty
+        return addresses.any {
+            it.trim().equals(address.trim(), ignoreCase = true)
+        }
     }
 
     suspend fun updateFcmToken() {
-        val uid = auth.currentUser?.uid ?: return
+        val phone = auth.currentUser?.phoneNumber ?: return
+
         val token = FirebaseMessaging
             .getInstance()
             .token
             .await()
 
-        firestore
-            .collection("users")
-            .document(uid)
-            .update(
-                "fcmToken",
-                token
-            )
+        firestore.collection("users")
+            .document(phone)
+            .update("fcmToken", token)
             .await()
     }
 

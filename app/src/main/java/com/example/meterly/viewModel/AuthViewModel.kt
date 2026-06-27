@@ -55,22 +55,6 @@ class AuthViewModel : ViewModel() {
         val normalizedPhone = Validator.normalizePhone(phone)
 
         viewModelScope.launch {
-            val nameExists = repository.checkFullNameExists(fullName)
-
-            if (nameExists) {
-                _registerError.value = "Користувач з таким ПІБ вже зареєстрований"
-
-                return@launch
-            }
-
-            val phoneExists = repository.checkUserExists(normalizedPhone)
-
-            if (phoneExists) {
-                _registerError.value = "Користувач з таким номером вже зареєстрований"
-
-                return@launch
-            }
-
             _registerError.value = null
 
             pendingFullName = fullName
