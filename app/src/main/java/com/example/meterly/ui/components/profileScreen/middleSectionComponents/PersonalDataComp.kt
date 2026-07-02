@@ -1,15 +1,6 @@
 package com.example.meterly.ui.components.profileScreen.middleSectionComponents
 
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,83 +10,93 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.Address
+import com.example.meterly.model.User
 
 @Composable
-fun PersonalDataComp(){
+fun PersonalDataComp(
+    user: User?,
+    currentAddress: Address?
+) {
     Column(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier.fillMaxWidth()
     ) {
-        PIB()
-        HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f), modifier = Modifier.padding(vertical = 8.dp))
-        PhoneNumber()
-        HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f), modifier = Modifier.padding(vertical = 8.dp))
-        Address()
+        PIB(user)
+
+        HorizontalDivider(
+            color = Color.LightGray.copy(alpha = 0.3f),
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+
+        PhoneNumber(user)
+
+        HorizontalDivider(
+            color = Color.LightGray.copy(alpha = 0.3f),
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+
+        val addressString = currentAddress?.address?.ifBlank { "Адресу не вказано" } ?: "Адресу не вказано"
+
+        AddressSection(addressText = addressString)
     }
 }
 
 @Composable
-fun PIB(){
+fun PIB(user: User?) {
     Column(
-        horizontalAlignment = Alignment.Start,
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp)
     ) {
+        Text(text = "ПІБ", fontSize = 13.sp, color = Color.Gray)
+        Spacer(Modifier.height(4.dp))
         Text(
-            text = "ПІБ",
-            fontSize = 13.sp,
-            fontWeight = FontWeight.Normal,
-            color = Color.Gray
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = "userPIB",
+            text = user?.fullName ?: "",
             fontSize = 16.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color.Black
+            fontWeight = FontWeight.Medium
         )
     }
 }
 
 @Composable
-fun PhoneNumber(){
+fun PhoneNumber(user: User?) {
     Column(
-        horizontalAlignment = Alignment.Start,
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp)
     ) {
+        Text(text = "Номер телефону", fontSize = 13.sp, color = Color.Gray)
+        Spacer(Modifier.height(4.dp))
         Text(
-            text = "Номер телефону",
-            fontSize = 13.sp,
-            fontWeight = FontWeight.Normal,
-            color = Color.Gray
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = "userPhoneNumber",
+            text = user?.phoneNumber ?: "",
             fontSize = 16.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color.Black
+            fontWeight = FontWeight.Medium
         )
     }
 }
 
 @Composable
-fun Address(){
+fun AddressSection(
+    addressText: String
+) {
     Column(
-        horizontalAlignment = Alignment.Start,
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp)
     ) {
         Text(
             text = "Адреса проживання",
             fontSize = 13.sp,
-            fontWeight = FontWeight.Normal,
             color = Color.Gray
         )
-        Spacer(modifier = Modifier.height(4.dp))
+
+        Spacer(Modifier.height(4.dp))
+
         Text(
-            text = "userAddress",
+            text = addressText,
             fontSize = 16.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color.Black
+            fontWeight = FontWeight.Medium
         )
     }
 }

@@ -18,10 +18,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.example.meterly.model.User
 
 @Composable
 fun TopSectionProfileScreen(
-    imageUrl: String? = null
+    imageUrl: String? = null,
+    user: User?
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -43,7 +45,9 @@ fun TopSectionProfileScreen(
         Spacer(modifier = Modifier.height(12.dp))
 
         Text(
-            text = "UserName",
+            text = user?.fullName
+                ?.substringBefore(" ")
+                ?: "",
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White

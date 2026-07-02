@@ -17,13 +17,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.Address
+import com.example.meterly.model.User
 import com.example.meterly.ui.components.profileScreen.middleSectionComponents.MyObjects
 import com.example.meterly.ui.components.profileScreen.middleSectionComponents.Other
 import com.example.meterly.ui.components.profileScreen.middleSectionComponents.PersonalDataComp
 import com.example.meterly.ui.components.profileScreen.middleSectionComponents.Settings
 
 @Composable
-fun MiddleSectionProfileScreen(){
+fun MiddleSectionProfileScreen(
+    user: User?,
+    currentAddress: Address?
+){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
@@ -47,7 +52,11 @@ fun MiddleSectionProfileScreen(){
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                PersonalDataComp()
+
+                PersonalDataComp(
+                    user = user,
+                    currentAddress = currentAddress
+                )
             }
         }
 

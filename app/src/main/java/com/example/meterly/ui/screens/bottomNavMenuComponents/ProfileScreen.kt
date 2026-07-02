@@ -10,15 +10,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.meterly.ui.components.profileScreen.BottomSectionProfileScreen
 import com.example.meterly.ui.components.profileScreen.MiddleSectionProfileScreen
 import com.example.meterly.ui.components.profileScreen.TopSectionProfileScreen
 import com.example.meterly.ui.theme.secondaryGradient
+import com.example.meterly.viewModel.ProfileViewModel
+
 
 @Composable
 @Preview
@@ -26,6 +31,9 @@ fun ProfileScreen(
     navController: NavHostController? = null,
     onSignOutClick: () -> Unit = {}
 ) {
+    val profileViewModel: ProfileViewModel = viewModel()
+    val user by profileViewModel.user.collectAsState()
+    val currentAddress by profileViewModel.currentAddress.collectAsState()
 
     Box(
         modifier = Modifier
@@ -44,11 +52,14 @@ fun ProfileScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            TopSectionProfileScreen()
+            TopSectionProfileScreen(user = user)
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            MiddleSectionProfileScreen()
+            MiddleSectionProfileScreen(
+                user = user,
+                currentAddress = currentAddress
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
