@@ -70,7 +70,9 @@ fun RegisterScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             BottomSection(
-                onLoginClick = onLoginClick
+                onLoginClick = onLoginClick,
+                onPrivacyClick = onPrivacyClick,
+                onTermsClick = onTermsClick
             )
         }
     }

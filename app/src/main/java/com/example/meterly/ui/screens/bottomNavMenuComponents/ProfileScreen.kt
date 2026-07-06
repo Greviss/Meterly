@@ -17,7 +17,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -31,10 +30,10 @@ import com.example.meterly.ui.theme.secondaryGradient
 import com.example.meterly.viewModel.ProfileViewModel
 
 @Composable
-@Preview
 fun ProfileScreen(
     navController: NavHostController? = null,
-    onSignOutClick: () -> Unit = {}
+    onSignOutClick: () -> Unit = {},
+    onClickPrivacy: () -> Unit
 ) {
 
     val profileViewModel: ProfileViewModel = viewModel()
@@ -98,7 +97,8 @@ fun ProfileScreen(
                 onEditAddress = { address ->
                     selectedAddress = address
                     showEditDialog = true
-                }
+                },
+                onClickPrivacy = onClickPrivacy
             )
 
             Spacer(modifier = Modifier.height(16.dp))

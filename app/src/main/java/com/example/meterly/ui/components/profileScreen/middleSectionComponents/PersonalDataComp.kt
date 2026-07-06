@@ -49,12 +49,13 @@ fun PIB(user: User?) {
             .fillMaxWidth()
             .padding(horizontal = 4.dp)
     ) {
-        Text(text = "ПІБ", fontSize = 13.sp, color = Color.Gray)
+        Text(text = "ПІБ", fontSize = 13.sp, color = Color.Black)
         Spacer(Modifier.height(4.dp))
         Text(
             text = user?.fullName ?: "",
             fontSize = 16.sp,
-            fontWeight = FontWeight.Medium
+            fontWeight = FontWeight.Medium,
+            color = Color.DarkGray
         )
     }
 }
@@ -66,12 +67,13 @@ fun PhoneNumber(user: User?) {
             .fillMaxWidth()
             .padding(horizontal = 4.dp)
     ) {
-        Text(text = "Номер телефону", fontSize = 13.sp, color = Color.Gray)
+        Text(text = "Номер телефону", fontSize = 13.sp, color = Color.Black)
         Spacer(Modifier.height(4.dp))
         Text(
             text = user?.phoneNumber ?: "",
             fontSize = 16.sp,
-            fontWeight = FontWeight.Medium
+            fontWeight = FontWeight.Medium,
+            color = Color.DarkGray
         )
     }
 }
@@ -88,7 +90,7 @@ fun AddressSection(
         Text(
             text = "Адреса проживання",
             fontSize = 13.sp,
-            color = Color.Gray
+            color = Color.Black
         )
 
         Spacer(Modifier.height(4.dp))
@@ -96,7 +98,8 @@ fun AddressSection(
         Text(
             text = addressText,
             fontSize = 16.sp,
-            fontWeight = FontWeight.Medium
+            fontWeight = FontWeight.Medium,
+            color = Color.DarkGray
         )
     }
 }

@@ -74,8 +74,8 @@ fun MiddleSection2(
                 OutlinedTextField(
                     value = addressEnt,
                     onValueChange = onAddressEntChange,
-                    label = {Text("Адреса проживання")},
-                    placeholder = {Text("вул. Хрещатик, 1, кв. 10")},
+                    label = {Text("Адреса проживання", color = Color.DarkGray)},
+                    placeholder = {Text("вул. Хрещатик, 1, кв. 10", color = Color.Gray)},
                     leadingIcon = {
                         Icon(Icons.Default.LocationOn, null)
                     },
@@ -105,7 +105,7 @@ fun MiddleSection2(
                             onPhoneEntChange(digitOnly)
                         }
                     },
-                    label = {Text("Номер телефону")},
+                    label = {Text("Номер телефону", color = Color.DarkGray)},
                     leadingIcon = {
                         Icon(Icons.Default.Phone, null)
                     },
@@ -119,7 +119,7 @@ fun MiddleSection2(
                     imeAction = ImeAction.Next
                     ),
                     supportingText = {
-                        Text("${phoneNumberEnt.length}/9 цифр")
+                        Text("${phoneNumberEnt.length}/9 цифр", color = Color.Gray)
                     },
                     keyboardActions = KeyboardActions(
                         onNext = {focusManager.moveFocus(FocusDirection.Down)}

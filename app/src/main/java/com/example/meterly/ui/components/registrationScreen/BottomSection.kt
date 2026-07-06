@@ -13,8 +13,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun BottomSection(
     onLoginClick: () -> Unit = {},
-    onPrivacyClick: () -> Unit = {},
-    onTermsClick: () -> Unit = {}
+    onPrivacyClick: () -> Unit,
+    onTermsClick: () -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

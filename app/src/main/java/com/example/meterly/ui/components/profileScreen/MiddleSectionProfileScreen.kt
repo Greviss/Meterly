@@ -32,7 +32,8 @@ fun MiddleSectionProfileScreen(
     onAddAddress: () -> Unit,
     onAddressClick: (Address) -> Unit,
     onDeleteAddress: (Address) -> Unit,
-    onEditAddress: (Address) -> Unit
+    onEditAddress: (Address) -> Unit,
+    onClickPrivacy: () -> Unit
 ) {
 
     Column(
@@ -50,17 +51,16 @@ fun MiddleSectionProfileScreen(
                 defaultElevation = 2.dp
             )
         ) {
-
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(20.dp)
             ) {
-
                 Text(
                     text = "Особисті дані",
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -84,17 +84,16 @@ fun MiddleSectionProfileScreen(
                 defaultElevation = 2.dp
             )
         ) {
-
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(20.dp)
             ) {
-
                 Text(
                     text = "Налаштування",
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -125,7 +124,8 @@ fun MiddleSectionProfileScreen(
                 Text(
                     text = "Моє житло",
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -153,7 +153,6 @@ fun MiddleSectionProfileScreen(
                 defaultElevation = 2.dp
             )
         ) {
-
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -163,12 +162,13 @@ fun MiddleSectionProfileScreen(
                 Text(
                     text = "Інше",
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Other()
+                Other(onClickPrivacy = onClickPrivacy)
             }
         }
     }

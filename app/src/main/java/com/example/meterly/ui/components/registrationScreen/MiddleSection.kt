@@ -83,8 +83,8 @@ fun MiddleSection(
                 OutlinedTextField(
                     value = nameReg,
                     onValueChange = onNameRegChange,
-                    label = { Text("ПІБ") },
-                    placeholder = { Text("Іванов Іван Іванович") },
+                    label = { Text("ПІБ", color = Color.DarkGray) },
+                    placeholder = { Text("Іванов Іван Іванович", color = Color.Gray) },
                     leadingIcon = {
                         Icon(Icons.Default.Person, contentDescription = null)
                     },
@@ -109,8 +109,8 @@ fun MiddleSection(
                 OutlinedTextField(
                     value = addressReg,
                     onValueChange = onAddressRegChange,
-                    label = { Text("Адреса проживання") },
-                    placeholder = { Text("вул. Хрещатик, 1, кв. 10") },
+                    label = { Text("Адреса проживання", color = Color.DarkGray) },
+                    placeholder = { Text("вул. Хрещатик, 1, кв. 10", color = Color.Gray) },
                     leadingIcon = {
                         Icon(Icons.Default.LocationOn, contentDescription = null)
                     },
@@ -140,12 +140,12 @@ fun MiddleSection(
                             onPhoneRegChange(digitOnly)
                         }
                     },
-                    label = { Text("Номер телефону") },
+                    label = { Text("Номер телефону", color = Color.DarkGray) },
                     leadingIcon = {
                         Icon(Icons.Default.Phone, contentDescription = null)
                     },
                     supportingText = {
-                        Text("${phoneNumberReg.length}/9 цифр")
+                        Text("${phoneNumberReg.length}/9 цифр", color = Color.Gray)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),

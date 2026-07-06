@@ -14,6 +14,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.meterly.state.AuthState
+import com.example.meterly.ui.components.PrivacyPolicyScreen
+import com.example.meterly.ui.components.TermsOfUse
 import com.example.meterly.ui.components.analyticsScreen.GasScreen2
 import com.example.meterly.ui.components.analyticsScreen.LightScreen2
 import com.example.meterly.ui.components.analyticsScreen.SewerageScreen2
@@ -49,6 +51,8 @@ sealed class Screen(val route: String) {
     object LightScreenAnalytics: Screen("light_screen_analytics")
     object SewerageScreenAnalytics: Screen("sewerage_screen_analytics")
     object Profile: Screen("profile_screen")
+    object PrivacyPolicy: Screen("privacy_policy")
+    object TermsOfUse: Screen("terms_of_use")
 }
 
 @Composable
@@ -96,7 +100,13 @@ fun AppNavigation(navController: NavHostController) {
                 onLoginClick = {
                     navController.navigate(Screen.Enter.route)
                 },
-                errorMessage = registerError
+                errorMessage = registerError,
+                onPrivacyClick = {
+                    navController.navigate(Screen.PrivacyPolicy.route)
+                },
+                onTermsClick = {
+                    navController.navigate(Screen.TermsOfUse.route)
+                }
             )
 
             LaunchedEffect(authState) {
@@ -178,6 +188,25 @@ fun AppNavigation(navController: NavHostController) {
                             inclusive = true
                         }
                     }
+                },
+                onClickPrivacy = {
+                    navController.navigate(Screen.PrivacyPolicy.route)
+                }
+            )
+        }
+
+        composable(Screen.PrivacyPolicy.route) {
+            PrivacyPolicyScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Screen.TermsOfUse.route) {
+            TermsOfUse(
+                onBack = {
+                    navController.popBackStack()
                 }
             )
         }
