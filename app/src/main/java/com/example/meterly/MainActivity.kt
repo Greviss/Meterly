@@ -15,6 +15,7 @@ import com.example.meterly.ui.navigation.Screen
 import com.example.meterly.ui.navigation.AppNavigation
 import com.example.meterly.ui.navigation.BottomNavigationBar
 import com.example.meterly.ui.theme.MeterlyTheme
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,19 +27,22 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-
-                    val currentRoute = navController.currentBackStackEntryAsState()?.value?.destination?.route
+                    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
                     val screensWithBotNavMenu = listOf(
                         Screen.Home.route,
                         Screen.Analytics.route,
                         Screen.Payments.route,
-                        Screen.Profile.route
+                        Screen.Profile.route,
+                        Screen.GasScreenPay.route,
+                        Screen.WaterScreenPay.route,
+                        Screen.LightScreenPay.route,
+                        Screen.SewerageScreenPay.route
                     )
 
                     Scaffold(
                         bottomBar = {
-                            if (currentRoute in screensWithBotNavMenu){
+                            if (currentRoute in screensWithBotNavMenu) {
                                 BottomNavigationBar(navController)
                             }
                         }

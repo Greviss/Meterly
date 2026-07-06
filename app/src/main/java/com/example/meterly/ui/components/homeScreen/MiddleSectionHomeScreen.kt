@@ -35,7 +35,12 @@ import androidx.compose.ui.unit.sp
 import com.example.meterly.R
 
 @Composable
-fun MiddleSectionHomeScreen() {
+fun MiddleSectionHomeScreen(
+    onGasClick: () -> Unit,
+    onWaterClick: () -> Unit,
+    onLightClick: () -> Unit,
+    onSewerageClick: () -> Unit
+) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -63,7 +68,8 @@ fun MiddleSectionHomeScreen() {
                 ButtonUtil(
                     image = painterResource(R.drawable.icon_gas),
                     text = "Газ",
-                    contentColor = Color(0xFFC2DEF5)
+                    contentColor = Color(0xFFC2DEF5),
+                    onUtilClick = onGasClick
                 )
 
                 Spacer(modifier = Modifier.width(12.dp))
@@ -71,7 +77,8 @@ fun MiddleSectionHomeScreen() {
                 ButtonUtil(
                     image = painterResource(R.drawable.icon_water),
                     text = "Вода",
-                    contentColor = Color(0xFFC1E9EE)
+                    contentColor = Color(0xFFC1E9EE),
+                    onUtilClick = onWaterClick
                 )
             }
 
@@ -84,7 +91,8 @@ fun MiddleSectionHomeScreen() {
                 ButtonUtil(
                     image = painterResource(R.drawable.icon_light),
                     text = "Світло",
-                    contentColor = Color(0xFFECE7C1)
+                    contentColor = Color(0xFFECE7C1),
+                    onUtilClick = onLightClick
                 )
 
                 Spacer(modifier = Modifier.width(12.dp))
@@ -92,7 +100,8 @@ fun MiddleSectionHomeScreen() {
                 ButtonUtil(
                     image = painterResource(R.drawable.icon_sewerage),
                     text = "Канал.",
-                    contentColor = Color(0xFFC1EED2)
+                    contentColor = Color(0xFFC1EED2),
+                    onUtilClick = onSewerageClick
                 )
             }
         }
@@ -102,10 +111,11 @@ fun MiddleSectionHomeScreen() {
 fun ButtonUtil(
     image: Painter,
     text: String,
-    contentColor: Color
+    contentColor: Color,
+    onUtilClick: () -> Unit
 ) {
     Button(
-        onClick = {},
+        onClick = onUtilClick,
         modifier = Modifier.size(120.dp),
         shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.buttonColors(containerColor = contentColor),

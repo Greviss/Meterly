@@ -26,7 +26,18 @@ fun BottomNavigationBar(
         contentColor = contentColor
     ) {
         navigationItems.forEach { item ->
-            val isSelected = currentRoute == item.route
+            val isSelected = when (item.route) {
+                Screen.Payments.route -> {
+                    currentRoute in listOf(
+                        Screen.Payments.route,
+                        Screen.GasScreenPay.route,
+                        Screen.WaterScreenPay.route,
+                        Screen.LightScreenPay.route,
+                        Screen.SewerageScreenPay.route
+                    )
+                }
+                else -> currentRoute == item.route
+            }
 
             NavigationBarItem(
                 selected = isSelected,

@@ -167,7 +167,28 @@ fun AppNavigation(navController: NavHostController) {
         }
 
         composable(Screen.Home.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(
+                navController = navController,
+                onGasClick = { navController.navigate(Screen.GasScreenPay.route){
+                    popUpTo(navController.graph.startDestinationId) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                } },
+                onWaterClick = { navController.navigate(Screen.WaterScreenPay.route){
+                    popUpTo(navController.graph.startDestinationId) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                } },
+                onLightClick = { navController.navigate(Screen.LightScreenPay.route){
+                    popUpTo(navController.graph.startDestinationId) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                } },
+                onSewerageClick = { navController.navigate(Screen.SewerageScreenPay.route){
+                    popUpTo(navController.graph.startDestinationId) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                } })
         }
 
         composable(Screen.Analytics.route) {
@@ -235,6 +256,9 @@ fun AppNavigation(navController: NavHostController) {
                 onRightArrowSewerage = { navController.navigate(Screen.GasScreenPay.route) }
             )
         }
+
+
+
         composable(Screen.GasScreenAnalytics.route){
             GasScreen2(
                 onLeftArrowGas2 = { navController.navigate(Screen.SewerageScreenAnalytics.route) },
