@@ -11,15 +11,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.User
 
 @Composable
-fun TopSectionHomeScreen(){
+fun TopSectionHomeScreen(
+    user: User?
+){
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth().padding(24.dp)
     ) {
         Text(
-            text = "Вітаю, userName",
+            text = "Вітаю, ${user?.fullName?.split(" ")?.getOrNull(1) ?: "Гість"}",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black

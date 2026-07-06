@@ -45,9 +45,7 @@ fun TopSectionProfileScreen(
         Spacer(modifier = Modifier.height(12.dp))
 
         Text(
-            text = user?.fullName
-                ?.substringBefore(" ")
-                ?: "",
+            text = user?.fullName?.split(" ")?.getOrNull(1) ?: "Гість",
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White

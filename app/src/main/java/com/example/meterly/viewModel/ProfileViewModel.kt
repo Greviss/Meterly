@@ -23,19 +23,45 @@ class ProfileViewModel: ViewModel() {
     val currentAddress: StateFlow<Address?> = _currentAddress
 
     init {
-        loadProfile()
+        repository.observeProfile {
+            _user.value = it.user
+            _addresses.value = it.addresses
+            _currentAddress.value = it.currentAddress
+        }
     }
 
-    fun loadProfile() {
+    fun addAddress(address: String) {
         viewModelScope.launch {
-
-            _user.value = repository.getCurrentUser()
-
-            _addresses.value =
-                repository.getAddresses()
-
-            _currentAddress.value =
-                repository.getCurrentAddress()
+            repository.addAddress(address)
         }
+    }
+
+    fun deleteAddress(id: String) {
+        viewModelScope.launch {
+            repository.deleteAddress(id)
+        }
+    }
+
+    fun updateAddress(
+        addressId: String,
+        newAddress: String
+    ) {
+        viewModelScope.launch {
+            repository.updateAddress(
+                addressId,
+                newAddress
+            )
+        }
+    }
+
+    fun setCurrentAddress(addressId: String) {
+        viewModelScope.launch {
+            repository.setCurrentAddress(addressId)
+        }
+    }
+
+    override fun onCleared() {
+        repository.removerListener()
+        super.onCleared()
     }
 }
