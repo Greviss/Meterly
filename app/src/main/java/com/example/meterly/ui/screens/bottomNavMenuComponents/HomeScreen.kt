@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -29,8 +28,13 @@ import com.example.meterly.ui.components.homeScreen.TopSectionHomeScreen
 import com.example.meterly.ui.theme.secondaryGradient
 
 @Composable
-@Preview
-fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = null){
+fun HomeScreen(
+    navController: NavController? = null,
+    modifier: Modifier = Modifier,
+    onGasClick: () -> Unit,
+    onWaterClick: () -> Unit,
+    onLightClick: () -> Unit,
+    onSewerageClick: () -> Unit){
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -44,7 +48,12 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController? = nu
         ) {
             TopSectionHomeScreen()
 
-            MiddleSectionHomeScreen()
+            MiddleSectionHomeScreen(
+                onGasClick = onGasClick,
+                onWaterClick = onWaterClick,
+                onLightClick = onLightClick,
+                onSewerageClick = onSewerageClick
+            )
 
             Spacer(modifier = Modifier.height(20.dp))
 
