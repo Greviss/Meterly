@@ -61,7 +61,7 @@ class ProfileRepository {
             }
     }
 
-    fun removerListener(){
+    fun removeListener(){
         profileListener?.remove()
     }
 
@@ -262,5 +262,43 @@ class ProfileRepository {
             address = snapshot.getString("address") ?: "",
             createdAt = snapshot.getLong("createdAt") ?: 0L
         )
+    }
+
+    suspend fun updateFullName(fullName: String){
+        val phone = auth.currentUser?.phoneNumber ?: return
+
+        firestore.collection("users")
+            .document(phone)
+            .update("fullName", fullName)
+            .await()
+    }
+
+    suspend fun deleteAccount() {
+        val user = auth.currentUser ?: return
+        val phone = user.phoneNumber ?: return
+
+        val addressesRef = firestore
+            .collection("users")
+            .document(phone)
+            .collection("addresses")
+
+        addressesRef
+            .get()
+            .await()
+            .documents
+            .forEach {
+
+                it.reference.delete().await()
+
+            }
+
+        firestore
+            .collection("users")
+            .document(phone)
+            .delete()
+            .await()
+
+        user.delete().await()
+        auth.signOut()
     }
 }

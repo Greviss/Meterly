@@ -33,7 +33,8 @@ fun MiddleSectionProfileScreen(
     onAddressClick: (Address) -> Unit,
     onDeleteAddress: (Address) -> Unit,
     onEditAddress: (Address) -> Unit,
-    onClickPrivacy: () -> Unit
+    onClickPrivacy: () -> Unit,
+    onClickProfileControl: () -> Unit
 ) {
 
     Column(
@@ -98,7 +99,7 @@ fun MiddleSectionProfileScreen(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Settings()
+                Settings(onClickProfileControl = onClickProfileControl)
             }
         }
 

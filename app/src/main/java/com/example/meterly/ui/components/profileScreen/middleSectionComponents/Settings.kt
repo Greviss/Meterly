@@ -1,5 +1,6 @@
 package com.example.meterly.ui.components.profileScreen.middleSectionComponents
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,7 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Settings(){
+fun Settings(
+    onClickProfileControl: () -> Unit
+){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
@@ -40,7 +43,7 @@ fun Settings(){
         HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f))
         Theme()
         HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f))
-        ProfileControl()
+        ProfileControl(onClickProfileControl = onClickProfileControl)
     }
 }
 
@@ -153,12 +156,13 @@ fun Theme(){
 }
 
 @Composable
-fun ProfileControl(){
+fun ProfileControl(onClickProfileControl: () -> Unit){
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
+            .clickable{ onClickProfileControl() }
             .padding(vertical = 12.dp, horizontal = 4.dp)
     ) {
         Column(horizontalAlignment = Alignment.Start) {

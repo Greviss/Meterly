@@ -24,6 +24,8 @@ import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.GasScree
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.LightScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.SewerageScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.WaterScreen
+import com.example.meterly.ui.components.profileScreen.middleSectionComponents.ProfileControl
+import com.example.meterly.ui.screens.ProfileControlScreen
 import com.example.meterly.ui.screens.authentication.EnterScreen
 import com.example.meterly.ui.screens.authentication.OtpScreen
 import com.example.meterly.ui.screens.authentication.RegisterScreen
@@ -53,6 +55,7 @@ sealed class Screen(val route: String) {
     object Profile: Screen("profile_screen")
     object PrivacyPolicy: Screen("privacy_policy")
     object TermsOfUse: Screen("terms_of_use")
+    object ProfileControl : Screen("profile_control")
 }
 
 @Composable
@@ -204,15 +207,23 @@ fun AppNavigation(navController: NavHostController) {
                 navController = navController,
                 onSignOutClick = {
                     authViewModel.signOut()
+
                     navController.navigate(Screen.Registration.route) {
                         popUpTo(navController.graph.startDestinationId) {
                             inclusive = true
                         }
                     }
                 },
+
                 onClickPrivacy = {
                     navController.navigate(Screen.PrivacyPolicy.route)
                 }
+            )
+        }
+
+        composable(Screen.ProfileControl.route) {
+            ProfileControlScreen(
+                navController = navController
             )
         }
 

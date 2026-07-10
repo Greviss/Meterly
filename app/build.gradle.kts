@@ -42,6 +42,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.compose.foundation.layout)
+    implementation(libs.androidx.ui)
     implementation(libs.compose)
     implementation(libs.compose.m3)
     implementation(libs.androidx.compose.material.icons.extended)

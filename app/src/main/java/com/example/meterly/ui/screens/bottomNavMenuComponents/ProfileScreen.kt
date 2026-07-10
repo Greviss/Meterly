@@ -26,12 +26,13 @@ import com.example.meterly.ui.components.profileScreen.MiddleSectionProfileScree
 import com.example.meterly.ui.components.profileScreen.TopSectionProfileScreen
 import com.example.meterly.ui.components.profileScreen.middleSectionComponents.AddAddressDialog
 import com.example.meterly.ui.components.profileScreen.middleSectionComponents.EditAddressDialog
+import com.example.meterly.ui.navigation.Screen
 import com.example.meterly.ui.theme.secondaryGradient
 import com.example.meterly.viewModel.ProfileViewModel
 
 @Composable
 fun ProfileScreen(
-    navController: NavHostController? = null,
+    navController: NavHostController,
     onSignOutClick: () -> Unit = {},
     onClickPrivacy: () -> Unit
 ) {
@@ -98,7 +99,8 @@ fun ProfileScreen(
                     selectedAddress = address
                     showEditDialog = true
                 },
-                onClickPrivacy = onClickPrivacy
+                onClickPrivacy = onClickPrivacy,
+                onClickProfileControl = { navController.navigate(Screen.ProfileControl.route) }
             )
 
             Spacer(modifier = Modifier.height(16.dp))

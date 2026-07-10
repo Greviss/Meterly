@@ -2,7 +2,6 @@ package com.example.meterly.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.meterly.model.Address
 import com.example.meterly.model.User
 import com.example.meterly.repository.ProfileRepository
@@ -61,7 +60,22 @@ class ProfileViewModel: ViewModel() {
     }
 
     override fun onCleared() {
-        repository.removerListener()
+        repository.removeListener()
         super.onCleared()
+    }
+
+    fun updateFullName(fullName: String) {
+        viewModelScope.launch {
+            repository.updateFullName(fullName)
+        }
+    }
+
+    fun deleteAccount(
+        onSuccess: () -> Unit
+    ) {
+        viewModelScope.launch {
+            repository.deleteAccount()
+            onSuccess()
+        }
     }
 }
