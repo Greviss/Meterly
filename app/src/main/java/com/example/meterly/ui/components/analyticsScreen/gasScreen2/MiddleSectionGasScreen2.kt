@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.PriceChange
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,12 +44,12 @@ fun MiddleSectionGasScreen2(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth() //  Змінено з fillMaxSize()
+        modifier = Modifier.fillMaxWidth()
     ) {
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Column(
@@ -61,7 +62,7 @@ fun MiddleSectionGasScreen2(
                     text = "Аналітика",
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -75,7 +76,7 @@ fun MiddleSectionGasScreen2(
                     modelProducer = modelProducerGas,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp) // Тепер ця висота спрацює коректно
+                        .height(200.dp)
                 )
             }
         }
@@ -90,7 +91,7 @@ fun CostsGas(){
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
@@ -103,7 +104,7 @@ fun CostsGas(){
                 text = "Витрати в цьому місяці",
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 16.sp,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
 
@@ -150,7 +151,7 @@ fun CostsGas(){
                             text = "Розхід",
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 12.sp,
-                            color = Color.Black
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
 
@@ -160,7 +161,7 @@ fun CostsGas(){
                         text = "82 м³",
                         fontWeight = FontWeight.Medium,
                         fontSize = 15.sp,
-                        color = Color.Black
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
@@ -203,7 +204,7 @@ fun CostsGas(){
                             text = "Сплата",
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 12.sp,
-                            color = Color.Black
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
 
@@ -213,7 +214,7 @@ fun CostsGas(){
                         text = "655 грн.",
                         fontWeight = FontWeight.Medium,
                         fontSize = 15.sp,
-                        color = Color.Black
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
@@ -257,7 +258,7 @@ fun CostsGas(){
                             text = "Курс",
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 15.sp,
-                            color = Color.Black
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
 
@@ -267,7 +268,7 @@ fun CostsGas(){
                         text = "7.96 грн./м³",
                         fontWeight = FontWeight.Medium,
                         fontSize = 13.sp,
-                        color = Color.Black
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }

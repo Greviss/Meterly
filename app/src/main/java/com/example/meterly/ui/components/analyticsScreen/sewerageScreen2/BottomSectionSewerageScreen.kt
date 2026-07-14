@@ -26,6 +26,7 @@ import androidx.compose.material.icons.filled.Wallet
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,7 +46,7 @@ fun BottomSectionSewerageScreen2(){
             .padding(bottom = 12.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(Color.White)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -57,7 +58,7 @@ fun BottomSectionSewerageScreen2(){
                 text = "Відомості",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Row(
@@ -147,15 +148,15 @@ fun BottomSectionSewerageScreen2(){
 
 @Composable
 fun RowElementSewerage(titleSewerage1: String,
-               subtitleSewerage1: String,
-               valueSewerage1: String,
-               iconSewerage1: ImageVector, iconTintSewerage1: Color, iconBgColorSewerage1: Color,
-               modifierSewerage1: Modifier = Modifier){
+                       subtitleSewerage1: String,
+                       valueSewerage1: String,
+                       iconSewerage1: ImageVector, iconTintSewerage1: Color, iconBgColorSewerage1: Color,
+                       modifierSewerage1: Modifier = Modifier){
     Card(
         modifier = Modifier.size(width = 150.dp, height = 125.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(Color(0xFFE7E7E7))
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -188,7 +189,7 @@ fun RowElementSewerage(titleSewerage1: String,
                 Text(text = valueSewerage1,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -197,7 +198,7 @@ fun RowElementSewerage(titleSewerage1: String,
             Text(
                 text = titleSewerage1,
                 fontSize = 14.sp,
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.Medium
             )
 
@@ -206,7 +207,7 @@ fun RowElementSewerage(titleSewerage1: String,
             Text(
                 text = subtitleSewerage1,
                 fontSize = 10.sp,
-                color = Color.Gray,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                 fontWeight = FontWeight.Normal
             )
         }
@@ -225,7 +226,7 @@ fun ColumnElementSewerage(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -256,13 +257,13 @@ fun ColumnElementSewerage(
                     text = titleSewerage2,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF1A1C1E)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
                     text = subtitleSewerage2,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Normal,
-                    color = Color.Gray
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                 )
             }
 

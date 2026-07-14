@@ -17,6 +17,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,7 +34,7 @@ fun TermsOfUse(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.White),
+            .background(color = MaterialTheme.colorScheme.background),
     ) {
         Column(
             modifier = Modifier
@@ -61,7 +62,7 @@ fun TermsOfUse(
                     text = "◄УМОВИ ВИКОРИСТАННЯ►",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
 
@@ -129,7 +130,7 @@ fun TermsOfUse(
                             "З усіх питань, пов'язаних з роботою додатка, користувач може звернутися до розробника через контактні дані, зазначені в описі додатка.",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Normal,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
     }

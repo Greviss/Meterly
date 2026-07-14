@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,7 +36,7 @@ fun EnterScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(primaryGradient())
+            .background(primaryGradient(MaterialTheme.colorScheme))
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

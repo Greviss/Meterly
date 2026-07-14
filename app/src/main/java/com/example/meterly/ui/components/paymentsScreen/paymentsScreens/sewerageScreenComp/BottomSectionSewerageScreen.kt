@@ -28,6 +28,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -51,7 +52,7 @@ fun BottomSectionSewerageScreen(){
                 .padding(vertical = 16.dp),
             shape = RoundedCornerShape(24.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
         ) {
             Column(
                 modifier = Modifier
@@ -63,7 +64,7 @@ fun BottomSectionSewerageScreen(){
                     text = "Відомості",
                     fontSize = 22.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -147,7 +148,7 @@ fun ColumnElem(titleSewerage: String,
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(2.dp),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -178,14 +179,14 @@ fun ColumnElem(titleSewerage: String,
                     text = titleSewerage,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF1A1C1E)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
                     text = subtitleSewerage,
                     fontSize = 12.sp,
                     lineHeight = 11.sp,
                     fontWeight = FontWeight.Normal,
-                    color = Color.Gray
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                 )
             }
 
@@ -217,7 +218,7 @@ fun ReceiptPickerItem3(hasReceipt: Boolean, fileName: String? = null) {
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(6.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFF5F5F5)
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
         )
     ) {
         Row(
@@ -230,7 +231,7 @@ fun ReceiptPickerItem3(hasReceipt: Boolean, fileName: String? = null) {
                 modifier = Modifier
                     .size(48.dp)
                     .background(
-                        color = if (hasReceipt) Color(0xFF4CAF50) else Color(0xFFD9D9D9),
+                        color = if (hasReceipt) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
                         shape = RoundedCornerShape(12.dp)
                     ),
                 contentAlignment = Alignment.Center
@@ -241,7 +242,7 @@ fun ReceiptPickerItem3(hasReceipt: Boolean, fileName: String? = null) {
                     else
                         Icons.Default.AttachFile,
                     contentDescription = null,
-                    tint = Color.White
+                    tint = if (hasReceipt) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -255,21 +256,21 @@ fun ReceiptPickerItem3(hasReceipt: Boolean, fileName: String? = null) {
                         "Прикріпити квитанцію",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 if (hasReceipt && fileName != null) {
                     Text(
                         text = fileName,
                         fontSize = 14.sp,
-                        color = Color.DarkGray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
             Icon(
                 imageVector = Icons.Default.ArrowForwardIos,
                 contentDescription = null,
-                tint = Color.Black,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(16.dp)
             )
         }

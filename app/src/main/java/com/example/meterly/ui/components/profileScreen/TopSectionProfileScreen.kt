@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -48,13 +49,13 @@ fun TopSectionProfileScreen(
             text = user?.fullName?.split(" ")?.getOrNull(1) ?: "Гість",
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White
+            color = MaterialTheme.colorScheme.onBackground
         )
 
         Text(
             text = "Активний користувач",
             fontSize = 14.sp,
-            color = Color.White.copy(0.8f)
+            color = MaterialTheme.colorScheme.onBackground.copy(0.8f)
         )
     }
 }

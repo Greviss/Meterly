@@ -11,7 +11,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,7 +39,7 @@ fun OtpScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(primaryGradient())
+            .background(primaryGradient(MaterialTheme.colorScheme))
     ) {
         Image(
             painter = painterResource(R.drawable.top_element),
@@ -62,13 +61,13 @@ fun OtpScreen(
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
-                color = Color.White.copy(0.35f)
+                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.35f)
 
             ) {
                 Text(
                     text = "\uD83D\uDCA1 Впишіть 6-значний код, який надійшов вам у вигляді SMS-повідомлення, по номеру телефну, який ви вказали при реєстрації.",
                     fontSize = 14.sp,
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onSurface,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(16.dp),
                     lineHeight = 18.sp
@@ -82,7 +81,7 @@ fun OtpScreen(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.headlineSmall,
-                color = Color.White
+                color = MaterialTheme.colorScheme.onPrimary
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -90,7 +89,7 @@ fun OtpScreen(
             Card(
                 modifier = Modifier.wrapContentSize(),
                 shape = RoundedCornerShape(12.dp),
-                colors = CardDefaults.cardColors(Color.White)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
             ) {
                 OutlinedTextField(
                     value = code,
@@ -98,14 +97,22 @@ fun OtpScreen(
                     label = { Text("SMS-код") },
                     placeholder = { Text("000000") },
                     leadingIcon = {
-                        Icon(Icons.Default.Sms, contentDescription = null) },
+                        Icon(
+                            Icons.Default.Sms,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(6.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color(0xFF1E88E5),
-                        focusedLabelColor = Color(0xFF1E88E5)
+                        focusedBorderColor = MaterialTheme.colorScheme.primary,
+                        focusedLabelColor = MaterialTheme.colorScheme.primary,
+                        cursorColor = MaterialTheme.colorScheme.primary,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                        unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant
                     ),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true
@@ -115,7 +122,7 @@ fun OtpScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             if (authState is AuthState.Error) {
-                Text(authState.message, color = Color.Red)
+                Text(authState.message, color = MaterialTheme.colorScheme.error)
                 Spacer(modifier = Modifier.height(8.dp))
             }
 
@@ -127,10 +134,10 @@ fun OtpScreen(
                     .height(50.dp),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF1E88E5),
-                    contentColor = Color.White,
-                    disabledContainerColor = Color(0xFFBDBDBD),
-                    disabledContentColor = Color(0xFF9E9E9E)
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                    disabledContainerColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
+                    disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
                 ),
                 elevation = ButtonDefaults.buttonElevation(
                     defaultElevation = 4.dp
@@ -140,7 +147,7 @@ fun OtpScreen(
                     CircularProgressIndicator(
                         modifier = Modifier.size(20.dp),
                         strokeWidth = 2.dp,
-                        color = Color.White
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 } else {
                     Text("Підтвердити")

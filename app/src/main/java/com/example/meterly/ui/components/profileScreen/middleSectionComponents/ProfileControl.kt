@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButtonDefaults.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,7 +41,7 @@ fun ProfileControl(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(secondaryGradient())
+            .background(secondaryGradient(MaterialTheme.colorScheme))
     ) {
 
         Column(
@@ -50,7 +51,7 @@ fun ProfileControl(
         ) {
 
             Spacer(modifier = Modifier.height(24.dp))
-            
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -61,7 +62,7 @@ fun ProfileControl(
                 androidx.compose.material3.Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = null,
-                    tint = Color.Black,
+                    tint = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier
                         .size(35.dp)
                         .clickable { onBackClick() }
@@ -73,7 +74,7 @@ fun ProfileControl(
                     text = "Керування профілем",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
 
@@ -83,7 +84,7 @@ fun ProfileControl(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color.White
+                    containerColor = MaterialTheme.colorScheme.surface
                 )
             ) {
 
@@ -93,7 +94,7 @@ fun ProfileControl(
                     onClick = onEditName
                 )
 
-                HorizontalDivider()
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
                 ProfileItem(
                     icon = Icons.Default.Logout,
@@ -101,7 +102,7 @@ fun ProfileControl(
                     onClick = onSignOut
                 )
 
-                HorizontalDivider()
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
                 ProfileItem(
                     icon = Icons.Default.Share,
@@ -109,13 +110,13 @@ fun ProfileControl(
                     onClick = onShare
                 )
 
-                HorizontalDivider()
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
                 ProfileItem(
                     icon = Icons.Default.Delete,
                     title = "Видалити акаунт",
-                    textColor = Color.Red,
-                    iconColor = Color.Red,
+                    textColor = MaterialTheme.colorScheme.error,
+                    iconColor = MaterialTheme.colorScheme.error,
                     onClick = onDeleteAccount
                 )
             }
@@ -127,8 +128,8 @@ fun ProfileControl(
 private fun ProfileItem(
     icon: ImageVector,
     title: String,
-    textColor: Color = Color.Black,
-    iconColor: Color = Color.Gray,
+    textColor: Color = MaterialTheme.colorScheme.onSurface,
+    iconColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     onClick: () -> Unit
 ) {
     Row(
@@ -142,7 +143,7 @@ private fun ProfileItem(
         androidx.compose.material3.Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = Color.Gray
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
         Spacer(modifier = Modifier.width(16.dp))

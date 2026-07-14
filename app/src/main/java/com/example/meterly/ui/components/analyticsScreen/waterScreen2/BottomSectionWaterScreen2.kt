@@ -26,6 +26,7 @@ import androidx.compose.material.icons.filled.WaterDrop
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -44,7 +45,7 @@ fun BottomSectionWaterScreen2(){
             .padding(bottom = 12.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(Color.White)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -56,7 +57,7 @@ fun BottomSectionWaterScreen2(){
                 text = "Відомості",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Row(
@@ -144,15 +145,15 @@ fun BottomSectionWaterScreen2(){
 
 @Composable
 fun RowElementWater(titleWater1: String,
-               subtitleWater1: String,
-               valueWater1: String,
-               iconWater1: ImageVector, iconTintWater1: Color, iconBgColorWater1: Color,
-               modifierWater1: Modifier = Modifier){
+                    subtitleWater1: String,
+                    valueWater1: String,
+                    iconWater1: ImageVector, iconTintWater1: Color, iconBgColorWater1: Color,
+                    modifierWater1: Modifier = Modifier){
     Card(
         modifier = Modifier.size(width = 150.dp, height = 125.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(Color(0xFFE7E7E7))
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -185,7 +186,7 @@ fun RowElementWater(titleWater1: String,
                 Text(text = valueWater1,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -194,7 +195,7 @@ fun RowElementWater(titleWater1: String,
             Text(
                 text = titleWater1,
                 fontSize = 14.sp,
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.Medium
             )
 
@@ -203,7 +204,7 @@ fun RowElementWater(titleWater1: String,
             Text(
                 text = subtitleWater1,
                 fontSize = 10.sp,
-                color = Color.Gray,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                 fontWeight = FontWeight.Normal
             )
         }
@@ -222,7 +223,7 @@ fun ColumnElementWater(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -253,13 +254,13 @@ fun ColumnElementWater(
                     text = titleWater2,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF1A1C1E)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
                     text = subtitleWater2,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Normal,
-                    color = Color.Gray
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                 )
             }
 

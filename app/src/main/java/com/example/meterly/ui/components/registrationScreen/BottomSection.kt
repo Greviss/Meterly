@@ -5,7 +5,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,20 +25,20 @@ fun BottomSection(
         ) {
             HorizontalDivider(
                 modifier = Modifier.weight(1f),
-                color = Color.White.copy(alpha = 0.5f)
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f)
             )
 
             Text(
                 text = "або",
                 modifier = Modifier.padding(horizontal = 16.dp),
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
 
             HorizontalDivider(
                 modifier = Modifier.weight(1f),
-                color = Color.White.copy(alpha = 0.5f)
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f)
             )
         }
 
@@ -53,7 +52,7 @@ fun BottomSection(
                 text = "Вже маєте акаунт?",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = MaterialTheme.colorScheme.onPrimary
             )
 
             Spacer(modifier = Modifier.width(4.dp))
@@ -62,7 +61,7 @@ fun BottomSection(
                 Text(
                     text = "Увійти",
                     fontSize = 14.sp,
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }
@@ -75,7 +74,7 @@ fun BottomSection(
             Text(
                 text = "Реєструючись, ви погоджуєтесь з",
                 fontSize = 14.sp,
-                color = Color.Gray
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
             )
 
             Row(
@@ -87,20 +86,20 @@ fun BottomSection(
                     Text(
                         text = "Умовами користування",
                         fontSize = 12.sp,
-                        color = Color.Blue,
+                        color = MaterialTheme.colorScheme.secondary,
                         fontWeight = FontWeight.Bold
                     )
                 }
                 Text(
                     text = "та",
                     fontSize = 12.sp,
-                    color = Color.White.copy(alpha = 0.8f)
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
                 )
                 TextButton(onClick = onPrivacyClick) {
                     Text(
                         text = "Політикою конфіденційності",
                         fontSize = 11.sp,
-                        color = Color.Blue,
+                        color = MaterialTheme.colorScheme.secondary,
                         fontWeight = FontWeight.Bold
                     )
                 }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,7 +28,7 @@ fun TopSection2(){
             text = "Meterly",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onSurface,
             letterSpacing = 2.sp,
             modifier = Modifier.padding(top = 24.dp)
         )
@@ -35,7 +36,7 @@ fun TopSection2(){
         Text(
             text = "Ваш помічник для аналітики та\n відстежування статистики комунальних послуг",
             fontSize = 14.sp,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onSurface,
             textAlign = TextAlign.Center,
             lineHeight = 18.sp,
             modifier = Modifier.padding(top = 4.dp)
@@ -46,18 +47,17 @@ fun TopSection2(){
         Surface(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(12.dp),
-            color = Color.White.copy(0.35f)
+            color = MaterialTheme.colorScheme.surface.copy(0.35f)
 
         ) {
             Text(
                 text = "\uD83D\uDCA1 Перед використовуванням додатка, вам потрібно ввести особові рахунки. Особовий рахунок вказано у квитанції за комунальні послуги.",
                 fontSize = 14.sp,
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(16.dp),
                 lineHeight = 18.sp
             )
         }
-
     }
 }

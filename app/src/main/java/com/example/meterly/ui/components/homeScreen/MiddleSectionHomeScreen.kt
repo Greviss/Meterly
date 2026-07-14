@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.ArrowCircleRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -141,7 +142,7 @@ fun ButtonUtil(
                     text = text,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color.Black,
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
 
                 Spacer(modifier = Modifier.height(2.dp))
@@ -151,14 +152,14 @@ fun ButtonUtil(
                     fontSize = 10.sp,
                     lineHeight = 11.sp,
                     fontWeight = FontWeight.Normal,
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
 
             Icon(
                 imageVector = Icons.Default.ArrowCircleRight,
                 contentDescription = null,
-                tint = Color(0xFF808080),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier
                     .size(24.dp)
                     .align(Alignment.BottomEnd)

@@ -9,11 +9,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,7 +34,9 @@ fun MiddleSectionProfileScreen(
     onDeleteAddress: (Address) -> Unit,
     onEditAddress: (Address) -> Unit,
     onClickPrivacy: () -> Unit,
-    onClickProfileControl: () -> Unit
+    onClickProfileControl: () -> Unit,
+    currentTheme: String,
+    onThemeClick: () -> Unit
 ) {
 
     Column(
@@ -46,7 +48,7 @@ fun MiddleSectionProfileScreen(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color.White
+                containerColor = MaterialTheme.colorScheme.surface
             ),
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 2.dp
@@ -61,7 +63,7 @@ fun MiddleSectionProfileScreen(
                     text = "Особисті дані",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -79,7 +81,7 @@ fun MiddleSectionProfileScreen(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color.White
+                containerColor = MaterialTheme.colorScheme.surface
             ),
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 2.dp
@@ -94,12 +96,16 @@ fun MiddleSectionProfileScreen(
                     text = "Налаштування",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Settings(onClickProfileControl = onClickProfileControl)
+                Settings(
+                    onClickProfileControl = onClickProfileControl,
+                    currentTheme = currentTheme,
+                    onThemeClick = onThemeClick
+                )
             }
         }
 
@@ -109,7 +115,7 @@ fun MiddleSectionProfileScreen(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color.White
+                containerColor = MaterialTheme.colorScheme.surface
             ),
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 2.dp
@@ -126,7 +132,7 @@ fun MiddleSectionProfileScreen(
                     text = "Моє житло",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -148,7 +154,7 @@ fun MiddleSectionProfileScreen(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color.White
+                containerColor = MaterialTheme.colorScheme.surface
             ),
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 2.dp
@@ -164,12 +170,14 @@ fun MiddleSectionProfileScreen(
                     text = "Інше",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Other(onClickPrivacy = onClickPrivacy)
+                Other(
+                    onClickPrivacy = onClickPrivacy
+                )
             }
         }
     }

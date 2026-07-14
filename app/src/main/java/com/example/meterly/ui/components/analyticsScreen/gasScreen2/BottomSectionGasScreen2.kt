@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Wallet
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,7 +44,7 @@ fun BottomSectionGasScreen2() {
             .padding(bottom = 12.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(Color.White)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -55,7 +56,7 @@ fun BottomSectionGasScreen2() {
                 text = "Відомості",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Row(
@@ -143,15 +144,15 @@ fun BottomSectionGasScreen2() {
 
 @Composable
 fun RowElementGas(titleGas1: String,
-               subtitleGas1: String,
-               valueGas1: String,
-               iconGas1: ImageVector, iconTintGas1: Color, iconBgColorGas1: Color,
-               modifierGas1: Modifier = Modifier){
+                  subtitleGas1: String,
+                  valueGas1: String,
+                  iconGas1: ImageVector, iconTintGas1: Color, iconBgColorGas1: Color,
+                  modifierGas1: Modifier = Modifier){
     Card(
         modifier = Modifier.size(width = 150.dp, height = 125.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(Color(0xFFE7E7E7))
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -184,7 +185,7 @@ fun RowElementGas(titleGas1: String,
                 Text(text = valueGas1,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -193,14 +194,14 @@ fun RowElementGas(titleGas1: String,
             Text(
                 text = titleGas1,
                 fontSize = 14.sp,
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.Medium
             )
 
             Text(
                 text = subtitleGas1,
                 fontSize = 10.sp,
-                color = Color.Gray,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                 fontWeight = FontWeight.Normal
             )
         }
@@ -219,7 +220,7 @@ fun ColumnElementGas(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -250,13 +251,13 @@ fun ColumnElementGas(
                     text = titleGas2,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF1A1C1E)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
                     text = subtitleGas2,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Normal,
-                    color = Color.Gray
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                 )
             }
 

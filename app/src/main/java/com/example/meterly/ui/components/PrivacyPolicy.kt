@@ -18,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,7 +36,7 @@ fun PrivacyPolicyScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.White),
+            .background(color = MaterialTheme.colorScheme.background),
     ) {
         Column(
             modifier = Modifier
@@ -63,7 +64,7 @@ fun PrivacyPolicyScreen(
                     text = "◄ПОЛІТИКА КОНФЕДЕНЦІЙНОСТІ►",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
 
@@ -132,7 +133,7 @@ fun PrivacyPolicyScreen(
                         "Якщо у вас виникли питання щодо цієї Політики конфіденційності або обробки персональних даних, зв'яжіться з розробником через контактні дані, зазначені в описі додатка.",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Normal,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
     }

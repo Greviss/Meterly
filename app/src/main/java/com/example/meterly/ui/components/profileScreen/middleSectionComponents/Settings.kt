@@ -13,36 +13,41 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
 fun Settings(
-    onClickProfileControl: () -> Unit
+    onClickProfileControl: () -> Unit,
+    currentTheme: String,
+    onThemeClick: () -> Unit
 ){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
         ReminderBegin()
-        HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f))
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         ReminderEnd()
-        HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f))
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         Rounding()
-        HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f))
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         ReminderTimeBegin()
-        HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f))
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         ReminderTimeEnd()
-        HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f))
-        Theme()
-        HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f))
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+        Theme(
+            currentTheme = currentTheme,
+            onClick = onThemeClick
+        )
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         ProfileControl(onClickProfileControl = onClickProfileControl)
     }
 }
@@ -56,10 +61,23 @@ fun ReminderBegin(){
             .fillMaxWidth()
             .padding(vertical = 12.dp, horizontal = 4.dp)
     ) {
-        Column(horizontalAlignment = Alignment.Start) {
-            Text(text = "Нагадування на початку міс.", fontSize = 16.sp, fontWeight = FontWeight.Medium, color = Color.Black)
+        Column(
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(
+                text = "Нагадування на початку міс.",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+
             Spacer(modifier = Modifier.height(2.dp))
-            Text(text = "Увімкнено", fontSize = 13.sp, color = Color.Gray)
+
+            Text(
+                text = "Увімкнено",
+                fontSize = 13.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
         Switch(checked = true, onCheckedChange = {})
     }
@@ -74,10 +92,19 @@ fun ReminderEnd() {
             .fillMaxWidth()
             .padding(vertical = 12.dp, horizontal = 4.dp)
     ) {
-        Column(horizontalAlignment = Alignment.Start) {
-            Text(text = "Нагадування в кінці міс.", fontSize = 16.sp, fontWeight = FontWeight.Medium, color = Color.Black)
+        Column(
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(text = "Нагадування в кінці міс.",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface)
+
             Spacer(modifier = Modifier.height(2.dp))
-            Text(text = "Увімкнено", fontSize = 13.sp, color = Color.Gray)
+
+            Text(text = "Увімкнено",
+                fontSize = 13.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         Switch(checked = true, onCheckedChange = {})
     }
@@ -92,10 +119,19 @@ fun Rounding(){
             .fillMaxWidth()
             .padding(vertical = 12.dp, horizontal = 4.dp)
     ) {
-        Column(horizontalAlignment = Alignment.Start) {
-            Text(text = "Округлення суми", fontSize = 16.sp, fontWeight = FontWeight.Medium, color = Color.Black)
+        Column(
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(text = "Округлення суми",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface)
+
             Spacer(modifier = Modifier.height(2.dp))
-            Text(text = "Вимкнено", fontSize = 13.sp, color = Color.Gray)
+
+            Text(text = "Вимкнено",
+                fontSize = 13.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         Switch(checked = false, onCheckedChange = {})
     }
@@ -110,12 +146,24 @@ fun ReminderTimeBegin(){
             .fillMaxWidth()
             .padding(vertical = 12.dp, horizontal = 4.dp)
     ) {
-        Column(horizontalAlignment = Alignment.Start) {
-            Text(text = "Час нагадування на початку", fontSize = 16.sp, fontWeight = FontWeight.Medium, color = Color.Black)
+        Column(
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(text = "Час нагадування на початку",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface)
+
             Spacer(modifier = Modifier.height(2.dp))
-            Text(text = "20:00", fontSize = 13.sp, color = Color.Gray)
+
+            Text(text = "20:00",
+                fontSize = 13.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        Icon(imageVector = Icons.Default.ArrowForwardIos, contentDescription = null, tint = Color.LightGray, modifier = Modifier.size(16.dp))
+        Icon(imageVector = Icons.Default.ArrowForwardIos,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.size(16.dp))
     }
 }
 
@@ -128,30 +176,62 @@ fun ReminderTimeEnd(){
             .fillMaxWidth()
             .padding(vertical = 12.dp, horizontal = 4.dp)
     ) {
-        Column(horizontalAlignment = Alignment.Start) {
-            Text(text = "Час нагадування в кінці", fontSize = 16.sp, fontWeight = FontWeight.Medium, color = Color.Black)
+        Column(
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(text = "Час нагадування в кінці",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface)
+
             Spacer(modifier = Modifier.height(2.dp))
-            Text(text = "18:00", fontSize = 13.sp, color = Color.Gray)
+
+            Text(text = "18:00",
+                fontSize = 13.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        Icon(imageVector = Icons.Default.ArrowForwardIos, contentDescription = null, tint = Color.LightGray, modifier = Modifier.size(16.dp))
+        Icon(imageVector = Icons.Default.ArrowForwardIos,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.size(16.dp))
     }
 }
 
 @Composable
-fun Theme(){
+fun Theme(
+    currentTheme: String,
+    onClick: () -> Unit
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick() }
             .padding(vertical = 12.dp, horizontal = 4.dp)
     ) {
-        Column(horizontalAlignment = Alignment.Start) {
-            Text(text = "Тема додатка", fontSize = 16.sp, fontWeight = FontWeight.Medium, color = Color.Black)
+        Column {
+            Text(
+                text = "Тема додатка",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+
             Spacer(modifier = Modifier.height(2.dp))
-            Text(text = "Як у системі", fontSize = 13.sp, color = Color.Gray)
+
+            Text(
+                text = currentTheme,
+                fontSize = 13.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
-        Icon(imageVector = Icons.Default.ArrowForwardIos, contentDescription = null, tint = Color.LightGray, modifier = Modifier.size(16.dp))
+        Icon(
+            imageVector = Icons.Default.ArrowForwardIos,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.size(16.dp)
+        )
     }
 }
 
@@ -165,11 +245,23 @@ fun ProfileControl(onClickProfileControl: () -> Unit){
             .clickable{ onClickProfileControl() }
             .padding(vertical = 12.dp, horizontal = 4.dp)
     ) {
-        Column(horizontalAlignment = Alignment.Start) {
-            Text(text = "Керування профілем", fontSize = 16.sp, fontWeight = FontWeight.Medium, color = Color.Black)
+        Column(
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(text = "Керування профілем",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface)
+
             Spacer(modifier = Modifier.height(2.dp))
-            Text(text = "Керувати", fontSize = 13.sp, color = Color.Gray)
+
+            Text(text = "Керувати",
+                fontSize = 13.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        Icon(imageVector = Icons.Default.ArrowForwardIos, contentDescription = null, tint = Color.LightGray, modifier = Modifier.size(16.dp))
+        Icon(imageVector = Icons.Default.ArrowForwardIos,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.size(16.dp))
     }
 }

@@ -13,11 +13,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,9 +31,9 @@ fun Other(
         modifier = Modifier.fillMaxWidth()
     ) {
         Version()
-        HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f))
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         PrivacyPolicyRow(onClickPrivacy = onClickPrivacy)
-        HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f))
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         Support()
     }
 }
@@ -52,13 +52,13 @@ fun Version(){
                 text = "Версія",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.height(2.dp))
             Text(
                 text = "v1.0.0",
                 fontSize = 13.sp,
-                color = Color.Gray
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }
@@ -81,19 +81,19 @@ fun PrivacyPolicyRow(
                 text = "Політика конфіденційності",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.height(2.dp))
             Text(
                 text = "Відкрити",
                 fontSize = 13.sp,
-                color = Color.Gray
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
         Icon(
             imageVector = Icons.Default.ArrowForwardIos,
             contentDescription = null,
-            tint = Color.LightGray,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.size(16.dp)
         )
     }
@@ -113,19 +113,19 @@ fun Support(){
                 text = "Повідомити про помилку/підтримка",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.height(2.dp))
             Text(
                 text = "Зв'язатися з нами",
                 fontSize = 13.sp,
-                color = Color.Gray
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
         Icon(
             imageVector = Icons.Default.ArrowForwardIos,
             contentDescription = null,
-            tint = Color.LightGray,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.size(16.dp)
         )
     }

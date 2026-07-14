@@ -18,6 +18,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -56,7 +57,7 @@ fun MiddleSection2(
             .height(325.dp),
             shape = RoundedCornerShape(24.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-            colors = CardDefaults.cardColors(Color.White)
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
@@ -66,7 +67,7 @@ fun MiddleSection2(
                     text = "Вхід",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -74,16 +75,19 @@ fun MiddleSection2(
                 OutlinedTextField(
                     value = addressEnt,
                     onValueChange = onAddressEntChange,
-                    label = {Text("Адреса проживання", color = Color.DarkGray)},
-                    placeholder = {Text("вул. Хрещатик, 1, кв. 10", color = Color.Gray)},
+                    label = {Text("Адреса проживання", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f))},
+                    placeholder = {Text("вул. Хрещатик, 1, кв. 10", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f))},
                     leadingIcon = {
                         Icon(Icons.Default.LocationOn, null)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color(0xFF1E88E5),
-                        focusedLabelColor = Color(0xFF1E88E5)
+                        focusedBorderColor = MaterialTheme.colorScheme.primary,
+                        focusedLabelColor = MaterialTheme.colorScheme.primary,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                        unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                        cursorColor = MaterialTheme.colorScheme.primary
                     ),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
@@ -105,21 +109,22 @@ fun MiddleSection2(
                             onPhoneEntChange(digitOnly)
                         }
                     },
-                    label = {Text("Номер телефону", color = Color.DarkGray)},
-                    leadingIcon = {
-                        Icon(Icons.Default.Phone, null)
-                    },
+                    label = {Text("Номер телефону", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f))},
+                    leadingIcon = { Icon(Icons.Default.Phone, null) },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color(0xFF1E88E5),
-                        focusedLabelColor = Color(0xFF1E88E5)
+                        focusedBorderColor = MaterialTheme.colorScheme.primary,
+                        focusedLabelColor = MaterialTheme.colorScheme.primary,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                        unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                        cursorColor = MaterialTheme.colorScheme.primary
                     ),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next
                     ),
                     supportingText = {
-                        Text("${phoneNumberEnt.length}/9 цифр", color = Color.Gray)
+                        Text("${phoneNumberEnt.length}/9 цифр", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f))
                     },
                     keyboardActions = KeyboardActions(
                         onNext = {focusManager.moveFocus(FocusDirection.Down)}
@@ -133,7 +138,7 @@ fun MiddleSection2(
 
                     Text(
                         text = errorMessage,
-                        color = Color(0xFFF5A7A1),
+                        color = MaterialTheme.colorScheme.error,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Medium
                     )
@@ -154,10 +159,10 @@ fun MiddleSection2(
                         .height(55.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF1E88E5),
-                        contentColor = Color.Gray,
-                        disabledContainerColor = Color(0xFFBDBDBD),
-                        disabledContentColor = Color(0xFF9E9E9E)
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary,
+                        disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                     ),
                     elevation = ButtonDefaults.buttonElevation(
                         defaultElevation = 4.dp
@@ -167,7 +172,7 @@ fun MiddleSection2(
                         text = "Увійти",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold,
-                        color = Color.White
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             }

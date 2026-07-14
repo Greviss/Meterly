@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,7 +44,7 @@ fun BottomSectionHomeScreen(){
         CardUtil(icon = painterResource(R.drawable.icon_gas),
             title = "Газ",
             subTitle = "0 грн.",
-            cardColor = Color(0xFFEC8078),
+            cardColor = MaterialTheme.colorScheme.errorContainer,
             colorBg = Color(0xFFC2DEF5),
             payment = "Не оплачено")
 
@@ -52,7 +53,7 @@ fun BottomSectionHomeScreen(){
         CardUtil(icon = painterResource(R.drawable.icon_water),
             title = "Вода",
             subTitle = "0 грн.",
-            cardColor = Color(0xFFEC8078),
+            cardColor = MaterialTheme.colorScheme.errorContainer,
             colorBg = Color(0xFFC1E9EE),
             payment = "Не оплачено")
 
@@ -61,7 +62,7 @@ fun BottomSectionHomeScreen(){
         CardUtil(icon = painterResource(R.drawable.icon_light),
             title = "Світло",
             subTitle = "0 грн.",
-            cardColor = Color(0xFFEC8078),
+            cardColor = MaterialTheme.colorScheme.errorContainer,
             colorBg = Color(0xFFECE7C1),
             payment = "Не оплачено")
 
@@ -70,7 +71,7 @@ fun BottomSectionHomeScreen(){
         CardUtil(icon = painterResource(R.drawable.icon_sewerage),
             title = "Канал.",
             subTitle = "0 грн.",
-            cardColor = Color(0xFFEC8078),
+            cardColor = MaterialTheme.colorScheme.errorContainer,
             colorBg = Color(0xFFC1EED2),
             payment = "Не оплачено")
     }
@@ -91,7 +92,7 @@ fun CardUtil(
             .padding(top = 6.dp, bottom = 6.dp, start = 16.dp, end = 16.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFE7E7E7))
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -121,20 +122,20 @@ fun CardUtil(
                     text = title,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = "До сплати: ",
                         fontSize = 13.sp,
-                        color = Color.DarkGray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Text(
                         text = subTitle,
                         fontSize = 14.sp,
                         fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFF4CAF50)
+                        color = MaterialTheme.colorScheme.tertiary
                     )
                 }
             }
@@ -146,7 +147,7 @@ fun CardUtil(
                     text = payment,
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Red,
+                    color = MaterialTheme.colorScheme.onErrorContainer,
                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                 )
             }

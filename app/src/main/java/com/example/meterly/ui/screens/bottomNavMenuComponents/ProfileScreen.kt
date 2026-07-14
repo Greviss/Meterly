@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -21,14 +22,17 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.meterly.model.Address
+import com.example.meterly.model.ThemeMode
 import com.example.meterly.ui.components.profileScreen.BottomSectionProfileScreen
 import com.example.meterly.ui.components.profileScreen.MiddleSectionProfileScreen
 import com.example.meterly.ui.components.profileScreen.TopSectionProfileScreen
 import com.example.meterly.ui.components.profileScreen.middleSectionComponents.AddAddressDialog
 import com.example.meterly.ui.components.profileScreen.middleSectionComponents.EditAddressDialog
+import com.example.meterly.ui.components.profileScreen.middleSectionComponents.ThemeDialog
 import com.example.meterly.ui.navigation.Screen
 import com.example.meterly.ui.theme.secondaryGradient
 import com.example.meterly.viewModel.ProfileViewModel
+import com.example.meterly.viewModel.ThemeViewModel
 
 @Composable
 fun ProfileScreen(
@@ -38,6 +42,8 @@ fun ProfileScreen(
 ) {
 
     val profileViewModel: ProfileViewModel = viewModel()
+    val themeViewModel: ThemeViewModel = viewModel()
+    val theme by themeViewModel.theme.collectAsState()
 
     var showAddDialog by remember {
         mutableStateOf(false)
@@ -51,6 +57,10 @@ fun ProfileScreen(
         mutableStateOf<Address?>(null)
     }
 
+    var showThemeDialog by remember {
+        mutableStateOf(false)
+    }
+
     val user by profileViewModel.user.collectAsState()
     val currentAddress by profileViewModel.currentAddress.collectAsState()
     val addresses by profileViewModel.addresses.collectAsState()
@@ -58,7 +68,7 @@ fun ProfileScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(secondaryGradient())
+            .background(secondaryGradient(MaterialTheme.colorScheme))
     ) {
 
         Column(
@@ -95,12 +105,26 @@ fun ProfileScreen(
                     profileViewModel.deleteAddress(it.id)
                 },
 
-                onEditAddress = { address ->
-                    selectedAddress = address
+                onEditAddress = {
+                    selectedAddress = it
                     showEditDialog = true
                 },
+
                 onClickPrivacy = onClickPrivacy,
-                onClickProfileControl = { navController.navigate(Screen.ProfileControl.route) }
+
+                onClickProfileControl = {
+                    navController.navigate(Screen.ProfileControl.route)
+                },
+
+                currentTheme = when (theme) {
+                    ThemeMode.SYSTEM -> "Як у системі"
+                    ThemeMode.LIGHT -> "Світла"
+                    ThemeMode.DARK -> "Темна"
+                },
+
+                onThemeClick = {
+                    showThemeDialog = true
+                }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -135,6 +159,19 @@ fun ProfileScreen(
                     )
 
                     showEditDialog = false
+                }
+            )
+        }
+
+        if (showThemeDialog) {
+            ThemeDialog(
+                currentTheme = theme,
+                onDismiss = {
+                    showThemeDialog = false
+                },
+                onSave = {
+                    themeViewModel.setTheme(it)
+                    showThemeDialog = false
                 }
             )
         }

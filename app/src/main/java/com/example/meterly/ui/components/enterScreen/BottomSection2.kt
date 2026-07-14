@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -34,20 +35,19 @@ fun BottomSection2(
         ) {
             HorizontalDivider(
             modifier = Modifier.weight(1f),
-            color = Color.White.copy(alpha = 0.5f)
-            )
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.45f))
 
             Text(
                 text = "або",
                 fontSize = 16.sp,
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
 
             HorizontalDivider(
                 modifier = Modifier.weight(1f),
-                color = Color.White.copy(alpha = 0.5f)
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
             )
         }
 
@@ -59,14 +59,14 @@ fun BottomSection2(
                 text = "Ще не зареєстровані?",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = MaterialTheme.colorScheme.onBackground
             )
 
             TextButton(onClick = onSignIn) {
                 Text(
                     text = "Зареєструватися",
                     fontSize = 16.sp,
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
         }

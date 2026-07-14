@@ -25,11 +25,11 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,7 +53,7 @@ fun MyObjects(
         if (addresses.isEmpty()) {
             Text(
                 text = "У вас ще немає доданих адрес.",
-                color = Color.Gray,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontSize = 14.sp
             )
         } else {
@@ -98,9 +98,9 @@ private fun AddressCard(
         colors = CardDefaults.cardColors(
             containerColor =
                 if (isCurrent)
-                    Color(0xFFE8F5E9)
+                    MaterialTheme.colorScheme.primaryContainer
                 else
-                    Color(0xFFF7F7F7)
+                    MaterialTheme.colorScheme.surfaceVariant
         )
     ) {
         Box {
@@ -115,9 +115,9 @@ private fun AddressCard(
                     contentDescription = null,
                     tint =
                         if (isCurrent)
-                            Color(0xFF2E7D32)
+                            MaterialTheme.colorScheme.primary
                         else
-                            Color.Gray
+                            MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Column(
                     modifier = Modifier
@@ -127,13 +127,14 @@ private fun AddressCard(
                     Text(
                         text = address.address,
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
 
                     if (isCurrent) {
                         Text(
                             text = "Поточна адреса",
-                            color = Color(0xFF2E7D32),
+                            color = MaterialTheme.colorScheme.primary,
                             fontSize = 12.sp
                         )
                     }
@@ -143,6 +144,7 @@ private fun AddressCard(
             Icon(
                 imageVector = Icons.Default.MoreVert,
                 contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.clickable {
                     expanded = true
                 }
@@ -198,7 +200,7 @@ private fun AddObjects(
         Text(
             text = "Список адрес",
             fontSize = 16.sp,
-            color = Color.Gray
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
         FloatingActionButton(

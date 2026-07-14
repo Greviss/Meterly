@@ -1,5 +1,8 @@
 package com.example.meterly.ui.theme
 
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
@@ -17,18 +20,43 @@ val White = Color(0xFFFFFFFF)
 val LightBlue = Color(0xFFBFE9F4)
 val Black = Color(0xFF000000)
 
-fun primaryGradient() = Brush.verticalGradient(
-    colors = listOf(Color(0xFF1E4D8F),
-        Color(0xFF3678C9),
-        Color(0xFFB6D8F7))
+fun primaryGradient(colors: ColorScheme) = Brush.verticalGradient(
+    listOf(
+        colors.primary,
+        colors.secondary,
+        colors.background
+    )
 )
-fun secondaryGradient() = Brush.verticalGradient(
-    colors = listOf(Color(0xFF4A90D9),
-        Color(0xFF87C0E8),
-        Color(0xFFEBF9FF)
+fun secondaryGradient(colors: ColorScheme) = Brush.verticalGradient(
+    listOf(
+        colors.primary,
+        colors.secondary,
+        colors.background
     )
 )
 
-fun whiteButtonGradient() = Brush.verticalGradient(
-    colors = listOf(LightGray, Gray)
+val LightColors = lightColorScheme(
+    primary = PrimaryBlue,
+    background = Color(0xFFF5F7FA),
+    surface = Color.White,
+    secondary = Color(0xFF4A90D9),
+    tertiary = Color(0xFF6FCF97),
+    error = Color(0xFFD78786),
+    onBackground = Color.Black,
+    onSurface = Color.Black,
+    onPrimary = Color.White,
+    onSecondary = Color.White
+)
+
+val DarkColors = darkColorScheme(
+    primary = PrimaryBlue,
+    background = Color(0xFF1A1A1A),
+    surface = Color(0xFF1E1E1E),
+    secondary = Color(0xFF4A90D9),
+    tertiary = Color(0xFF7DD4A1),
+    error = Color(0xFFD78786),
+    onBackground = Color.White,
+    onSurface = Color.White,
+    onPrimary = Color.Black,
+    onSecondary = Color.White
 )

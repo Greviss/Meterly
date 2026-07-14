@@ -12,11 +12,11 @@ import androidx.compose.material.icons.filled.ArrowCircleLeft
 import androidx.compose.material.icons.filled.ArrowCircleRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -53,7 +53,7 @@ fun TopSectionLightScreen(onLeftArrowLight: () -> Unit = {},
                 Icon(
                     imageVector = Icons.Default.ArrowCircleLeft,
                     contentDescription = null,
-                    tint = Color.Black
+                    tint = MaterialTheme.colorScheme.onSurface
                 )
             }
 
@@ -61,7 +61,7 @@ fun TopSectionLightScreen(onLeftArrowLight: () -> Unit = {},
                 text = "Світло",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             IconButton(
@@ -71,7 +71,7 @@ fun TopSectionLightScreen(onLeftArrowLight: () -> Unit = {},
                 Icon(
                     imageVector = Icons.Default.ArrowCircleRight,
                     contentDescription = null,
-                    tint = Color.Black
+                    tint = MaterialTheme.colorScheme.onSurface
                 )
             }
         }
