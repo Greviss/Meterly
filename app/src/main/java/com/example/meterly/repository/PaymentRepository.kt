@@ -32,7 +32,12 @@ class PaymentRepository {
                     return@addSnapshotListener
 
                 val payments = snapshot.documents.mapNotNull { doc ->
-                    doc.toObject(Payment::class.java)?.copy(id = doc.id)
+                    val payment = doc.toObject(Payment::class.java)
+                    if (payment != null) {
+                        // ОБХІД БАГУ KOTLIN+FIREBASE: витягуємо булеве значення вручну
+                        val actualIsPaid = doc.getBoolean("isPaid") ?: doc.getBoolean("paid") ?: false
+                        payment.copy(id = doc.id, isPaid = actualIsPaid)
+                    } else null
                 }
 
                 onChanged(payments)
@@ -57,22 +62,25 @@ class PaymentRepository {
 
         val existing = paymentsRef
             .whereEqualTo("utilityType", utilityValue)
-            .whereEqualTo("month", payment.month.toLong())
-            .whereEqualTo("year", payment.year.toLong())
             .get()
             .await()
 
-        val match = existing.documents.firstOrNull()
+        val match = existing.documents.firstOrNull { doc ->
+            doc.getLong("month") == payment.month.toLong()
+                    && doc.getLong("year") == payment.year.toLong()
+        }
 
         return if (match != null) {
             val docId = match.id
+
             val updateData = mapOf(
+                "monthBegin" to payment.monthBegin,
+                "monthEnd" to payment.monthEnd,
                 "consumption" to payment.consumption,
                 "amountDue" to payment.amountDue,
                 "rate" to payment.rate,
                 "date" to payment.date
             )
-
             paymentsRef.document(docId).set(updateData, SetOptions.merge()).await()
             docId
         } else {
@@ -89,6 +97,11 @@ class PaymentRepository {
     ) {
         val phone = auth.currentUser?.phoneNumber ?: return
 
+        val statusMap = mapOf(
+            "isPaid" to isPaid,
+            "paid" to isPaid
+        )
+
         firestore
             .collection("users")
             .document(phone)
@@ -96,7 +109,7 @@ class PaymentRepository {
             .document(addressId)
             .collection("payments")
             .document(paymentId)
-            .set(mapOf("isPaid" to isPaid), SetOptions.merge())
+            .set(statusMap, SetOptions.merge())
             .await()
     }
 
@@ -142,7 +155,11 @@ class PaymentRepository {
             .await()
 
         return snapshot.documents.mapNotNull { doc ->
-            doc.toObject(Payment::class.java)?.copy(id = doc.id)
+            val payment = doc.toObject(Payment::class.java)
+            if (payment != null) {
+                val actualIsPaid = doc.getBoolean("isPaid") ?: doc.getBoolean("paid") ?: false
+                payment.copy(id = doc.id, isPaid = actualIsPaid)
+            } else null
         }
     }
 

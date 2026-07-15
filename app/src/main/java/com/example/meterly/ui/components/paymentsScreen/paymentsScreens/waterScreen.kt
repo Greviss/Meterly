@@ -81,6 +81,12 @@ fun WaterScreen(onLeftArrowWater: () -> Unit = {},
                 previousPayment = previousPayment,
                 onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.WATER, isPaid) }
             )
+
+            ReceiptPickerItem(
+                utilityType = UtilityType.WATER,
+                currentPayment = currentPayment,
+                paymentViewModel = paymentViewModel
+            )
         }
     }
 }

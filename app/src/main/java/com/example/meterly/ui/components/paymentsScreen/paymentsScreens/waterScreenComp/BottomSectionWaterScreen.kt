@@ -172,10 +172,6 @@ fun BottomSectionWaterScreen(
                 }
             }
         }
-        ReceiptPickerItem4(
-            hasReceipt = currentPayment?.receiptUri?.isNotEmpty() == true,
-            fileName = currentPayment?.receiptFileName?.ifEmpty { null }
-        )
     }
 }
 
@@ -258,71 +254,3 @@ fun ColumnElem(titleWater: String,
     }
 }
 
-@Composable
-fun ReceiptPickerItem4(hasReceipt: Boolean, fileName: String? = null) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 12.dp)
-            .clickable{},
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(6.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        )
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(48.dp)
-                    .background(
-                        color = if (hasReceipt) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
-                        shape = RoundedCornerShape(12.dp)
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = if (hasReceipt)
-                        Icons.Default.Check
-                    else
-                        Icons.Default.AttachFile,
-                    contentDescription = null,
-                    tint = if (hasReceipt) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-
-            Spacer(modifier = Modifier.width(16.dp))
-
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = if (hasReceipt)
-                        "Квитанцію прикріплено"
-                    else
-                        "Прикріпити квитанцію",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-
-                if (hasReceipt && fileName != null) {
-                    Text(
-                        text = fileName,
-                        fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-            Icon(
-                imageVector = Icons.Default.ArrowForwardIos,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.size(16.dp)
-            )
-        }
-    }
-}

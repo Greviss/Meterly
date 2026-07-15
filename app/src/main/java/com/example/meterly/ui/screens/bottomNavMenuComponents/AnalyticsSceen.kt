@@ -4,6 +4,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.example.meterly.ui.components.analyticsScreen.GasScreen2
 import com.example.meterly.ui.components.analyticsScreen.LightScreen2

@@ -81,6 +81,12 @@ fun SewerageScreen(onLeftArrowSewerage: () -> Unit = {},
                 previousPayment = previousPayment,
                 onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.SEWERAGE, isPaid) }
             )
+
+            ReceiptPickerItem(
+                utilityType = UtilityType.SEWERAGE,
+                currentPayment = currentPayment,
+                paymentViewModel = paymentViewModel
+            )
         }
     }
 }

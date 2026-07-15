@@ -155,7 +155,10 @@ class PaymentViewModel : ViewModel() {
         uri: String,
         fileName: String
     ) {
-        val payment = _currentPayments.value[utility] ?: return
+        val payment = _currentPayments.value[utility]
+        if (payment == null) return
+        if (payment.id.isEmpty()) return
+
         viewModelScope.launch {
             try {
                 paymentRepository.updateReceipt(
@@ -164,8 +167,7 @@ class PaymentViewModel : ViewModel() {
                     uri = uri,
                     fileName = fileName
                 )
-            } catch (e: Exception) {
-            }
+            } catch (_: Exception) { }
         }
     }
 

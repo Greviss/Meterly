@@ -83,6 +83,12 @@ fun GasScreen(
                 previousPayment = previousPayment,
                 onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.GAS, isPaid) }
             )
+
+            ReceiptPickerItem(
+                utilityType = UtilityType.GAS,
+                currentPayment = currentPayment,
+                paymentViewModel = paymentViewModel
+            )
         }
     }
 }

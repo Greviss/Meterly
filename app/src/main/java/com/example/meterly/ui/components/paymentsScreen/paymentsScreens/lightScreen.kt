@@ -83,6 +83,12 @@ fun LightScreen(onLeftArrowLight: () -> Unit = {},
                 previousPayment = previousPayment,
                 onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.LIGHT, isPaid) }
             )
+
+            ReceiptPickerItem(
+                utilityType = UtilityType.LIGHT,
+                currentPayment = currentPayment,
+                paymentViewModel = paymentViewModel
+            )
         }
     }
 }
