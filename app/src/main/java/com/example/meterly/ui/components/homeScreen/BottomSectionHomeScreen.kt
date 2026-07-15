@@ -26,54 +26,107 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meterly.R
+import com.example.meterly.model.Payment
+import com.example.meterly.model.UtilityType
 
 @Composable
-fun BottomSectionHomeScreen(){
+fun BottomSectionHomeScreen(
+    currentPayments: Map<UtilityType, Payment?>
+){
+    val gas = currentPayments[UtilityType.GAS]
+    val water = currentPayments[UtilityType.WATER]
+    val light = currentPayments[UtilityType.LIGHT]
+    val sewerage = currentPayments[UtilityType.SEWERAGE]
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .wrapContentSize()
             .padding(bottom = 16.dp)
     ) {
-        CardUtil(icon = painterResource(R.drawable.icon_gas),
+        CardUtil(
+            icon = painterResource(R.drawable.icon_gas),
             title = "Газ",
-            subTitle = "0 грн.",
-            cardColor = MaterialTheme.colorScheme.errorContainer,
+            subTitle = formatAmount(gas?.amountDue),
+            cardColor = badgeBgColor(gas),
+            textColor = badgeTextColor(gas),
             colorBg = Color(0xFFC2DEF5),
-            payment = "Не оплачено")
+            payment = paymentStatus(gas)
+        )
 
         Spacer(modifier = Modifier.height(4.dp))
 
-        CardUtil(icon = painterResource(R.drawable.icon_water),
+        CardUtil(
+            icon = painterResource(R.drawable.icon_water),
             title = "Вода",
-            subTitle = "0 грн.",
-            cardColor = MaterialTheme.colorScheme.errorContainer,
+            subTitle = formatAmount(water?.amountDue),
+            cardColor = badgeBgColor(water),
+            textColor = badgeTextColor(water),
             colorBg = Color(0xFFC1E9EE),
-            payment = "Не оплачено")
+            payment = paymentStatus(water)
+        )
 
         Spacer(modifier = Modifier.height(4.dp))
 
-        CardUtil(icon = painterResource(R.drawable.icon_light),
+        CardUtil(
+            icon = painterResource(R.drawable.icon_light),
             title = "Світло",
-            subTitle = "0 грн.",
-            cardColor = MaterialTheme.colorScheme.errorContainer,
+            subTitle = formatAmount(light?.amountDue),
+            cardColor = badgeBgColor(light),
+            textColor = badgeTextColor(light),
             colorBg = Color(0xFFECE7C1),
-            payment = "Не оплачено")
+            payment = paymentStatus(light)
+        )
 
         Spacer(modifier = Modifier.height(4.dp))
 
-        CardUtil(icon = painterResource(R.drawable.icon_sewerage),
+        CardUtil(
+            icon = painterResource(R.drawable.icon_sewerage),
             title = "Канал.",
-            subTitle = "0 грн.",
-            cardColor = MaterialTheme.colorScheme.errorContainer,
+            subTitle = formatAmount(sewerage?.amountDue),
+            cardColor = badgeBgColor(sewerage),
+            textColor = badgeTextColor(sewerage),
             colorBg = Color(0xFFC1EED2),
-            payment = "Не оплачено")
+            payment = paymentStatus(sewerage)
+        )
+    }
+}
+
+private fun formatAmount(value: Double?): String {
+    return if (value != null) {
+        String.format("%.2f", value) + " грн."
+    } else {
+        "0 грн."
+    }
+}
+
+private fun paymentStatus(payment: Payment?): String {
+    return when {
+        payment == null -> "Немає даних"
+        payment.isPaid -> "Сплачено"
+        else -> "Не оплачено"
+    }
+}
+
+@Composable
+private fun badgeBgColor(payment: Payment?): Color {
+    return if (payment?.isPaid == true) {
+        Color(0xFF4CAF50)
+    } else {
+        MaterialTheme.colorScheme.errorContainer
+    }
+}
+
+@Composable
+private fun badgeTextColor(payment: Payment?): Color {
+    return if (payment?.isPaid == true) {
+        Color.White
+    } else {
+        MaterialTheme.colorScheme.onErrorContainer
     }
 }
 
@@ -83,6 +136,7 @@ fun CardUtil(
     title: String,
     subTitle: String,
     cardColor: Color,
+    textColor: Color,
     colorBg: Color,
     payment: String
 ) {
@@ -147,7 +201,7 @@ fun CardUtil(
                     text = payment,
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onErrorContainer,
+                    color = textColor,
                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                 )
             }

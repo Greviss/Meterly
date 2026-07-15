@@ -30,6 +30,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.UtilityType
+import com.example.meterly.viewModel.PaymentViewModel
 
 @Composable
 fun MiddleSectionWaterScreen(
@@ -38,7 +40,8 @@ fun MiddleSectionWaterScreen(
     monthEnd2: String = "",
     onMonthEndChange2: (String) -> Unit = {},
     rate2: String = "",
-    onRateEndChange2: (String) -> Unit = {}
+    onRateEndChange2: (String) -> Unit = {},
+    paymentViewModel: PaymentViewModel
 ){
     Column(
         modifier = Modifier.wrapContentSize(),
@@ -138,15 +141,19 @@ fun MiddleSectionWaterScreen(
                         keyboardType = KeyboardType.Number,
                         imeAction = ImeAction.Next
                     ),
-                    maxLines = 5,
                     singleLine = true
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = { ->
-                        null
+                    onClick = {
+                        paymentViewModel.calculate(
+                            utility = UtilityType.WATER,
+                            begin = monthBegin2.toDoubleOrNull() ?: 0.0,
+                            end = monthEnd2.toDoubleOrNull() ?: 0.0,
+                            rate = rate2.toDoubleOrNull() ?: 0.0
+                        )
                     },
                     modifier = Modifier
                         .fillMaxWidth()

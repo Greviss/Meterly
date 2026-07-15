@@ -30,6 +30,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.UtilityType
+import com.example.meterly.viewModel.PaymentViewModel
 
 @Composable
 fun MiddleSectionLightScreen(
@@ -38,7 +40,8 @@ fun MiddleSectionLightScreen(
     monthEnd3: String = "",
     onMonthEndChange3: (String) -> Unit = {},
     rate3: String = "",
-    onRateChange3: (String) -> Unit = {}
+    onRateChange3: (String) -> Unit = {},
+    paymentViewModel: PaymentViewModel
 ){
     Column(
         modifier = Modifier.wrapContentSize(),
@@ -138,15 +141,19 @@ fun MiddleSectionLightScreen(
                         keyboardType = KeyboardType.Number,
                         imeAction = ImeAction.Next
                     ),
-                    maxLines = 5,
                     singleLine = true
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = { ->
-                        null
+                    onClick = {
+                        paymentViewModel.calculate(
+                            utility = UtilityType.LIGHT,
+                            begin = monthBegin3.toDoubleOrNull() ?: 0.0,
+                            end = monthEnd3.toDoubleOrNull() ?: 0.0,
+                            rate = rate3.toDoubleOrNull() ?: 0.0
+                        )
                     },
                     modifier = Modifier
                         .fillMaxWidth()

@@ -1,7 +1,6 @@
 package com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,14 +20,14 @@ import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.GasMeter
 import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material.icons.filled.Money
-import androidx.compose.material.icons.filled.Wallet
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,9 +37,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.Payment
 
 @Composable
-fun BottomSectionGasScreen(){
+fun BottomSectionGasScreen(
+    currentPayment: Payment?,
+    previousPayment: Payment?,
+    onPaidChange: (Boolean) -> Unit
+) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -68,81 +72,120 @@ fun BottomSectionGasScreen(){
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                ColumnElem(
-                    titleGas = "Витрачено",
-                    subtitleGas = "В цьому місяці",
-                    iconGas = Icons.Default.LocalFireDepartment,
-                    iconBgColorGas = Color(0xFFFFBFBD),
-                    iconTintGas = Color(0xFFF44336),
-                    valueGas = "0 м³",
-                    textColorGas = Color(0xFFF44336),
-                    cardColorGas = Color(0xFFDC8E89),
-                )
+                if (currentPayment == null) {
+                    Text(
+                        text = "Розрахунок ще не виконано.",
+                        fontSize = 16.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                } else {
+                    ColumnElem(
+                        titleGas = "Витрачено",
+                        subtitleGas = "В цьому місяці",
+                        iconGas = Icons.Default.LocalFireDepartment,
+                        iconBgColorGas = Color(0xFFFFBFBD),
+                        iconTintGas = Color(0xFFF44336),
+                        valueGas = "${formatValue(currentPayment.consumption)} м³",
+                        textColorGas = Color(0xFFF44336),
+                        cardColorGas = Color(0xFFDC8E89),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleGas = "Витрачено",
-                    subtitleGas = "В попередньому місяці",
-                    iconGas = Icons.Default.GasMeter,
-                    iconBgColorGas = Color(0xFFFFEFC1),
-                    iconTintGas = Color(0xFFFF9800),
-                    valueGas = "82 м³",
-                    textColorGas = Color(0xFFFF9800),
-                    cardColorGas = Color(0xFFFFD797),
-                )
+                    ColumnElem(
+                        titleGas = "Витрачено",
+                        subtitleGas = "В попередньому місяці",
+                        iconGas = Icons.Default.LocalFireDepartment,
+                        iconBgColorGas = Color(0xFFFFEFC1),
+                        iconTintGas = Color(0xFFFF9800),
+                        valueGas = if (previousPayment != null) "${formatValue(previousPayment.consumption)} м³" else "-",
+                        textColorGas = Color(0xFFFF9800),
+                        cardColorGas = Color(0xFFFFD797),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleGas = "До сплати",
-                    subtitleGas = "В цьому місяці",
-                    iconGas = Icons.Default.Money,
-                    iconBgColorGas = Color(0xFFE2FFBE),
-                    iconTintGas = Color(0xFF4CAF50),
-                    valueGas = "0 грн.",
-                    textColorGas = Color(0xFF4CAF50),
-                    cardColorGas = Color(0xFFB6DB8B),
-                )
+                    ColumnElem(
+                        titleGas = "До сплати",
+                        subtitleGas = "В цьому місяці",
+                        iconGas = Icons.Default.Money,
+                        iconBgColorGas = Color(0xFFE2FFBE),
+                        iconTintGas = Color(0xFF4CAF50),
+                        valueGas = "${formatValue(currentPayment.amountDue)} грн.",
+                        textColorGas = Color(0xFF4CAF50),
+                        cardColorGas = Color(0xFFB6DB8B),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleGas = "До сплати",
-                    subtitleGas = "В попередньому місяці",
-                    iconGas = Icons.Default.Money,
-                    iconBgColorGas = Color(0xFF4CAF50),
-                    iconTintGas = Color(0xFFE2FFBE),
-                    valueGas = "655 грн.",
-                    textColorGas = Color(0xFFB6DB8B),
-                    cardColorGas = Color(0xFF4CAF50),
-                )
+                    ColumnElem(
+                        titleGas = "До сплати",
+                        subtitleGas = "В попередньому місяці",
+                        iconGas = Icons.Default.Money,
+                        iconBgColorGas = Color(0xFF4CAF50),
+                        iconTintGas = Color(0xFFE2FFBE),
+                        valueGas = if (previousPayment != null) "${formatValue(previousPayment.amountDue)} грн." else "-",
+                        textColorGas = Color(0xFFB6DB8B),
+                        cardColorGas = Color(0xFF4CAF50),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleGas = "Тариф",
-                    subtitleGas = "Актуальна ціна тарифа",
-                    iconGas = Icons.Default.AutoGraph,
-                    iconBgColorGas = Color(0xFFBBE0FF),
-                    iconTintGas = Color(0xFF3F51B5),
-                    valueGas = "7,96 грн./м³",
-                    textColorGas = Color(0xFF3F51B5),
-                    cardColorGas = Color(0xFF87B4D7),
-                )
+                    ColumnElem(
+                        titleGas = "Тариф",
+                        subtitleGas = "Актуальна ціна тарифа",
+                        iconGas = Icons.Default.AutoGraph,
+                        iconBgColorGas = Color(0xFFBBE0FF),
+                        iconTintGas = Color(0xFF3F51B5),
+                        valueGas = "${formatValue(currentPayment.rate)} грн./м³",
+                        textColorGas = Color(0xFF3F51B5),
+                        cardColorGas = Color(0xFF87B4D7),
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    HorizontalDivider()
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "Сплачено",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.weight(1f)
+                        )
+
+                        Checkbox(
+                            checked = currentPayment.isPaid,
+                            onCheckedChange = onPaidChange
+                        )
+                    }
+                }
             }
         }
-        ReceiptPickerItem(hasReceipt = false, fileName = null)
+        ReceiptPickerItem2(
+            hasReceipt = currentPayment?.receiptUri?.isNotEmpty() == true,
+            fileName = currentPayment?.receiptFileName?.ifEmpty { null }
+        )
     }
 }
 
 @Composable
-fun ColumnElem(titleGas: String,
-               subtitleGas: String,
-               iconGas: ImageVector, iconBgColorGas: Color, iconTintGas: Color,
-               valueGas: String,
-               textColorGas: Color,
-               cardColorGas: Color) {
+fun ColumnElem(
+    titleGas: String,
+    subtitleGas: String,
+    iconGas: ImageVector,
+    iconBgColorGas: Color,
+    iconTintGas: Color,
+    valueGas: String,
+    textColorGas: Color,
+    cardColorGas: Color
+) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(2.dp),
@@ -208,8 +251,7 @@ fun ColumnElem(titleGas: String,
 }
 
 @Composable
-fun ReceiptPickerItem(hasReceipt: Boolean,
-                      fileName: String? = null) {
+fun ReceiptPickerItem2(hasReceipt: Boolean, fileName: String? = null) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -274,5 +316,13 @@ fun ReceiptPickerItem(hasReceipt: Boolean,
                 modifier = Modifier.size(16.dp)
             )
         }
+    }
+}
+
+private fun formatValue(value: Double): String {
+    return if (value == value.toLong().toDouble()) {
+        value.toLong().toString()
+    } else {
+        String.format("%.2f", value)
     }
 }

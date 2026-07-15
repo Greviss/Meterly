@@ -1,5 +1,8 @@
 package com.example.meterly.ui.screens.bottomNavMenuComponents
 
+import android.app.Activity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Box
@@ -21,6 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,6 +34,7 @@ import com.example.meterly.ui.components.homeScreen.BottomSectionHomeScreen
 import com.example.meterly.ui.components.homeScreen.MiddleSectionHomeScreen
 import com.example.meterly.ui.components.homeScreen.TopSectionHomeScreen
 import com.example.meterly.ui.theme.secondaryGradient
+import com.example.meterly.viewModel.PaymentViewModel
 import com.example.meterly.viewModel.ProfileViewModel
 
 @Composable
@@ -43,6 +48,11 @@ fun HomeScreen(
 
     val profileViewModel: ProfileViewModel = viewModel()
     val user by profileViewModel.user.collectAsState()
+
+    val activity = LocalActivity.current as? ComponentActivity ?: throw IllegalStateException("LocalActivity is not a ComponentActivity")
+
+    val paymentViewModel: PaymentViewModel = viewModel(viewModelStoreOwner = activity)
+    val currentPayments by paymentViewModel.currentPayments.collectAsState()
 
     Box(
         modifier = modifier
@@ -86,7 +96,7 @@ fun HomeScreen(
                     color = MaterialTheme.colorScheme.onSurface
                 )
 
-                BottomSectionHomeScreen()
+                BottomSectionHomeScreen(currentPayments = currentPayments)
             }
         }
     }

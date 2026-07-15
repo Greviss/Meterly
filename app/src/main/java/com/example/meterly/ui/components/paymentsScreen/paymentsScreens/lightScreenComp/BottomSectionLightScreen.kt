@@ -36,9 +36,16 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Checkbox
+import com.example.meterly.model.Payment
 
 @Composable
-fun BottomSectionLightScreen(){
+fun BottomSectionLightScreen(
+    currentPayment: Payment?,
+    previousPayment: Payment?,
+    onPaidChange: (Boolean) -> Unit
+){
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -66,71 +73,113 @@ fun BottomSectionLightScreen(){
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                ColumnElem(
-                    titleLight = "Витрачено",
-                    subtitleLight = "В цьому місяці",
-                    iconLight = Icons.Default.Lightbulb,
-                    iconBgColorLight = Color(0xFFFFBFBD),
-                    iconTintLight = Color(0xFFF44336),
-                    valueLight = "0 Квт",
-                    textColorLight = Color(0xFFF44336),
-                    cardColorLight = Color(0xFFDC8E89),
-                )
+                if (currentPayment == null) {
+                    Text(
+                        text = "Розрахунок ще не виконано.",
+                        fontSize = 16.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                } else {
+                    ColumnElem(
+                        titleLight = "Витрачено",
+                        subtitleLight = "В цьому місяці",
+                        iconLight = Icons.Default.Lightbulb,
+                        iconBgColorLight = Color(0xFFFFBFBD),
+                        iconTintLight = Color(0xFFF44336),
+                        valueLight = "${formatValue(currentPayment.consumption)} кВт",
+                        textColorLight = Color(0xFFF44336),
+                        cardColorLight = Color(0xFFDC8E89),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleLight = "Витрачено",
-                    subtitleLight = "В попередньому місяці",
-                    iconLight = Icons.Default.ElectricMeter,
-                    iconBgColorLight = Color(0xFFFFEFC1),
-                    iconTintLight = Color(0xFFFF9800),
-                    valueLight = "115 кВт",
-                    textColorLight = Color(0xFFFF9800),
-                    cardColorLight = Color(0xFFFFD797),
-                )
+                    ColumnElem(
+                        titleLight = "Витрачено",
+                        subtitleLight = "В попередньому місяці",
+                        iconLight = Icons.Default.ElectricMeter,
+                        iconBgColorLight = Color(0xFFFFEFC1),
+                        iconTintLight = Color(0xFFFF9800),
+                        valueLight = if (previousPayment != null) "${formatValue(previousPayment.consumption)} кВт" else "-",
+                        textColorLight = Color(0xFFFF9800),
+                        cardColorLight = Color(0xFFFFD797),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleLight = "До сплати",
-                    subtitleLight = "В цьому місяці",
-                    iconLight = Icons.Default.Money,
-                    iconBgColorLight = Color(0xFFE2FFBE),
-                    iconTintLight = Color(0xFF4CAF50),
-                    valueLight = "0 грн.",
-                    textColorLight = Color(0xFF4CAF50),
-                    cardColorLight = Color(0xFFB6DB8B),
-                )
+                    ColumnElem(
+                        titleLight = "До сплати",
+                        subtitleLight = "В цьому місяці",
+                        iconLight = Icons.Default.Money,
+                        iconBgColorLight = Color(0xFFE2FFBE),
+                        iconTintLight = Color(0xFF4CAF50),
+                        valueLight = "${formatValue(currentPayment.amountDue)} грн.",
+                        textColorLight = Color(0xFF4CAF50),
+                        cardColorLight = Color(0xFFB6DB8B),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleLight = "До сплати",
-                    subtitleLight = "В попередньому місяці",
-                    iconLight = Icons.Default.Money,
-                    iconBgColorLight = Color(0xFF4CAF50),
-                    iconTintLight = Color(0xFFE2FFBE),
-                    valueLight = "500 грн.",
-                    textColorLight = Color(0xFFB6DB8B),
-                    cardColorLight = Color(0xFF4CAF50),
-                )
+                    ColumnElem(
+                        titleLight = "До сплати",
+                        subtitleLight = "В попередньому місяці",
+                        iconLight = Icons.Default.Money,
+                        iconBgColorLight = Color(0xFF4CAF50),
+                        iconTintLight = Color(0xFFE2FFBE),
+                        valueLight = if (previousPayment != null) "${formatValue(previousPayment.amountDue)} грн." else "-",
+                        textColorLight = Color(0xFFB6DB8B),
+                        cardColorLight = Color(0xFF4CAF50),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleLight = "Тариф",
-                    subtitleLight = "Актуальна ціна тарифа",
-                    iconLight = Icons.Default.AutoGraph,
-                    iconBgColorLight = Color(0xFFBBE0FF),
-                    iconTintLight = Color(0xFF3F51B5),
-                    valueLight = "4,32 грн./кВт",
-                    textColorLight = Color(0xFF3F51B5),
-                    cardColorLight = Color(0xFF87B4D7),
-                )
+                    ColumnElem(
+                        titleLight = "Тариф",
+                        subtitleLight = "Актуальна ціна тарифа",
+                        iconLight = Icons.Default.AutoGraph,
+                        iconBgColorLight = Color(0xFFBBE0FF),
+                        iconTintLight = Color(0xFF3F51B5),
+                        valueLight = "${formatValue(currentPayment.rate)} грн./кВт",
+                        textColorLight = Color(0xFF3F51B5),
+                        cardColorLight = Color(0xFF87B4D7),
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    HorizontalDivider()
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "Сплачено",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Checkbox(
+                            checked = currentPayment.isPaid,
+                            onCheckedChange = onPaidChange
+                        )
+                    }
+                }
             }
         }
-        ReceiptPickerItem2(hasReceipt = false, fileName = null)
+        ReceiptPickerItem2(
+            hasReceipt = currentPayment?.receiptUri?.isNotEmpty() == true,
+            fileName = currentPayment?.receiptFileName?.ifEmpty { null }
+        )
+    }
+}
+
+private fun formatValue(value: Double): String {
+    return if (value == value.toLong().toDouble()) {
+        value.toLong().toString()
+    } else {
+        String.format("%.2f", value)
     }
 }
 

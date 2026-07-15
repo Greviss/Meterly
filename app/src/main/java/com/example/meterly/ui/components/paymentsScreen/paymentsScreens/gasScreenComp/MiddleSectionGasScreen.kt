@@ -30,6 +30,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.UtilityType
+import com.example.meterly.viewModel.PaymentViewModel
 
 @Composable
 fun MiddleSectionGasScreen(
@@ -38,7 +40,8 @@ fun MiddleSectionGasScreen(
     monthEnd: String = "",
     onMonthEndChange: (String) -> Unit = {},
     rate: String = "",
-    onRateChange: (String) -> Unit = {}
+    onRateChange: (String) -> Unit = {},
+    paymentViewModel: PaymentViewModel
 ){
     Column(
         modifier = Modifier.wrapContentSize(),
@@ -144,8 +147,13 @@ fun MiddleSectionGasScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = { ->
-                        null
+                    onClick = {
+                        paymentViewModel.calculate(
+                            utility = UtilityType.GAS,
+                            begin = monthBegin.toDoubleOrNull() ?: 0.0,
+                            end = monthEnd.toDoubleOrNull() ?: 0.0,
+                            rate = rate.toDoubleOrNull() ?: 0.0
+                        )
                     },
                     modifier = Modifier
                         .fillMaxWidth()

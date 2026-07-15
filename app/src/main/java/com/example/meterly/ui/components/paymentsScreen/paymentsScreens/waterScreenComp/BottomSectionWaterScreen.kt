@@ -40,10 +40,16 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material3.Checkbox
+import com.example.meterly.model.Payment
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp.ColumnElem
 
 @Composable
-fun BottomSectionWaterScreen(){
+fun BottomSectionWaterScreen(
+    currentPayment: Payment?,
+    previousPayment: Payment?,
+    onPaidChange: (Boolean) -> Unit
+){
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -71,71 +77,113 @@ fun BottomSectionWaterScreen(){
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                ColumnElem(
-                    titleWater = "Витрачено",
-                    subtitleWater = "В цьому місяці",
-                    iconWater = Icons.Default.WaterDrop,
-                    iconBgColorWater = Color(0xFFFFBFBD),
-                    iconTintWater = Color(0xFFF44336),
-                    valueWater = "0 м³",
-                    textColorWater = Color(0xFFF44336),
-                    cardColorWater = Color(0xFFDC8E89),
-                )
+                if (currentPayment == null) {
+                    Text(
+                        text = "Розрахунок ще не виконано.",
+                        fontSize = 16.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                } else {
+                    ColumnElem(
+                        titleWater = "Витрачено",
+                        subtitleWater = "В цьому місяці",
+                        iconWater = Icons.Default.WaterDrop,
+                        iconBgColorWater = Color(0xFFFFBFBD),
+                        iconTintWater = Color(0xFFF44336),
+                        valueWater = "${formatValue(currentPayment.consumption)} м³",
+                        textColorWater = Color(0xFFF44336),
+                        cardColorWater = Color(0xFFDC8E89),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleWater = "Витрачено",
-                    subtitleWater = "В попередньому місяці",
-                    iconWater = Icons.Default.WaterDamage,
-                    iconBgColorWater = Color(0xFFFFEFC1),
-                    iconTintWater = Color(0xFFFF9800),
-                    valueWater = "11 м³",
-                    textColorWater = Color(0xFFFF9800),
-                    cardColorWater = Color(0xFFFFD797),
-                )
+                    ColumnElem(
+                        titleWater = "Витрачено",
+                        subtitleWater = "В попередньому місяці",
+                        iconWater = Icons.Default.WaterDamage,
+                        iconBgColorWater = Color(0xFFFFEFC1),
+                        iconTintWater = Color(0xFFFF9800),
+                        valueWater = if (previousPayment != null) "${formatValue(previousPayment.consumption)} м³" else "-",
+                        textColorWater = Color(0xFFFF9800),
+                        cardColorWater = Color(0xFFFFD797),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleWater = "До сплати",
-                    subtitleWater = "В цьому місяці",
-                    iconWater = Icons.Default.Money,
-                    iconBgColorWater = Color(0xFFE2FFBE),
-                    iconTintWater = Color(0xFF4CAF50),
-                    valueWater = "0 грн.",
-                    textColorWater = Color(0xFF4CAF50),
-                    cardColorWater = Color(0xFFB6DB8B),
-                )
+                    ColumnElem(
+                        titleWater = "До сплати",
+                        subtitleWater = "В цьому місяці",
+                        iconWater = Icons.Default.Money,
+                        iconBgColorWater = Color(0xFFE2FFBE),
+                        iconTintWater = Color(0xFF4CAF50),
+                        valueWater = "${formatValue(currentPayment.amountDue)} грн.",
+                        textColorWater = Color(0xFF4CAF50),
+                        cardColorWater = Color(0xFFB6DB8B),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleWater = "До сплати",
-                    subtitleWater = "В попередньому місяці",
-                    iconWater = Icons.Default.Money,
-                    iconBgColorWater = Color(0xFF4CAF50),
-                    iconTintWater = Color(0xFFE2FFBE),
-                    valueWater = "374 грн.",
-                    textColorWater = Color(0xFFB6DB8B),
-                    cardColorWater = Color(0xFF4CAF50),
-                )
+                    ColumnElem(
+                        titleWater = "До сплати",
+                        subtitleWater = "В попередньому місяці",
+                        iconWater = Icons.Default.Money,
+                        iconBgColorWater = Color(0xFF4CAF50),
+                        iconTintWater = Color(0xFFE2FFBE),
+                        valueWater = if (previousPayment != null) "${formatValue(previousPayment.amountDue)} грн." else "-",
+                        textColorWater = Color(0xFFB6DB8B),
+                        cardColorWater = Color(0xFF4CAF50),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleWater = "Тариф",
-                    subtitleWater = "Актуальна ціна тарифа",
-                    iconWater = Icons.Default.AutoGraph,
-                    iconBgColorWater = Color(0xFFBBE0FF),
-                    iconTintWater = Color(0xFF3F51B5),
-                    valueWater = "34 грн./м³",
-                    textColorWater = Color(0xFF3F51B5),
-                    cardColorWater = Color(0xFF87B4D7),
-                )
+                    ColumnElem(
+                        titleWater = "Тариф",
+                        subtitleWater = "Актуальна ціна тарифа",
+                        iconWater = Icons.Default.AutoGraph,
+                        iconBgColorWater = Color(0xFFBBE0FF),
+                        iconTintWater = Color(0xFF3F51B5),
+                        valueWater = "${formatValue(currentPayment.rate)} грн./м³",
+                        textColorWater = Color(0xFF3F51B5),
+                        cardColorWater = Color(0xFF87B4D7),
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    HorizontalDivider()
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "Сплачено",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Checkbox(
+                            checked = currentPayment.isPaid,
+                            onCheckedChange = onPaidChange
+                        )
+                    }
+                }
             }
         }
-        ReceiptPickerItem4(hasReceipt = false, fileName = null)
+        ReceiptPickerItem4(
+            hasReceipt = currentPayment?.receiptUri?.isNotEmpty() == true,
+            fileName = currentPayment?.receiptFileName?.ifEmpty { null }
+        )
+    }
+}
+
+private fun formatValue(value: Double): String {
+    return if (value == value.toLong().toDouble()) {
+        value.toLong().toString()
+    } else {
+        String.format("%.2f", value)
     }
 }
 

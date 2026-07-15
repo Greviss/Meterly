@@ -38,10 +38,16 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material3.Checkbox
+import com.example.meterly.model.Payment
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp.ColumnElem
 
 @Composable
-fun BottomSectionSewerageScreen(){
+fun BottomSectionSewerageScreen(
+    currentPayment: Payment?,
+    previousPayment: Payment?,
+    onPaidChange: (Boolean) -> Unit
+){
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -69,71 +75,113 @@ fun BottomSectionSewerageScreen(){
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                ColumnElem(
-                    titleSewerage = "Витрачено",
-                    subtitleSewerage = "В цьому місяці",
-                    iconSewerage = Icons.Default.Plumbing,
-                    iconBgColorSewerage = Color(0xFFFFBFBD),
-                    iconTintSewerage = Color(0xFFF44336),
-                    valueSewerage = "0 м³",
-                    textColorSewerage = Color(0xFFF44336),
-                    cardColorSewerage = Color(0xFFDC8E89),
-                )
+                if (currentPayment == null) {
+                    Text(
+                        text = "Розрахунок ще не виконано.",
+                        fontSize = 16.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                } else {
+                    ColumnElem(
+                        titleSewerage = "Витрачено",
+                        subtitleSewerage = "В цьому місяці",
+                        iconSewerage = Icons.Default.Plumbing,
+                        iconBgColorSewerage = Color(0xFFFFBFBD),
+                        iconTintSewerage = Color(0xFFF44336),
+                        valueSewerage = "${formatValue(currentPayment.consumption)} м³",
+                        textColorSewerage = Color(0xFFF44336),
+                        cardColorSewerage = Color(0xFFDC8E89),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleSewerage = "Витрачено",
-                    subtitleSewerage = "В попередньому місяці",
-                    iconSewerage = Icons.Default.Plumbing,
-                    iconBgColorSewerage = Color(0xFFFFEFC1),
-                    iconTintSewerage = Color(0xFFFF9800),
-                    valueSewerage = "11 м³",
-                    textColorSewerage = Color(0xFFFF9800),
-                    cardColorSewerage = Color(0xFFFFD797),
-                )
+                    ColumnElem(
+                        titleSewerage = "Витрачено",
+                        subtitleSewerage = "В попередньому місяці",
+                        iconSewerage = Icons.Default.Plumbing,
+                        iconBgColorSewerage = Color(0xFFFFEFC1),
+                        iconTintSewerage = Color(0xFFFF9800),
+                        valueSewerage = if (previousPayment != null) "${formatValue(previousPayment.consumption)} м³" else "-",
+                        textColorSewerage = Color(0xFFFF9800),
+                        cardColorSewerage = Color(0xFFFFD797),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleSewerage = "До сплати",
-                    subtitleSewerage = "В цьому місяці",
-                    iconSewerage = Icons.Default.Money,
-                    iconBgColorSewerage = Color(0xFFE2FFBE),
-                    iconTintSewerage = Color(0xFF4CAF50),
-                    valueSewerage = "0 грн.",
-                    textColorSewerage = Color(0xFF4CAF50),
-                    cardColorSewerage = Color(0xFFB6DB8B),
-                )
+                    ColumnElem(
+                        titleSewerage = "До сплати",
+                        subtitleSewerage = "В цьому місяці",
+                        iconSewerage = Icons.Default.Money,
+                        iconBgColorSewerage = Color(0xFFE2FFBE),
+                        iconTintSewerage = Color(0xFF4CAF50),
+                        valueSewerage = "${formatValue(currentPayment.amountDue)} грн.",
+                        textColorSewerage = Color(0xFF4CAF50),
+                        cardColorSewerage = Color(0xFFB6DB8B),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleSewerage = "До сплати",
-                    subtitleSewerage = "В попередньому місяці",
-                    iconSewerage = Icons.Default.Money,
-                    iconBgColorSewerage = Color(0xFF4CAF50),
-                    iconTintSewerage = Color(0xFFE2FFBE),
-                    valueSewerage = "374 грн.",
-                    textColorSewerage = Color(0xFFB6DB8B),
-                    cardColorSewerage = Color(0xFF4CAF50),
-                )
+                    ColumnElem(
+                        titleSewerage = "До сплати",
+                        subtitleSewerage = "В попередньому місяці",
+                        iconSewerage = Icons.Default.Money,
+                        iconBgColorSewerage = Color(0xFF4CAF50),
+                        iconTintSewerage = Color(0xFFE2FFBE),
+                        valueSewerage = if (previousPayment != null) "${formatValue(previousPayment.amountDue)} грн." else "-",
+                        textColorSewerage = Color(0xFFB6DB8B),
+                        cardColorSewerage = Color(0xFF4CAF50),
+                    )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                ColumnElem(
-                    titleSewerage = "Тариф",
-                    subtitleSewerage = "Актуальна ціна тарифа",
-                    iconSewerage = Icons.Default.AutoGraph,
-                    iconBgColorSewerage = Color(0xFFBBE0FF),
-                    iconTintSewerage = Color(0xFF3F51B5),
-                    valueSewerage = "34 грн./м³",
-                    textColorSewerage = Color(0xFF3F51B5),
-                    cardColorSewerage = Color(0xFF87B4D7),
-                )
+                    ColumnElem(
+                        titleSewerage = "Тариф",
+                        subtitleSewerage = "Актуальна ціна тарифа",
+                        iconSewerage = Icons.Default.AutoGraph,
+                        iconBgColorSewerage = Color(0xFFBBE0FF),
+                        iconTintSewerage = Color(0xFF3F51B5),
+                        valueSewerage = "${formatValue(currentPayment.rate)} грн./м³",
+                        textColorSewerage = Color(0xFF3F51B5),
+                        cardColorSewerage = Color(0xFF87B4D7),
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    HorizontalDivider()
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "Сплачено",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Checkbox(
+                            checked = currentPayment.isPaid,
+                            onCheckedChange = onPaidChange
+                        )
+                    }
+                }
             }
         }
-        ReceiptPickerItem3(hasReceipt = false, fileName = null)
+        ReceiptPickerItem3(
+            hasReceipt = currentPayment?.receiptUri?.isNotEmpty() == true,
+            fileName = currentPayment?.receiptFileName?.ifEmpty { null }
+        )
+    }
+}
+
+private fun formatValue(value: Double): String {
+    return if (value == value.toLong().toDouble()) {
+        value.toLong().toString()
+    } else {
+        String.format("%.2f", value)
     }
 }
 
