@@ -11,6 +11,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,6 +24,7 @@ import com.example.meterly.ui.components.analyticsScreen.waterScreen2.TopSection
 import com.example.meterly.ui.theme.secondaryGradient
 import com.patrykandpatrick.vico.compose.cartesian.axis.Axis
 import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProducer
+import com.patrykandpatrick.vico.compose.cartesian.data.lineSeries
 
 @Composable
 @Preview
@@ -34,9 +37,23 @@ fun WaterScreen2(
     onLeftArrowWater2: () -> Unit = {},
     onRightArrowWater2: () -> Unit = {},
     startAxisWater: Axis<Axis.Position.Vertical.Start>? = null,
-    bottomAxisWater: Axis<Axis.Position.Horizontal.Bottom>? = null,
-    modelProducerWater: CartesianChartModelProducer = CartesianChartModelProducer()
+    bottomAxisWater: Axis<Axis.Position.Horizontal.Bottom>? = null
 ){
+    val modelProducer = remember { CartesianChartModelProducer() }
+
+    val sortedPayments = remember(allPayments) {
+        allPayments.sortedWith(compareBy({ it.year }, { it.month }))
+    }
+
+    LaunchedEffect(sortedPayments) {
+        if (sortedPayments.isEmpty()) return@LaunchedEffect
+        modelProducer.runTransaction {
+            lineSeries {
+                series(sortedPayments.map { it.month }, sortedPayments.map { it.consumption })
+            }
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -65,7 +82,7 @@ fun WaterScreen2(
                     allPayments = allPayments,
                     startAxisWater = { startAxisWater },
                     bottomAxisWater = { bottomAxisWater },
-                    modelProducerWater = modelProducerWater
+                    modelProducerWater = modelProducer
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))

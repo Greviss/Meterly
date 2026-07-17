@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.sp
 import com.example.meterly.model.Payment
 import com.example.meterly.ui.components.analyticsScreen.rememberMonthBottomAxis
 import com.example.meterly.ui.components.analyticsScreen.rememberMonthStartAxis
-import com.example.meterly.ui.components.analyticsScreen.rememberPaymentChartModelProducer
 import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
 import com.patrykandpatrick.vico.compose.cartesian.axis.Axis
 import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProducer
@@ -47,7 +46,6 @@ fun MiddleSectionWaterScreen2(
     bottomAxisWater: () -> Axis<Axis.Position.Horizontal.Bottom>?,
     modelProducerWater: CartesianChartModelProducer
 ) {
-    val chartModelProducer = rememberPaymentChartModelProducer(allPayments)
     val startAxis = if (allPayments.size > 1) rememberMonthStartAxis() else startAxisWater()
     val bottomAxis = if (allPayments.size > 1) rememberMonthBottomAxis(allPayments) else bottomAxisWater()
 
@@ -91,7 +89,7 @@ fun MiddleSectionWaterScreen2(
                             startAxis = startAxis,
                             bottomAxis = bottomAxis,
                         ),
-                        modelProducer = chartModelProducer,
+                        modelProducer = modelProducerWater,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(200.dp)

@@ -36,6 +36,8 @@ class PaymentViewModel : ViewModel() {
 
     private var currentAddressId: String? = null
 
+    private val pendingCreations = mutableSetOf<Pair<UtilityType, Pair<Int, Int>>>()
+
     init {
         profileRepository.observeProfile { profileState ->
             val newAddressId = profileState.currentAddress?.id
@@ -82,7 +84,7 @@ class PaymentViewModel : ViewModel() {
 
                 current[type] = typePayments.firstOrNull {
                     it.month == curMonth && it.year == curYear
-                } ?: typePayments.maxByOrNull { it.date }
+                }
 
                 previous[type] = typePayments.firstOrNull {
                     it.month == prevMonth && it.year == prevYear
@@ -95,6 +97,71 @@ class PaymentViewModel : ViewModel() {
             _allPaymentsByType.value = byType
 
             updateAnalyticsPayments()
+            ensureCurrentMonthPayments()
+        }
+    }
+
+    private fun ensureCurrentMonthPayments() {
+        val addressId = currentAddressId ?: return
+        val byType = _allPaymentsByType.value
+        val calendar = Calendar.getInstance()
+        val curMonth = calendar.get(Calendar.MONTH) + 1
+        val curYear = calendar.get(Calendar.YEAR)
+
+        UtilityType.entries.forEach { type ->
+            val typePayments = byType[type] ?: emptyList()
+            val hasCurrentMonth = typePayments.any { it.month == curMonth && it.year == curYear }
+
+            if (!hasCurrentMonth && typePayments.isNotEmpty()) {
+                val key = type to (curMonth to curYear)
+                if (key in pendingCreations) return@forEach
+                pendingCreations.add(key)
+
+                createPaymentForNewMonth(type, typePayments, addressId, curMonth, curYear, key)
+            }
+        }
+    }
+
+    private fun createPaymentForNewMonth(
+        type: UtilityType,
+        typePayments: List<Payment>,
+        addressId: String,
+        curMonth: Int,
+        curYear: Int,
+        key: Pair<UtilityType, Pair<Int, Int>>
+    ) {
+        val lastPayment = typePayments.maxByOrNull { it.date } ?: run {
+            pendingCreations.remove(key)
+            return
+        }
+
+        val newPayment = Payment(
+            utilityType = type.name,
+            monthBegin = lastPayment.monthEnd,
+            monthEnd = lastPayment.monthEnd,
+            consumption = 0.0,
+            rate = lastPayment.rate,
+            amountDue = 0.0,
+            isPaid = false,
+            date = System.currentTimeMillis(),
+            month = curMonth,
+            year = curYear,
+            addressId = addressId
+        )
+
+        viewModelScope.launch {
+            try {
+                val savedId = paymentRepository.savePayment(newPayment)
+                if (savedId.isNotEmpty()) {
+                    val saved = newPayment.copy(id = savedId)
+                    val updated = _currentPayments.value.toMutableMap()
+                    updated[type] = saved
+                    _currentPayments.value = updated
+                }
+            } catch (_: Exception) {
+            } finally {
+                pendingCreations.remove(key)
+            }
         }
     }
 
