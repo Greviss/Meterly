@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.meterly.model.Payment
 import com.example.meterly.ui.components.analyticsScreen.lightScreen2.BottomSectionLightScreen2
 import com.example.meterly.ui.components.analyticsScreen.lightScreen2.MiddleSectionLightScreen2
 import com.example.meterly.ui.components.analyticsScreen.lightScreen2.TopSectionLightScreen2
@@ -24,11 +25,17 @@ import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProdu
 
 @Composable
 @Preview
-fun LightScreen2(onLeftArrowLight2: () -> Unit = {},
-                 onRightArrowLight2: () -> Unit = {},
-                 startAxisLight: Axis<Axis.Position.Vertical.Start>? = null,
-                 bottomAxisLight: Axis<Axis.Position.Horizontal.Bottom>? = null,
-                 modelProducerLight: CartesianChartModelProducer = CartesianChartModelProducer()
+fun LightScreen2(
+    payment: Payment? = null,
+    allPayments: List<Payment> = emptyList(),
+    selectedMonth: Int = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH) + 1,
+    selectedYear: Int = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR),
+    onPeriodSelected: (month: Int, year: Int) -> Unit = { _, _ -> },
+    onLeftArrowLight2: () -> Unit = {},
+    onRightArrowLight2: () -> Unit = {},
+    startAxisLight: Axis<Axis.Position.Vertical.Start>? = null,
+    bottomAxisLight: Axis<Axis.Position.Horizontal.Bottom>? = null,
+    modelProducerLight: CartesianChartModelProducer = CartesianChartModelProducer()
 ){
     Box(
         modifier = Modifier
@@ -42,20 +49,35 @@ fun LightScreen2(onLeftArrowLight2: () -> Unit = {},
                 .padding(horizontal = 20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            TopSectionLightScreen2(onLeftArrowLight2 = onLeftArrowLight2,
-                onRightArrowLight2 = onRightArrowLight2)
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            MiddleSectionLightScreen2(
-                startAxisLight = { startAxisLight },
-                bottomAxisLight = { bottomAxisLight },
-                modelProducerLight = modelProducerLight
+            TopSectionLightScreen2(
+                onLeftArrowLight2 = onLeftArrowLight2,
+                onRightArrowLight2 = onRightArrowLight2,
+                selectedMonth = selectedMonth,
+                selectedYear = selectedYear,
+                onPeriodSelected = onPeriodSelected
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            if (payment != null) {
+                Spacer(modifier = Modifier.height(16.dp))
 
-            BottomSectionLightScreen2()
+                MiddleSectionLightScreen2(
+                    payment = payment,
+                    allPayments = allPayments,
+                    startAxisLight = { startAxisLight },
+                    bottomAxisLight = { bottomAxisLight },
+                    modelProducerLight = modelProducerLight
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                BottomSectionLightScreen2(
+                    payment = payment,
+                    allPayments = allPayments
+                )
+            } else {
+                Spacer(modifier = Modifier.height(32.dp))
+                NoDataFallback()
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.meterly.model.Payment
 import com.example.meterly.ui.components.analyticsScreen.sewerageScreen2.BottomSectionSewerageScreen2
 import com.example.meterly.ui.components.analyticsScreen.sewerageScreen2.MiddleSectionSewerageScreen2
 import com.example.meterly.ui.components.analyticsScreen.sewerageScreen2.TopSectionSewerageScreen2
@@ -24,11 +25,17 @@ import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProdu
 
 @Composable
 @Preview
-fun SewerageScreen2(onLeftArrowSewerage2: () -> Unit = {},
-                 onRightArrowSewerage2: () -> Unit = {},
-                 startAxisSewerage: Axis<Axis.Position.Vertical.Start>? = null,
-                 bottomAxisSewerage: Axis<Axis.Position.Horizontal.Bottom>? = null,
-                 modelProducerSewerage: CartesianChartModelProducer = CartesianChartModelProducer()
+fun SewerageScreen2(
+    payment: Payment? = null,
+    allPayments: List<Payment> = emptyList(),
+    selectedMonth: Int = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH) + 1,
+    selectedYear: Int = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR),
+    onPeriodSelected: (month: Int, year: Int) -> Unit = { _, _ -> },
+    onLeftArrowSewerage2: () -> Unit = {},
+    onRightArrowSewerage2: () -> Unit = {},
+    startAxisSewerage: Axis<Axis.Position.Vertical.Start>? = null,
+    bottomAxisSewerage: Axis<Axis.Position.Horizontal.Bottom>? = null,
+    modelProducerSewerage: CartesianChartModelProducer = CartesianChartModelProducer()
 ){
     Box(
         modifier = Modifier
@@ -42,20 +49,35 @@ fun SewerageScreen2(onLeftArrowSewerage2: () -> Unit = {},
                 .padding(horizontal = 20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            TopSectionSewerageScreen2(onLeftArrowSewerage2 = onLeftArrowSewerage2,
-                onRightArrowSewerage2 = onRightArrowSewerage2)
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            MiddleSectionSewerageScreen2(
-                startAxisSewerage = { startAxisSewerage },
-                bottomAxisSewerage = { bottomAxisSewerage },
-                modelProducerSewerage = modelProducerSewerage
+            TopSectionSewerageScreen2(
+                onLeftArrowSewerage2 = onLeftArrowSewerage2,
+                onRightArrowSewerage2 = onRightArrowSewerage2,
+                selectedMonth = selectedMonth,
+                selectedYear = selectedYear,
+                onPeriodSelected = onPeriodSelected
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            if (payment != null) {
+                Spacer(modifier = Modifier.height(16.dp))
 
-            BottomSectionSewerageScreen2()
+                MiddleSectionSewerageScreen2(
+                    payment = payment,
+                    allPayments = allPayments,
+                    startAxisSewerage = { startAxisSewerage },
+                    bottomAxisSewerage = { bottomAxisSewerage },
+                    modelProducerSewerage = modelProducerSewerage
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                BottomSectionSewerageScreen2(
+                    payment = payment,
+                    allPayments = allPayments
+                )
+            } else {
+                Spacer(modifier = Modifier.height(32.dp))
+                NoDataFallback()
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.meterly.model.Payment
 import com.example.meterly.ui.components.analyticsScreen.waterScreen2.BottomSectionWaterScreen2
 import com.example.meterly.ui.components.analyticsScreen.waterScreen2.MiddleSectionWaterScreen2
 import com.example.meterly.ui.components.analyticsScreen.waterScreen2.TopSectionWaterScreen2
@@ -24,11 +25,17 @@ import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProdu
 
 @Composable
 @Preview
-fun WaterScreen2(onLeftArrowWater2: () -> Unit = {},
-               onRightArrowWater2: () -> Unit = {},
-               startAxisWater: Axis<Axis.Position.Vertical.Start>? = null,
-               bottomAxisWater: Axis<Axis.Position.Horizontal.Bottom>? = null,
-               modelProducerWater: CartesianChartModelProducer = CartesianChartModelProducer()
+fun WaterScreen2(
+    payment: Payment? = null,
+    allPayments: List<Payment> = emptyList(),
+    selectedMonth: Int = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH) + 1,
+    selectedYear: Int = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR),
+    onPeriodSelected: (month: Int, year: Int) -> Unit = { _, _ -> },
+    onLeftArrowWater2: () -> Unit = {},
+    onRightArrowWater2: () -> Unit = {},
+    startAxisWater: Axis<Axis.Position.Vertical.Start>? = null,
+    bottomAxisWater: Axis<Axis.Position.Horizontal.Bottom>? = null,
+    modelProducerWater: CartesianChartModelProducer = CartesianChartModelProducer()
 ){
     Box(
         modifier = Modifier
@@ -42,20 +49,35 @@ fun WaterScreen2(onLeftArrowWater2: () -> Unit = {},
                 .padding(horizontal = 20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            TopSectionWaterScreen2(onLeftArrowWater2 = onLeftArrowWater2,
-                onRightArrowWater2 = onRightArrowWater2)
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            MiddleSectionWaterScreen2(
-                startAxisWater = { startAxisWater },
-                bottomAxisWater = { bottomAxisWater },
-                modelProducerWater = modelProducerWater
+            TopSectionWaterScreen2(
+                onLeftArrowWater2 = onLeftArrowWater2,
+                onRightArrowWater2 = onRightArrowWater2,
+                selectedMonth = selectedMonth,
+                selectedYear = selectedYear,
+                onPeriodSelected = onPeriodSelected
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            if (payment != null) {
+                Spacer(modifier = Modifier.height(16.dp))
 
-            BottomSectionWaterScreen2()
+                MiddleSectionWaterScreen2(
+                    payment = payment,
+                    allPayments = allPayments,
+                    startAxisWater = { startAxisWater },
+                    bottomAxisWater = { bottomAxisWater },
+                    modelProducerWater = modelProducerWater
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                BottomSectionWaterScreen2(
+                    payment = payment,
+                    allPayments = allPayments
+                )
+            } else {
+                Spacer(modifier = Modifier.height(32.dp))
+                NoDataFallback()
+            }
         }
     }
 }

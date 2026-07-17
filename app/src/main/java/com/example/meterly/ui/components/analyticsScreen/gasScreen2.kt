@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.meterly.model.Payment
 import com.example.meterly.ui.components.analyticsScreen.gasScreen2.BottomSectionGasScreen2
 import com.example.meterly.ui.components.analyticsScreen.gasScreen2.MiddleSectionGasScreen2
 import com.example.meterly.ui.components.analyticsScreen.gasScreen2.TopSectionGasScreen2
@@ -24,11 +25,17 @@ import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProdu
 
 @Composable
 @Preview
-fun GasScreen2(onLeftArrowGas2: () -> Unit = {},
-               onRightArrowGas2: () -> Unit = {},
-               startAxisGas: Axis<Axis.Position.Vertical.Start>? = null,
-               bottomAxisGas: Axis<Axis.Position.Horizontal.Bottom>? = null,
-               modelProducerGas: CartesianChartModelProducer = CartesianChartModelProducer()
+fun GasScreen2(
+    payment: Payment? = null,
+    allPayments: List<Payment> = emptyList(),
+    selectedMonth: Int = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH) + 1,
+    selectedYear: Int = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR),
+    onPeriodSelected: (month: Int, year: Int) -> Unit = { _, _ -> },
+    onLeftArrowGas2: () -> Unit = {},
+    onRightArrowGas2: () -> Unit = {},
+    startAxisGas: Axis<Axis.Position.Vertical.Start>? = null,
+    bottomAxisGas: Axis<Axis.Position.Horizontal.Bottom>? = null,
+    modelProducerGas: CartesianChartModelProducer = CartesianChartModelProducer()
 ){
     Box(
         modifier = Modifier
@@ -44,20 +51,33 @@ fun GasScreen2(onLeftArrowGas2: () -> Unit = {},
         ) {
             TopSectionGasScreen2(
                 onLeftArrowGas2 = onLeftArrowGas2,
-                onRightArrowGas2 = onRightArrowGas2
+                onRightArrowGas2 = onRightArrowGas2,
+                selectedMonth = selectedMonth,
+                selectedYear = selectedYear,
+                onPeriodSelected = onPeriodSelected
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            if (payment != null) {
+                Spacer(modifier = Modifier.height(16.dp))
 
-            MiddleSectionGasScreen2(
-                startAxisGas = { startAxisGas },
-                bottomAxisGas = { bottomAxisGas },
-                modelProducerGas = modelProducerGas,
-            )
+                MiddleSectionGasScreen2(
+                    payment = payment,
+                    allPayments = allPayments,
+                    startAxisGas = { startAxisGas },
+                    bottomAxisGas = { bottomAxisGas },
+                    modelProducerGas = modelProducerGas,
+                )
 
-            Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
-            BottomSectionGasScreen2()
+                BottomSectionGasScreen2(
+                    payment = payment,
+                    allPayments = allPayments
+                )
+            } else {
+                Spacer(modifier = Modifier.height(32.dp))
+                NoDataFallback()
+            }
         }
     }
 }

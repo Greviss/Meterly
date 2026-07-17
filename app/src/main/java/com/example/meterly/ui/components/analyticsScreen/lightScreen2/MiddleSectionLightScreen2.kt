@@ -29,6 +29,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.Payment
+import com.example.meterly.ui.components.analyticsScreen.rememberMonthBottomAxis
+import com.example.meterly.ui.components.analyticsScreen.rememberMonthStartAxis
+import com.example.meterly.ui.components.analyticsScreen.rememberPaymentChartModelProducer
 import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
 import com.patrykandpatrick.vico.compose.cartesian.axis.Axis
 import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProducer
@@ -37,10 +41,16 @@ import com.patrykandpatrick.vico.compose.cartesian.rememberCartesianChart
 
 @Composable
 fun MiddleSectionLightScreen2(
+    payment: Payment? = null,
+    allPayments: List<Payment> = emptyList(),
     startAxisLight: () -> Axis<Axis.Position.Vertical.Start>?,
     bottomAxisLight: () -> Axis<Axis.Position.Horizontal.Bottom>?,
     modelProducerLight: CartesianChartModelProducer
 ) {
+    val chartModelProducer = rememberPaymentChartModelProducer(allPayments)
+    val startAxis = if (allPayments.size > 1) rememberMonthStartAxis() else startAxisLight()
+    val bottomAxis = if (allPayments.size > 1) rememberMonthBottomAxis(allPayments) else bottomAxisLight()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
@@ -67,27 +77,40 @@ fun MiddleSectionLightScreen2(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                CartesianChartHost(
-                    chart = rememberCartesianChart(
-                        rememberLineCartesianLayer(),
-                        startAxis = startAxisLight(),
-                        bottomAxis = bottomAxisLight(),
-                    ),
-                    modelProducer = modelProducerLight,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp)
-                )
+                if (allPayments.isEmpty()) {
+                    Text(
+                        text = "Недостатньо даних",
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(vertical = 80.dp)
+                    )
+                } else {
+                    CartesianChartHost(
+                        chart = rememberCartesianChart(
+                            rememberLineCartesianLayer(),
+                            startAxis = startAxis,
+                            bottomAxis = bottomAxis,
+                        ),
+                        modelProducer = chartModelProducer,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                    )
+                }
             }
         }
     }
     Spacer(modifier = Modifier.height(16.dp))
 
-    CostsLight()
+    CostsLight(payment = payment)
 }
 
 @Composable
-fun CostsLight(){
+fun CostsLight(payment: Payment? = null){
+    val consumption = payment?.consumption ?: 0.0
+    val amountDue = payment?.amountDue ?: 0.0
+    val rate = payment?.rate ?: 0.0
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
@@ -158,9 +181,9 @@ fun CostsLight(){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "65 кВт",
+                        text = "${String.format("%.1f", consumption)} кВт",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 15.sp,
+                        fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
@@ -211,9 +234,9 @@ fun CostsLight(){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "281 грн.",
+                        text = "${String.format("%.2f", amountDue)} грн.",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 15.sp,
+                        fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
@@ -265,9 +288,9 @@ fun CostsLight(){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "4,32 грн./кВт",
+                        text = "${String.format("%.2f", rate)} грн./кВт",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 13.sp,
+                        fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }

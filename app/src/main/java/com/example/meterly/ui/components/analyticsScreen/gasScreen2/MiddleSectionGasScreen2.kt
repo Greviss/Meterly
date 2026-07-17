@@ -30,6 +30,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.Payment
+import com.example.meterly.ui.components.analyticsScreen.rememberMonthBottomAxis
+import com.example.meterly.ui.components.analyticsScreen.rememberMonthStartAxis
+import com.example.meterly.ui.components.analyticsScreen.rememberPaymentChartModelProducer
 import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
 import com.patrykandpatrick.vico.compose.cartesian.axis.Axis
 import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProducer
@@ -38,10 +42,16 @@ import com.patrykandpatrick.vico.compose.cartesian.rememberCartesianChart
 
 @Composable
 fun MiddleSectionGasScreen2(
+    payment: Payment? = null,
+    allPayments: List<Payment> = emptyList(),
     startAxisGas: () -> Axis<Axis.Position.Vertical.Start>?,
     bottomAxisGas: () -> Axis<Axis.Position.Horizontal.Bottom>?,
     modelProducerGas: CartesianChartModelProducer
 ) {
+    val chartModelProducer = rememberPaymentChartModelProducer(allPayments)
+    val startAxis = if (allPayments.size > 1) rememberMonthStartAxis() else startAxisGas()
+    val bottomAxis = if (allPayments.size > 1) rememberMonthBottomAxis(allPayments) else bottomAxisGas()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
@@ -67,27 +77,40 @@ fun MiddleSectionGasScreen2(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                CartesianChartHost(
-                    chart = rememberCartesianChart(
-                        rememberLineCartesianLayer(),
-                        startAxis = startAxisGas(),
-                        bottomAxis = bottomAxisGas(),
-                    ),
-                    modelProducer = modelProducerGas,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp)
-                )
+                if (allPayments.isEmpty()) {
+                    Text(
+                        text = "Недостатньо даних",
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(vertical = 80.dp)
+                    )
+                } else {
+                    CartesianChartHost(
+                        chart = rememberCartesianChart(
+                            rememberLineCartesianLayer(),
+                            startAxis = startAxis,
+                            bottomAxis = bottomAxis,
+                        ),
+                        modelProducer = chartModelProducer,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                    )
+                }
             }
         }
     }
     Spacer(modifier = Modifier.height(16.dp))
 
-    CostsGas()
+    CostsGas(payment = payment)
 }
 
 @Composable
-fun CostsGas(){
+fun CostsGas(payment: Payment? = null){
+    val consumption = payment?.consumption ?: 0.0
+    val amountDue = payment?.amountDue ?: 0.0
+    val rate = payment?.rate ?: 0.0
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
@@ -158,9 +181,9 @@ fun CostsGas(){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "82 м³",
+                        text = "${String.format("%.1f", consumption)} м³",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 15.sp,
+                        fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
@@ -211,9 +234,9 @@ fun CostsGas(){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "655 грн.",
+                        text = "${String.format("%.2f", amountDue)} грн.",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 15.sp,
+                        fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
@@ -265,9 +288,9 @@ fun CostsGas(){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "7.96 грн./м³",
+                        text = "${String.format("%.2f", rate)} грн./м³",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 13.sp,
+                        fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }

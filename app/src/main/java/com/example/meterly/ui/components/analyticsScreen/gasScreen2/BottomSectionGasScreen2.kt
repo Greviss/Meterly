@@ -35,9 +35,54 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.Payment
+import java.util.Calendar
+
+private val monthNames = listOf(
+    "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень",
+    "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"
+)
 
 @Composable
-fun BottomSectionGasScreen2() {
+fun BottomSectionGasScreen2(
+    payment: Payment? = null,
+    allPayments: List<Payment> = emptyList()
+) {
+    val amountDue = payment?.amountDue ?: 0.0
+    val consumption = payment?.consumption ?: 0.0
+    val selectedYear = payment?.year ?: Calendar.getInstance().get(Calendar.YEAR)
+    val selectedMonth = payment?.month ?: 1
+
+    val nonZeroPayments = allPayments.filter { it.amountDue > 0 }
+
+    val previousPayment = allPayments
+        .filter { it.date < (payment?.date ?: Long.MAX_VALUE) }
+        .sortedByDescending { it.date }
+        .firstOrNull()
+
+    val prevAmount = previousPayment?.amountDue ?: 0.0
+    val savings = maxOf(0.0, prevAmount - amountDue)
+    val savingsPercent = if (prevAmount > 0) (savings / prevAmount * 100) else 0.0
+
+    val daysInMonth = java.util.Calendar.getInstance().apply {
+        set(selectedYear, selectedMonth - 1, 1)
+    }.getActualMaximum(java.util.Calendar.DAY_OF_MONTH)
+    val dailyConsumption = if (daysInMonth > 0) consumption / daysInMonth else 0.0
+    val dailyCost = if (daysInMonth > 0) amountDue / daysInMonth else 0.0
+
+    val maxPayment = nonZeroPayments.maxByOrNull { it.amountDue }
+    val minPayment = nonZeroPayments.filter { it.amountDue > 0 }.minByOrNull { it.amountDue }
+
+    val yearTotal = allPayments
+        .filter { it.year == selectedYear }
+        .sumOf { it.amountDue }
+
+    fun formatMonthYear(p: Payment?): String {
+        if (p == null) return "—"
+        val mName = monthNames.getOrElse(p.month - 1) { "?" }
+        return "$mName ${p.year}"
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -67,14 +112,14 @@ fun BottomSectionGasScreen2() {
             ) {
                 RowElementGas(titleGas1 = "Економія (грн.)",
                     subtitleGas1 = "Заощаджено",
-                    valueGas1 = "0 грн.",
+                    valueGas1 = "${String.format("%.2f", savings)} грн.",
                     iconGas1 = Icons.Default.Eco, iconTintGas1 = Color(0xFF4CAF50), iconBgColorGas1 = Color(0xFFE8F5E9),
                     modifierGas1 = Modifier.weight(1f)
                 )
 
                 RowElementGas(titleGas1 = "Економія (%)",
                     subtitleGas1 = "Заощаджено",
-                    valueGas1 = "0 %-",
+                    valueGas1 = "${String.format("%.1f", savingsPercent)} %",
                     iconGas1 = Icons.Default.Percent, iconTintGas1 = Color(0xFF4CAF50), iconBgColorGas1 = Color(0xFFE8F5E9),
                     modifierGas1 = Modifier.weight(1f)
                 )
@@ -88,14 +133,14 @@ fun BottomSectionGasScreen2() {
             ){
                 RowElementGas(titleGas1 = "Витрачено (м³)",
                     subtitleGas1 = "Щоденні витрати",
-                    valueGas1 = "0 м³",
+                    valueGas1 = "${String.format("%.2f", dailyConsumption)} м³",
                     iconGas1 = Icons.Default.LocalFireDepartment, iconTintGas1 = Color(0xFF447EAC), iconBgColorGas1 = Color(0xFFC9D0FF),
                     modifierGas1 = Modifier.weight(1f)
                 )
 
                 RowElementGas(titleGas1 = "Витрачено (грн.)",
                     subtitleGas1 = "Щоденні витрати",
-                    valueGas1 = "0 грн.",
+                    valueGas1 = "${String.format("%.2f", dailyCost)} грн.",
                     iconGas1 = Icons.Default.Payments, iconTintGas1 = Color(0xFF9E8744), iconBgColorGas1 = Color(0xFFFFF0D7),
                     modifierGas1 = Modifier.weight(1f)
                 )
@@ -109,8 +154,8 @@ fun BottomSectionGasScreen2() {
             ){
                 ColumnElementGas(
                     titleGas2 = "Макс. витрат",
-                    subtitleGas2 = "За грудень 2025",
-                    valueGas2 = "1248 грн.",
+                    subtitleGas2 = "За ${formatMonthYear(maxPayment)}",
+                    valueGas2 = "${String.format("%.0f", maxPayment?.amountDue ?: 0.0)} грн.",
                     iconGas2 = Icons.Default.ArrowCircleUp, iconTintGas2 = Color(0xFFA04B45), iconBgColorGas2 = Color(0xFFFFD7D5),
                     cardColorGas2 = Color(0xFFFFD7D5),
                     textColorGas2 = Color(0xFFF44336)
@@ -120,8 +165,8 @@ fun BottomSectionGasScreen2() {
 
                 ColumnElementGas(
                     titleGas2 = "Мін. витрат",
-                    subtitleGas2 = "За липень 2025",
-                    valueGas2 = "225 грн.",
+                    subtitleGas2 = "За ${formatMonthYear(minPayment)}",
+                    valueGas2 = "${String.format("%.0f", minPayment?.amountDue ?: 0.0)} грн.",
                     iconGas2 = Icons.Default.ArrowCircleDown, iconTintGas2 = Color(0xFF47954A), iconBgColorGas2 = Color(0xFFF1FFDE),
                     cardColorGas2 = Color(0xFFF1FFDE),
                     textColorGas2 = Color(0xFF4CAF50)
@@ -131,8 +176,8 @@ fun BottomSectionGasScreen2() {
 
                 ColumnElementGas(
                     titleGas2 = "За увесь рік",
-                    subtitleGas2 = "За 2025",
-                    valueGas2 = "7102 грн.",
+                    subtitleGas2 = "За $selectedYear",
+                    valueGas2 = "${String.format("%.0f", yearTotal)} грн.",
                     iconGas2 = Icons.Default.Wallet, iconTintGas2 = Color(0xFF67489E), iconBgColorGas2 = Color(0xFFF3E1FF),
                     cardColorGas2 = Color(0xFFF3E1FF),
                     textColorGas2 = Color(0xFF673AB7)

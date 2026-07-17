@@ -29,6 +29,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.Payment
+import com.example.meterly.ui.components.analyticsScreen.rememberMonthBottomAxis
+import com.example.meterly.ui.components.analyticsScreen.rememberMonthStartAxis
+import com.example.meterly.ui.components.analyticsScreen.rememberPaymentChartModelProducer
 import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
 import com.patrykandpatrick.vico.compose.cartesian.axis.Axis
 import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProducer
@@ -37,10 +41,16 @@ import com.patrykandpatrick.vico.compose.cartesian.rememberCartesianChart
 
 @Composable
 fun MiddleSectionWaterScreen2(
+    payment: Payment? = null,
+    allPayments: List<Payment> = emptyList(),
     startAxisWater: () -> Axis<Axis.Position.Vertical.Start>?,
     bottomAxisWater: () -> Axis<Axis.Position.Horizontal.Bottom>?,
     modelProducerWater: CartesianChartModelProducer
 ) {
+    val chartModelProducer = rememberPaymentChartModelProducer(allPayments)
+    val startAxis = if (allPayments.size > 1) rememberMonthStartAxis() else startAxisWater()
+    val bottomAxis = if (allPayments.size > 1) rememberMonthBottomAxis(allPayments) else bottomAxisWater()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
@@ -67,27 +77,40 @@ fun MiddleSectionWaterScreen2(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                CartesianChartHost(
-                    chart = rememberCartesianChart(
-                        rememberLineCartesianLayer(),
-                        startAxis = startAxisWater(),
-                        bottomAxis = bottomAxisWater(),
-                    ),
-                    modelProducer = modelProducerWater,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp)
-                )
+                if (allPayments.isEmpty()) {
+                    Text(
+                        text = "Недостатньо даних",
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(vertical = 80.dp)
+                    )
+                } else {
+                    CartesianChartHost(
+                        chart = rememberCartesianChart(
+                            rememberLineCartesianLayer(),
+                            startAxis = startAxis,
+                            bottomAxis = bottomAxis,
+                        ),
+                        modelProducer = chartModelProducer,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                    )
+                }
             }
         }
     }
     Spacer(modifier = Modifier.height(16.dp))
 
-    CostsWater()
+    CostsWater(payment = payment)
 }
 
 @Composable
-fun CostsWater(){
+fun CostsWater(payment: Payment? = null){
+    val consumption = payment?.consumption ?: 0.0
+    val amountDue = payment?.amountDue ?: 0.0
+    val rate = payment?.rate ?: 0.0
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
@@ -158,9 +181,9 @@ fun CostsWater(){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "8 м³",
+                        text = "${String.format("%.1f", consumption)} м³",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 15.sp,
+                        fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
@@ -211,9 +234,9 @@ fun CostsWater(){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "272 грн.",
+                        text = "${String.format("%.2f", amountDue)} грн.",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 15.sp,
+                        fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
@@ -265,9 +288,9 @@ fun CostsWater(){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "34 грн./м³",
+                        text = "${String.format("%.2f", rate)} грн./м³",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 13.sp,
+                        fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }

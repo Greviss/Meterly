@@ -19,11 +19,9 @@ import androidx.compose.material.icons.filled.ArrowCircleDown
 import androidx.compose.material.icons.filled.ArrowCircleUp
 import androidx.compose.material.icons.filled.Eco
 import androidx.compose.material.icons.filled.EnergySavingsLeaf
-import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material.icons.filled.Payments
 import androidx.compose.material.icons.filled.Percent
 import androidx.compose.material.icons.filled.Wallet
-import androidx.compose.material.icons.filled.WaterDrop
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -37,9 +35,54 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meterly.model.Payment
+import java.util.Calendar
+
+private val monthNames = listOf(
+    "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень",
+    "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"
+)
 
 @Composable
-fun BottomSectionLightScreen2(){
+fun BottomSectionLightScreen2(
+    payment: Payment? = null,
+    allPayments: List<Payment> = emptyList()
+){
+    val amountDue = payment?.amountDue ?: 0.0
+    val consumption = payment?.consumption ?: 0.0
+    val selectedYear = payment?.year ?: Calendar.getInstance().get(Calendar.YEAR)
+    val selectedMonth = payment?.month ?: 1
+
+    val nonZeroPayments = allPayments.filter { it.amountDue > 0 }
+
+    val previousPayment = allPayments
+        .filter { it.date < (payment?.date ?: Long.MAX_VALUE) }
+        .sortedByDescending { it.date }
+        .firstOrNull()
+
+    val prevAmount = previousPayment?.amountDue ?: 0.0
+    val savings = maxOf(0.0, prevAmount - amountDue)
+    val savingsPercent = if (prevAmount > 0) (savings / prevAmount * 100) else 0.0
+
+    val daysInMonth = java.util.Calendar.getInstance().apply {
+        set(selectedYear, selectedMonth - 1, 1)
+    }.getActualMaximum(java.util.Calendar.DAY_OF_MONTH)
+    val dailyConsumption = if (daysInMonth > 0) consumption / daysInMonth else 0.0
+    val dailyCost = if (daysInMonth > 0) amountDue / daysInMonth else 0.0
+
+    val maxPayment = nonZeroPayments.maxByOrNull { it.amountDue }
+    val minPayment = nonZeroPayments.filter { it.amountDue > 0 }.minByOrNull { it.amountDue }
+
+    val yearTotal = allPayments
+        .filter { it.year == selectedYear }
+        .sumOf { it.amountDue }
+
+    fun formatMonthYear(p: Payment?): String {
+        if (p == null) return "—"
+        val mName = monthNames.getOrElse(p.month - 1) { "?" }
+        return "$mName ${p.year}"
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -69,14 +112,14 @@ fun BottomSectionLightScreen2(){
             ) {
                 RowElementLight(titleLight1 = "Економія (грн.)",
                     subtitleLight1 = "Заощаджено",
-                    valueLight1 = "0 грн.",
+                    valueLight1 = "${String.format("%.2f", savings)} грн.",
                     iconLight1 = Icons.Default.Eco, iconTintLight1 = Color(0xFF4CAF50), iconBgColorLight1 = Color(0xFFE8F5E9),
                     modifierLight1 = Modifier.weight(1f)
                 )
 
                 RowElementLight(titleLight1 = "Економія (%)",
                     subtitleLight1 = "Заощаджено",
-                    valueLight1 = "0 %-",
+                    valueLight1 = "${String.format("%.1f", savingsPercent)} %",
                     iconLight1 = Icons.Default.Percent, iconTintLight1 = Color(0xFF4CAF50), iconBgColorLight1 = Color(0xFFE8F5E9),
                     modifierLight1 = Modifier.weight(1f)
                 )
@@ -90,14 +133,14 @@ fun BottomSectionLightScreen2(){
             ){
                 RowElementLight(titleLight1 = "Витрачено (кВт)",
                     subtitleLight1 = "Щоденні витрати",
-                    valueLight1 = "2,1 кВт",
+                    valueLight1 = "${String.format("%.2f", dailyConsumption)} кВт",
                     iconLight1 = Icons.Default.EnergySavingsLeaf, iconTintLight1 = Color(0xFF447EAC), iconBgColorLight1 = Color(0xFFC9D0FF),
                     modifierLight1 = Modifier.weight(1f)
                 )
 
                 RowElementLight(titleLight1 = "Витрачено (грн.)",
                     subtitleLight1 = "Щоденні витрати",
-                    valueLight1 = "13,11 грн.",
+                    valueLight1 = "${String.format("%.2f", dailyCost)} грн.",
                     iconLight1 = Icons.Default.Payments, iconTintLight1 = Color(0xFF9E8744), iconBgColorLight1 = Color(0xFFFFF0D7),
                     modifierLight1 = Modifier.weight(1f)
                 )
@@ -111,8 +154,8 @@ fun BottomSectionLightScreen2(){
             ){
                 ColumnElementLight(
                     titleLight2 = "Макс. витрат",
-                    subtitleLight2 = "За грудень 2025",
-                    valueLight2 = "198 грн.",
+                    subtitleLight2 = "За ${formatMonthYear(maxPayment)}",
+                    valueLight2 = "${String.format("%.0f", maxPayment?.amountDue ?: 0.0)} грн.",
                     iconLight2 = Icons.Default.ArrowCircleUp, iconTintLight2 = Color(0xFFA04B45), iconBgColorLight2 = Color(0xFFFFD7D5),
                     cardColorLight2 = Color(0xFFFFD7D5),
                     textColorLight2 = Color(0xFFF44336)
@@ -122,8 +165,8 @@ fun BottomSectionLightScreen2(){
 
                 ColumnElementLight(
                     titleLight2 = "Мін. витрат",
-                    subtitleLight2 = "За липень 2025",
-                    valueLight2 = "584 грн.",
+                    subtitleLight2 = "За ${formatMonthYear(minPayment)}",
+                    valueLight2 = "${String.format("%.0f", minPayment?.amountDue ?: 0.0)} грн.",
                     iconLight2 = Icons.Default.ArrowCircleDown, iconTintLight2 = Color(0xFF47954A), iconBgColorLight2 = Color(0xFFF1FFDE),
                     cardColorLight2 = Color(0xFFF1FFDE),
                     textColorLight2 = Color(0xFF4CAF50)
@@ -133,8 +176,8 @@ fun BottomSectionLightScreen2(){
 
                 ColumnElementLight(
                     titleLight2 = "За увесь рік",
-                    subtitleLight2 = "За 2025",
-                    valueLight2 = "4789 грн.",
+                    subtitleLight2 = "За $selectedYear",
+                    valueLight2 = "${String.format("%.0f", yearTotal)} грн.",
                     iconLight2 = Icons.Default.Wallet, iconTintLight2 = Color(0xFF67489E), iconBgColorLight2 = Color(0xFFF3E1FF),
                     cardColorLight2 = Color(0xFFF3E1FF),
                     textColorLight2 = Color(0xFF673AB7)

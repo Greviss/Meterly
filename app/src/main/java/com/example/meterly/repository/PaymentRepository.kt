@@ -90,6 +90,33 @@ class PaymentRepository {
         }
     }
 
+    suspend fun getPaymentByMonth(
+        addressId: String,
+        utilityType: String,
+        month: Int,
+        year: Int
+    ): Payment? {
+        val phone = auth.currentUser?.phoneNumber ?: return null
+
+        val snapshot = firestore
+            .collection("users")
+            .document(phone)
+            .collection("addresses")
+            .document(addressId)
+            .collection("payments")
+            .whereEqualTo("utilityType", utilityType)
+            .get()
+            .await()
+
+        val match = snapshot.documents.firstOrNull { doc ->
+            doc.getLong("month") == month.toLong() && doc.getLong("year") == year.toLong()
+        } ?: return null
+
+        val payment = match.toObject(Payment::class.java) ?: return null
+        val actualIsPaid = match.getBoolean("isPaid") ?: match.getBoolean("paid") ?: false
+        return payment.copy(id = match.id, isPaid = actualIsPaid)
+    }
+
     suspend fun updatePaidStatus(
         addressId: String,
         paymentId: String,

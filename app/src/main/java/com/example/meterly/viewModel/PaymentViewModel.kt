@@ -22,6 +22,18 @@ class PaymentViewModel : ViewModel() {
     private val _previousPayments = MutableStateFlow<Map<UtilityType, Payment?>>(emptyMap())
     val previousPayments: StateFlow<Map<UtilityType, Payment?>> = _previousPayments
 
+    private val _selectedAnalyticsMonth = MutableStateFlow(currentMonth())
+    val selectedAnalyticsMonth: StateFlow<Int> = _selectedAnalyticsMonth
+
+    private val _selectedAnalyticsYear = MutableStateFlow(currentYear())
+    val selectedAnalyticsYear: StateFlow<Int> = _selectedAnalyticsYear
+
+    private val _analyticsPayments = MutableStateFlow<Map<UtilityType, Payment?>>(emptyMap())
+    val analyticsPayments: StateFlow<Map<UtilityType, Payment?>> = _analyticsPayments
+
+    private val _allPaymentsByType = MutableStateFlow<Map<UtilityType, List<Payment>>>(emptyMap())
+    val allPaymentsByType: StateFlow<Map<UtilityType, List<Payment>>> = _allPaymentsByType
+
     private var currentAddressId: String? = null
 
     init {
@@ -58,8 +70,8 @@ class PaymentViewModel : ViewModel() {
             val previous = mutableMapOf<UtilityType, Payment?>()
 
             val calendar = Calendar.getInstance()
-            val currentMonth = calendar.get(Calendar.MONTH) + 1
-            val currentYear = calendar.get(Calendar.YEAR)
+            val curMonth = calendar.get(Calendar.MONTH) + 1
+            val curYear = calendar.get(Calendar.YEAR)
 
             calendar.add(Calendar.MONTH, -1)
             val prevMonth = calendar.get(Calendar.MONTH) + 1
@@ -69,7 +81,7 @@ class PaymentViewModel : ViewModel() {
                 val typePayments = byType[type] ?: emptyList()
 
                 current[type] = typePayments.firstOrNull {
-                    it.month == currentMonth && it.year == currentYear
+                    it.month == curMonth && it.year == curYear
                 } ?: typePayments.maxByOrNull { it.date }
 
                 previous[type] = typePayments.firstOrNull {
@@ -79,7 +91,40 @@ class PaymentViewModel : ViewModel() {
 
             _currentPayments.value = current
             _previousPayments.value = previous
+
+            _allPaymentsByType.value = byType
+
+            updateAnalyticsPayments()
         }
+    }
+
+    private fun updateAnalyticsPayments() {
+        val month = _selectedAnalyticsMonth.value
+        val year = _selectedAnalyticsYear.value
+        val byType = _allPaymentsByType.value
+
+        val result = mutableMapOf<UtilityType, Payment?>()
+        UtilityType.entries.forEach { type ->
+            val typePayments = byType[type] ?: emptyList()
+            result[type] = typePayments.firstOrNull {
+                it.month == month && it.year == year
+            }
+        }
+        _analyticsPayments.value = result
+    }
+
+    fun selectAnalyticsPeriod(month: Int, year: Int) {
+        _selectedAnalyticsMonth.value = month
+        _selectedAnalyticsYear.value = year
+        updateAnalyticsPayments()
+    }
+
+    private fun currentMonth(): Int {
+        return Calendar.getInstance().get(Calendar.MONTH) + 1
+    }
+
+    private fun currentYear(): Int {
+        return Calendar.getInstance().get(Calendar.YEAR)
     }
 
     fun calculate(
