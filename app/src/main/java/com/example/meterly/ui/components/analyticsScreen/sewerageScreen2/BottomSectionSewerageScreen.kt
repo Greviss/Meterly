@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meterly.model.Payment
+import com.example.meterly.util.AmountFormatter
 import java.util.Calendar
 
 private val monthNames = listOf(
@@ -46,7 +47,8 @@ private val monthNames = listOf(
 @Composable
 fun BottomSectionSewerageScreen2(
     payment: Payment? = null,
-    allPayments: List<Payment> = emptyList()
+    allPayments: List<Payment> = emptyList(),
+    roundAmounts: Boolean = false
 ){
     val amountDue = payment?.amountDue ?: 0.0
     val consumption = payment?.consumption ?: 0.0
@@ -112,7 +114,7 @@ fun BottomSectionSewerageScreen2(
             ) {
                 RowElementSewerage(titleSewerage1 = "Економія (грн.)",
                     subtitleSewerage1 = "Заощаджено",
-                    valueSewerage1 = "${String.format("%.2f", savings)} грн.",
+                    valueSewerage1 = AmountFormatter.format(savings, roundAmounts),
                     iconSewerage1 = Icons.Default.Eco, iconTintSewerage1 = Color(0xFF4CAF50), iconBgColorSewerage1 = Color(0xFFE8F5E9),
                     modifierSewerage1 = Modifier.weight(1f)
                 )
@@ -141,7 +143,7 @@ fun BottomSectionSewerageScreen2(
 
                 RowElementSewerage(titleSewerage1 = "Витрачено (грн.)",
                     subtitleSewerage1 = "Щоденні витрати",
-                    valueSewerage1 = "${String.format("%.2f", dailyCost)} грн.",
+                    valueSewerage1 = AmountFormatter.format(dailyCost, roundAmounts),
                     iconSewerage1 = Icons.Default.Payments, iconTintSewerage1 = Color(0xFF9E8744), iconBgColorSewerage1 = Color(0xFFFFF0D7),
                     modifierSewerage1 = Modifier.weight(1f)
                 )
@@ -156,7 +158,7 @@ fun BottomSectionSewerageScreen2(
                 ColumnElementSewerage(
                     titleSewerage2 = "Макс. витрат",
                     subtitleSewerage2 = "За ${formatMonthYear(maxPayment)}",
-                    valueSewerage2 = "${String.format("%.0f", maxPayment?.amountDue ?: 0.0)} грн.",
+                    valueSewerage2 = AmountFormatter.format(maxPayment?.amountDue ?: 0.0, roundAmounts),
                     iconSewerage2 = Icons.Default.ArrowCircleUp,
                     iconTintSewerage2 = Color(0xFFA04B45),
                     iconBgColorSewerage2 = Color(0xFFFFD7D5),
@@ -169,7 +171,7 @@ fun BottomSectionSewerageScreen2(
                 ColumnElementSewerage(
                     titleSewerage2 = "Мін. витрат",
                     subtitleSewerage2 = "За ${formatMonthYear(minPayment)}",
-                    valueSewerage2 = "${String.format("%.0f", minPayment?.amountDue ?: 0.0)} грн.",
+                    valueSewerage2 = AmountFormatter.format(minPayment?.amountDue ?: 0.0, roundAmounts),
                     iconSewerage2 = Icons.Default.ArrowCircleDown, iconTintSewerage2 = Color(0xFF47954A), iconBgColorSewerage2 = Color(0xFFF1FFDE),
                     cardColorSewerage2 = Color(0xFFF1FFDE),
                     textColorSewerage2 = Color(0xFF4CAF50)
@@ -180,7 +182,7 @@ fun BottomSectionSewerageScreen2(
                 ColumnElementSewerage(
                     titleSewerage2 = "За увесь рік",
                     subtitleSewerage2 = "За $selectedYear",
-                    valueSewerage2 = "${String.format("%.0f", yearTotal)} грн.",
+                    valueSewerage2 = AmountFormatter.format(yearTotal, roundAmounts),
                     iconSewerage2 = Icons.Default.Wallet, iconTintSewerage2 = Color(0xFF67489E), iconBgColorSewerage2 = Color(0xFFF3E1FF),
                     cardColorSewerage2 = Color(0xFFF3E1FF),
                     textColorSewerage2 = Color(0xFF673AB7)

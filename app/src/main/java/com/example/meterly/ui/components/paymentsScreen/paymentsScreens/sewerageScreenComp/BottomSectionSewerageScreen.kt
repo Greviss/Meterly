@@ -41,11 +41,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.material3.Checkbox
 import com.example.meterly.model.Payment
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp.ColumnElem
+import com.example.meterly.util.AmountFormatter
+import kotlin.math.roundToInt
 
 @Composable
 fun BottomSectionSewerageScreen(
     currentPayment: Payment?,
     previousPayment: Payment?,
+    roundAmounts: Boolean = false,
     onPaidChange: (Boolean) -> Unit
 ){
     Column(
@@ -114,7 +117,7 @@ fun BottomSectionSewerageScreen(
                         iconSewerage = Icons.Default.Money,
                         iconBgColorSewerage = Color(0xFFE2FFBE),
                         iconTintSewerage = Color(0xFF4CAF50),
-                        valueSewerage = "${formatValue(currentPayment.amountDue)} грн.",
+                        valueSewerage = formatAmountValue(currentPayment.amountDue, roundAmounts),
                         textColorSewerage = Color(0xFF4CAF50),
                         cardColorSewerage = Color(0xFFB6DB8B),
                     )
@@ -127,7 +130,7 @@ fun BottomSectionSewerageScreen(
                         iconSewerage = Icons.Default.Money,
                         iconBgColorSewerage = Color(0xFF4CAF50),
                         iconTintSewerage = Color(0xFFE2FFBE),
-                        valueSewerage = if (previousPayment != null) "${formatValue(previousPayment.amountDue)} грн." else "-",
+                        valueSewerage = if (previousPayment != null) formatAmountValue(previousPayment.amountDue, roundAmounts) else "-",
                         textColorSewerage = Color(0xFFB6DB8B),
                         cardColorSewerage = Color(0xFF4CAF50),
                     )
@@ -140,7 +143,7 @@ fun BottomSectionSewerageScreen(
                         iconSewerage = Icons.Default.AutoGraph,
                         iconBgColorSewerage = Color(0xFFBBE0FF),
                         iconTintSewerage = Color(0xFF3F51B5),
-                        valueSewerage = "${formatValue(currentPayment.rate)} грн./м³",
+                        valueSewerage = formatRateValue(currentPayment.rate, "м³", roundAmounts),
                         textColorSewerage = Color(0xFF3F51B5),
                         cardColorSewerage = Color(0xFF87B4D7),
                     )
@@ -179,6 +182,19 @@ private fun formatValue(value: Double): String {
     } else {
         String.format("%.2f", value)
     }
+}
+
+private fun formatAmountValue(value: Double, round: Boolean): String {
+    return if (round) {
+        "${value.toInt()} грн."
+    } else {
+        formatValue(value) + " грн."
+    }
+}
+
+private fun formatRateValue(value: Double, unit: String, round: Boolean): String {
+    val formatted = if (round) value.toInt().toString() else formatValue(value)
+    return "$formatted грн./$unit"
 }
 
 @Composable

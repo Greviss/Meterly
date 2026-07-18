@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.example.meterly.model.Payment
 import com.example.meterly.ui.components.analyticsScreen.rememberMonthBottomAxis
 import com.example.meterly.ui.components.analyticsScreen.rememberMonthStartAxis
+import com.example.meterly.util.AmountFormatter
 import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
 import com.patrykandpatrick.vico.compose.cartesian.axis.Axis
 import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProducer
@@ -45,7 +46,8 @@ fun MiddleSectionGasScreen2(
     allPayments: List<Payment> = emptyList(),
     startAxisGas: () -> Axis<Axis.Position.Vertical.Start>?,
     bottomAxisGas: () -> Axis<Axis.Position.Horizontal.Bottom>?,
-    modelProducerGas: CartesianChartModelProducer
+    modelProducerGas: CartesianChartModelProducer,
+    roundAmounts: Boolean = false
 ) {
     val startAxis = if (allPayments.size > 1) rememberMonthStartAxis() else startAxisGas()
     val bottomAxis = if (allPayments.size > 1) rememberMonthBottomAxis(allPayments) else bottomAxisGas()
@@ -100,11 +102,11 @@ fun MiddleSectionGasScreen2(
     }
     Spacer(modifier = Modifier.height(16.dp))
 
-    CostsGas(payment = payment)
+    CostsGas(payment = payment, roundAmounts = roundAmounts)
 }
 
 @Composable
-fun CostsGas(payment: Payment? = null){
+fun CostsGas(payment: Payment? = null, roundAmounts: Boolean = false){
     val consumption = payment?.consumption ?: 0.0
     val amountDue = payment?.amountDue ?: 0.0
     val rate = payment?.rate ?: 0.0
@@ -232,7 +234,7 @@ fun CostsGas(payment: Payment? = null){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "${String.format("%.2f", amountDue)} грн.",
+                        text = AmountFormatter.format(amountDue, roundAmounts),
                         fontWeight = FontWeight.Medium,
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
@@ -286,7 +288,7 @@ fun CostsGas(payment: Payment? = null){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "${String.format("%.2f", rate)} грн./м³",
+                        text = formatRateValue(rate, "м³", roundAmounts),
                         fontWeight = FontWeight.Medium,
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
@@ -295,4 +297,9 @@ fun CostsGas(payment: Payment? = null){
             }
         }
     }
+}
+
+private fun formatRateValue(value: Double, unit: String, round: Boolean): String {
+    val formatted = if (round) value.toInt().toString() else String.format("%.2f", value)
+    return "$formatted грн./$unit"
 }

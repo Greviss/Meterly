@@ -32,6 +32,7 @@ import com.example.meterly.ui.components.profileScreen.middleSectionComponents.T
 import com.example.meterly.ui.navigation.Screen
 import com.example.meterly.ui.theme.secondaryGradient
 import com.example.meterly.viewModel.ProfileViewModel
+import com.example.meterly.viewModel.SettingsViewModel
 import com.example.meterly.viewModel.ThemeViewModel
 
 @Composable
@@ -43,6 +44,7 @@ fun ProfileScreen(
 
     val profileViewModel: ProfileViewModel = viewModel()
     val themeViewModel: ThemeViewModel = viewModel()
+    val settingsViewModel: SettingsViewModel = viewModel()
     val theme by themeViewModel.theme.collectAsState()
 
     var showAddDialog by remember {
@@ -124,7 +126,9 @@ fun ProfileScreen(
 
                 onThemeClick = {
                     showThemeDialog = true
-                }
+                },
+
+                settingsViewModel = settingsViewModel
             )
 
             Spacer(modifier = Modifier.height(16.dp))

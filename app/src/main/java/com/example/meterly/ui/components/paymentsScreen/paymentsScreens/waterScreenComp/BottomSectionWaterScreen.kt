@@ -43,11 +43,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.material3.Checkbox
 import com.example.meterly.model.Payment
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp.ColumnElem
+import com.example.meterly.util.AmountFormatter
+import kotlin.math.roundToInt
 
 @Composable
 fun BottomSectionWaterScreen(
     currentPayment: Payment?,
     previousPayment: Payment?,
+    roundAmounts: Boolean = false,
     onPaidChange: (Boolean) -> Unit
 ){
     Column(
@@ -116,7 +119,7 @@ fun BottomSectionWaterScreen(
                         iconWater = Icons.Default.Money,
                         iconBgColorWater = Color(0xFFE2FFBE),
                         iconTintWater = Color(0xFF4CAF50),
-                        valueWater = "${formatValue(currentPayment.amountDue)} грн.",
+                        valueWater = formatAmountValue(currentPayment.amountDue, roundAmounts),
                         textColorWater = Color(0xFF4CAF50),
                         cardColorWater = Color(0xFFB6DB8B),
                     )
@@ -129,7 +132,7 @@ fun BottomSectionWaterScreen(
                         iconWater = Icons.Default.Money,
                         iconBgColorWater = Color(0xFF4CAF50),
                         iconTintWater = Color(0xFFE2FFBE),
-                        valueWater = if (previousPayment != null) "${formatValue(previousPayment.amountDue)} грн." else "-",
+                        valueWater = if (previousPayment != null) formatAmountValue(previousPayment.amountDue, roundAmounts) else "-",
                         textColorWater = Color(0xFFB6DB8B),
                         cardColorWater = Color(0xFF4CAF50),
                     )
@@ -142,7 +145,7 @@ fun BottomSectionWaterScreen(
                         iconWater = Icons.Default.AutoGraph,
                         iconBgColorWater = Color(0xFFBBE0FF),
                         iconTintWater = Color(0xFF3F51B5),
-                        valueWater = "${formatValue(currentPayment.rate)} грн./м³",
+                        valueWater = formatRateValue(currentPayment.rate, "м³", roundAmounts),
                         textColorWater = Color(0xFF3F51B5),
                         cardColorWater = Color(0xFF87B4D7),
                     )
@@ -181,6 +184,19 @@ private fun formatValue(value: Double): String {
     } else {
         String.format("%.2f", value)
     }
+}
+
+private fun formatAmountValue(value: Double, round: Boolean): String {
+    return if (round) {
+        "${value.toInt()} грн."
+    } else {
+        formatValue(value) + " грн."
+    }
+}
+
+private fun formatRateValue(value: Double, unit: String, round: Boolean): String {
+    val formatted = if (round) value.toInt().toString() else formatValue(value)
+    return "$formatted грн./$unit"
 }
 
 @Composable

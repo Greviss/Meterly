@@ -21,8 +21,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.meterly.model.UtilityType
+import com.example.meterly.repository.SettingsRepository
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp.BottomSectionGasScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp.MiddleSectionGasScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.gasScreenComp.TopSectionGasScreen
@@ -39,6 +41,9 @@ fun GasScreen(
     val paymentViewModel: PaymentViewModel = viewModel(viewModelStoreOwner = activity)
     val currentPayments by paymentViewModel.currentPayments.collectAsState()
     val previousPayments by paymentViewModel.previousPayments.collectAsState()
+
+    val context = LocalContext.current
+    val roundAmounts by SettingsRepository.roundAmounts(context).collectAsState(initial = false)
 
     val currentPayment = currentPayments[UtilityType.GAS]
     val previousPayment = previousPayments[UtilityType.GAS]
@@ -81,7 +86,8 @@ fun GasScreen(
             BottomSectionGasScreen(
                 currentPayment = currentPayment,
                 previousPayment = previousPayment,
-                onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.GAS, isPaid) }
+                onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.GAS, isPaid) },
+                roundAmounts = roundAmounts
             )
 
             ReceiptPickerItem(

@@ -39,11 +39,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Checkbox
 import com.example.meterly.model.Payment
+import com.example.meterly.util.AmountFormatter
+import kotlin.math.roundToInt
 
 @Composable
 fun BottomSectionLightScreen(
     currentPayment: Payment?,
     previousPayment: Payment?,
+    roundAmounts: Boolean = false,
     onPaidChange: (Boolean) -> Unit
 ){
     Column(
@@ -112,7 +115,7 @@ fun BottomSectionLightScreen(
                         iconLight = Icons.Default.Money,
                         iconBgColorLight = Color(0xFFE2FFBE),
                         iconTintLight = Color(0xFF4CAF50),
-                        valueLight = "${formatValue(currentPayment.amountDue)} грн.",
+                        valueLight = formatAmountValue(currentPayment.amountDue, roundAmounts),
                         textColorLight = Color(0xFF4CAF50),
                         cardColorLight = Color(0xFFB6DB8B),
                     )
@@ -125,7 +128,7 @@ fun BottomSectionLightScreen(
                         iconLight = Icons.Default.Money,
                         iconBgColorLight = Color(0xFF4CAF50),
                         iconTintLight = Color(0xFFE2FFBE),
-                        valueLight = if (previousPayment != null) "${formatValue(previousPayment.amountDue)} грн." else "-",
+                        valueLight = if (previousPayment != null) formatAmountValue(previousPayment.amountDue, roundAmounts) else "-",
                         textColorLight = Color(0xFFB6DB8B),
                         cardColorLight = Color(0xFF4CAF50),
                     )
@@ -138,7 +141,7 @@ fun BottomSectionLightScreen(
                         iconLight = Icons.Default.AutoGraph,
                         iconBgColorLight = Color(0xFFBBE0FF),
                         iconTintLight = Color(0xFF3F51B5),
-                        valueLight = "${formatValue(currentPayment.rate)} грн./кВт",
+                        valueLight = formatRateValue(currentPayment.rate, "кВт", roundAmounts),
                         textColorLight = Color(0xFF3F51B5),
                         cardColorLight = Color(0xFF87B4D7),
                     )
@@ -177,6 +180,19 @@ private fun formatValue(value: Double): String {
     } else {
         String.format("%.2f", value)
     }
+}
+
+private fun formatAmountValue(value: Double, round: Boolean): String {
+    return if (round) {
+        "${value.toInt()} грн."
+    } else {
+        formatValue(value) + " грн."
+    }
+}
+
+private fun formatRateValue(value: Double, unit: String, round: Boolean): String {
+    val formatted = if (round) value.toInt().toString() else formatValue(value)
+    return "$formatted грн./$unit"
 }
 
 @Composable

@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import com.example.meterly.model.Payment
 import com.example.meterly.ui.components.analyticsScreen.rememberMonthBottomAxis
 import com.example.meterly.ui.components.analyticsScreen.rememberMonthStartAxis
+import com.example.meterly.util.AmountFormatter
 import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
 import com.patrykandpatrick.vico.compose.cartesian.axis.Axis
 import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProducer
@@ -44,7 +45,8 @@ fun MiddleSectionLightScreen2(
     allPayments: List<Payment> = emptyList(),
     startAxisLight: () -> Axis<Axis.Position.Vertical.Start>?,
     bottomAxisLight: () -> Axis<Axis.Position.Horizontal.Bottom>?,
-    modelProducerLight: CartesianChartModelProducer
+    modelProducerLight: CartesianChartModelProducer,
+    roundAmounts: Boolean = false
 ) {
     val startAxis = if (allPayments.size > 1) rememberMonthStartAxis() else startAxisLight()
     val bottomAxis = if (allPayments.size > 1) rememberMonthBottomAxis(allPayments) else bottomAxisLight()
@@ -100,11 +102,11 @@ fun MiddleSectionLightScreen2(
     }
     Spacer(modifier = Modifier.height(16.dp))
 
-    CostsLight(payment = payment)
+    CostsLight(payment = payment, roundAmounts = roundAmounts)
 }
 
 @Composable
-fun CostsLight(payment: Payment? = null){
+fun CostsLight(payment: Payment? = null, roundAmounts: Boolean = false){
     val consumption = payment?.consumption ?: 0.0
     val amountDue = payment?.amountDue ?: 0.0
     val rate = payment?.rate ?: 0.0
@@ -232,7 +234,7 @@ fun CostsLight(payment: Payment? = null){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "${String.format("%.2f", amountDue)} грн.",
+                        text = AmountFormatter.format(amountDue, roundAmounts),
                         fontWeight = FontWeight.Medium,
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
@@ -286,7 +288,7 @@ fun CostsLight(payment: Payment? = null){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "${String.format("%.2f", rate)} грн./кВт",
+                        text = formatRateValue(rate, "кВт", roundAmounts),
                         fontWeight = FontWeight.Medium,
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
@@ -295,4 +297,9 @@ fun CostsLight(payment: Payment? = null){
             }
         }
     }
+}
+
+private fun formatRateValue(value: Double, unit: String, round: Boolean): String {
+    val formatted = if (round) value.toInt().toString() else String.format("%.2f", value)
+    return "$formatted грн./$unit"
 }

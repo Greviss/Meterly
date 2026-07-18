@@ -12,7 +12,11 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import com.example.meterly.repository.SettingsRepository
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,6 +44,8 @@ fun LightScreen2(
     bottomAxisLight: Axis<Axis.Position.Horizontal.Bottom>? = null
 ){
     val modelProducer = remember { CartesianChartModelProducer() }
+    val context = LocalContext.current
+    val roundAmounts by SettingsRepository.roundAmounts(context).collectAsState(initial = false)
 
     val sortedPayments = remember(allPayments) {
         allPayments.sortedWith(compareBy({ it.year }, { it.month }))
@@ -82,14 +88,16 @@ fun LightScreen2(
                     allPayments = allPayments,
                     startAxisLight = { startAxisLight },
                     bottomAxisLight = { bottomAxisLight },
-                    modelProducerLight = modelProducer
+                    modelProducerLight = modelProducer,
+                    roundAmounts = roundAmounts
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
                 BottomSectionLightScreen2(
                     payment = payment,
-                    allPayments = allPayments
+                    allPayments = allPayments,
+                    roundAmounts = roundAmounts
                 )
             } else {
                 Spacer(modifier = Modifier.height(32.dp))

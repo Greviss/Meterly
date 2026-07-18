@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meterly.model.Payment
+import com.example.meterly.util.AmountFormatter
 import java.util.Calendar
 
 private val monthNames = listOf(
@@ -46,7 +47,8 @@ private val monthNames = listOf(
 @Composable
 fun BottomSectionGasScreen2(
     payment: Payment? = null,
-    allPayments: List<Payment> = emptyList()
+    allPayments: List<Payment> = emptyList(),
+    roundAmounts: Boolean = false
 ) {
     val amountDue = payment?.amountDue ?: 0.0
     val consumption = payment?.consumption ?: 0.0
@@ -112,7 +114,7 @@ fun BottomSectionGasScreen2(
             ) {
                 RowElementGas(titleGas1 = "Економія (грн.)",
                     subtitleGas1 = "Заощаджено",
-                    valueGas1 = "${String.format("%.2f", savings)} грн.",
+                    valueGas1 = AmountFormatter.format(savings, roundAmounts),
                     iconGas1 = Icons.Default.Eco, iconTintGas1 = Color(0xFF4CAF50), iconBgColorGas1 = Color(0xFFE8F5E9),
                     modifierGas1 = Modifier.weight(1f)
                 )
@@ -140,7 +142,7 @@ fun BottomSectionGasScreen2(
 
                 RowElementGas(titleGas1 = "Витрачено (грн.)",
                     subtitleGas1 = "Щоденні витрати",
-                    valueGas1 = "${String.format("%.2f", dailyCost)} грн.",
+                    valueGas1 = AmountFormatter.format(dailyCost, roundAmounts),
                     iconGas1 = Icons.Default.Payments, iconTintGas1 = Color(0xFF9E8744), iconBgColorGas1 = Color(0xFFFFF0D7),
                     modifierGas1 = Modifier.weight(1f)
                 )
@@ -155,7 +157,7 @@ fun BottomSectionGasScreen2(
                 ColumnElementGas(
                     titleGas2 = "Макс. витрат",
                     subtitleGas2 = "За ${formatMonthYear(maxPayment)}",
-                    valueGas2 = "${String.format("%.0f", maxPayment?.amountDue ?: 0.0)} грн.",
+                    valueGas2 = AmountFormatter.format(maxPayment?.amountDue ?: 0.0, roundAmounts),
                     iconGas2 = Icons.Default.ArrowCircleUp, iconTintGas2 = Color(0xFFA04B45), iconBgColorGas2 = Color(0xFFFFD7D5),
                     cardColorGas2 = Color(0xFFFFD7D5),
                     textColorGas2 = Color(0xFFF44336)
@@ -166,7 +168,7 @@ fun BottomSectionGasScreen2(
                 ColumnElementGas(
                     titleGas2 = "Мін. витрат",
                     subtitleGas2 = "За ${formatMonthYear(minPayment)}",
-                    valueGas2 = "${String.format("%.0f", minPayment?.amountDue ?: 0.0)} грн.",
+                    valueGas2 = AmountFormatter.format(minPayment?.amountDue ?: 0.0, roundAmounts),
                     iconGas2 = Icons.Default.ArrowCircleDown, iconTintGas2 = Color(0xFF47954A), iconBgColorGas2 = Color(0xFFF1FFDE),
                     cardColorGas2 = Color(0xFFF1FFDE),
                     textColorGas2 = Color(0xFF4CAF50)
@@ -177,7 +179,7 @@ fun BottomSectionGasScreen2(
                 ColumnElementGas(
                     titleGas2 = "За увесь рік",
                     subtitleGas2 = "За $selectedYear",
-                    valueGas2 = "${String.format("%.0f", yearTotal)} грн.",
+                    valueGas2 = AmountFormatter.format(yearTotal, roundAmounts),
                     iconGas2 = Icons.Default.Wallet, iconTintGas2 = Color(0xFF67489E), iconBgColorGas2 = Color(0xFFF3E1FF),
                     cardColorGas2 = Color(0xFFF3E1FF),
                     textColorGas2 = Color(0xFF673AB7)

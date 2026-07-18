@@ -29,6 +29,7 @@ import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.waterScr
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.waterScreenComp.MiddleSectionWaterScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.waterScreenComp.TopSectionWaterScreen
 import com.example.meterly.ui.theme.secondaryGradient
+import com.example.meterly.repository.SettingsRepository
 import com.example.meterly.viewModel.PaymentViewModel
 
 @Composable
@@ -39,6 +40,9 @@ fun WaterScreen(onLeftArrowWater: () -> Unit = {},
     val paymentViewModel: PaymentViewModel = viewModel(viewModelStoreOwner = activity)
     val currentPayments by paymentViewModel.currentPayments.collectAsState()
     val previousPayments by paymentViewModel.previousPayments.collectAsState()
+
+    val context = LocalContext.current
+    val roundAmounts by SettingsRepository.roundAmounts(context).collectAsState(initial = false)
 
     val currentPayment = currentPayments[UtilityType.WATER]
     val previousPayment = previousPayments[UtilityType.WATER]
@@ -79,7 +83,8 @@ fun WaterScreen(onLeftArrowWater: () -> Unit = {},
             BottomSectionWaterScreen(
                 currentPayment = currentPayment,
                 previousPayment = previousPayment,
-                onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.WATER, isPaid) }
+                onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.WATER, isPaid) },
+                roundAmounts = roundAmounts
             )
 
             ReceiptPickerItem(

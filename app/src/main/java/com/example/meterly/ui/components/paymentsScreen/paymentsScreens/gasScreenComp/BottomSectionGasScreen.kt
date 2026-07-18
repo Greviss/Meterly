@@ -38,11 +38,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meterly.model.Payment
+import com.example.meterly.util.AmountFormatter
+import kotlin.math.roundToInt
 
 @Composable
 fun BottomSectionGasScreen(
     currentPayment: Payment?,
     previousPayment: Payment?,
+    roundAmounts: Boolean = false,
     onPaidChange: (Boolean) -> Unit
 ) {
     Column(
@@ -111,7 +114,7 @@ fun BottomSectionGasScreen(
                         iconGas = Icons.Default.Money,
                         iconBgColorGas = Color(0xFFE2FFBE),
                         iconTintGas = Color(0xFF4CAF50),
-                        valueGas = "${formatValue(currentPayment.amountDue)} грн.",
+                        valueGas = formatAmountValue(currentPayment.amountDue, roundAmounts),
                         textColorGas = Color(0xFF4CAF50),
                         cardColorGas = Color(0xFFB6DB8B),
                     )
@@ -124,7 +127,7 @@ fun BottomSectionGasScreen(
                         iconGas = Icons.Default.Money,
                         iconBgColorGas = Color(0xFF4CAF50),
                         iconTintGas = Color(0xFFE2FFBE),
-                        valueGas = if (previousPayment != null) "${formatValue(previousPayment.amountDue)} грн." else "-",
+                        valueGas = if (previousPayment != null) formatAmountValue(previousPayment.amountDue, roundAmounts) else "-",
                         textColorGas = Color(0xFFB6DB8B),
                         cardColorGas = Color(0xFF4CAF50),
                     )
@@ -137,7 +140,7 @@ fun BottomSectionGasScreen(
                         iconGas = Icons.Default.AutoGraph,
                         iconBgColorGas = Color(0xFFBBE0FF),
                         iconTintGas = Color(0xFF3F51B5),
-                        valueGas = "${formatValue(currentPayment.rate)} грн./м³",
+                        valueGas = formatRateValue(currentPayment.rate, "м³", roundAmounts),
                         textColorGas = Color(0xFF3F51B5),
                         cardColorGas = Color(0xFF87B4D7),
                     )
@@ -252,4 +255,17 @@ private fun formatValue(value: Double): String {
     } else {
         String.format("%.2f", value)
     }
+}
+
+private fun formatAmountValue(value: Double, round: Boolean): String {
+    return if (round) {
+        "${value.toInt()} грн."
+    } else {
+        formatValue(value) + " грн."
+    }
+}
+
+private fun formatRateValue(value: Double, unit: String, round: Boolean): String {
+    val formatted = if (round) value.toInt().toString() else formatValue(value)
+    return "$formatted грн./$unit"
 }

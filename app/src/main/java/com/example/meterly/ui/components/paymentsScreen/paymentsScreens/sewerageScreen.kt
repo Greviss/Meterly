@@ -29,6 +29,7 @@ import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.sewerage
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.sewerageScreenComp.MiddleSectionSewerageScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.sewerageScreenComp.TopSectionSewerageScreen
 import com.example.meterly.ui.theme.secondaryGradient
+import com.example.meterly.repository.SettingsRepository
 import com.example.meterly.viewModel.PaymentViewModel
 
 @Composable
@@ -39,6 +40,9 @@ fun SewerageScreen(onLeftArrowSewerage: () -> Unit = {},
     val paymentViewModel: PaymentViewModel = viewModel(viewModelStoreOwner = activity)
     val currentPayments by paymentViewModel.currentPayments.collectAsState()
     val previousPayments by paymentViewModel.previousPayments.collectAsState()
+
+    val context = LocalContext.current
+    val roundAmounts by SettingsRepository.roundAmounts(context).collectAsState(initial = false)
 
     val currentPayment = currentPayments[UtilityType.SEWERAGE]
     val previousPayment = previousPayments[UtilityType.SEWERAGE]
@@ -79,7 +83,8 @@ fun SewerageScreen(onLeftArrowSewerage: () -> Unit = {},
             BottomSectionSewerageScreen(
                 currentPayment = currentPayment,
                 previousPayment = previousPayment,
-                onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.SEWERAGE, isPaid) }
+                onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.SEWERAGE, isPaid) },
+                roundAmounts = roundAmounts
             )
 
             ReceiptPickerItem(

@@ -32,10 +32,12 @@ import androidx.compose.ui.unit.sp
 import com.example.meterly.R
 import com.example.meterly.model.Payment
 import com.example.meterly.model.UtilityType
+import com.example.meterly.util.AmountFormatter
 
 @Composable
 fun BottomSectionHomeScreen(
-    currentPayments: Map<UtilityType, Payment?>
+    currentPayments: Map<UtilityType, Payment?>,
+    roundAmounts: Boolean = false
 ){
     val gas = currentPayments[UtilityType.GAS]
     val water = currentPayments[UtilityType.WATER]
@@ -51,7 +53,7 @@ fun BottomSectionHomeScreen(
         CardUtil(
             icon = painterResource(R.drawable.icon_gas),
             title = "Газ",
-            subTitle = formatAmount(gas?.amountDue),
+            subTitle = formatAmount(gas?.amountDue, roundAmounts),
             cardColor = badgeBgColor(gas),
             textColor = badgeTextColor(gas),
             colorBg = Color(0xFFC2DEF5),
@@ -63,7 +65,7 @@ fun BottomSectionHomeScreen(
         CardUtil(
             icon = painterResource(R.drawable.icon_water),
             title = "Вода",
-            subTitle = formatAmount(water?.amountDue),
+            subTitle = formatAmount(water?.amountDue, roundAmounts),
             cardColor = badgeBgColor(water),
             textColor = badgeTextColor(water),
             colorBg = Color(0xFFC1E9EE),
@@ -75,7 +77,7 @@ fun BottomSectionHomeScreen(
         CardUtil(
             icon = painterResource(R.drawable.icon_light),
             title = "Світло",
-            subTitle = formatAmount(light?.amountDue),
+            subTitle = formatAmount(light?.amountDue, roundAmounts),
             cardColor = badgeBgColor(light),
             textColor = badgeTextColor(light),
             colorBg = Color(0xFFECE7C1),
@@ -87,7 +89,7 @@ fun BottomSectionHomeScreen(
         CardUtil(
             icon = painterResource(R.drawable.icon_sewerage),
             title = "Канал.",
-            subTitle = formatAmount(sewerage?.amountDue),
+            subTitle = formatAmount(sewerage?.amountDue, roundAmounts),
             cardColor = badgeBgColor(sewerage),
             textColor = badgeTextColor(sewerage),
             colorBg = Color(0xFFC1EED2),
@@ -96,9 +98,9 @@ fun BottomSectionHomeScreen(
     }
 }
 
-private fun formatAmount(value: Double?): String {
+private fun formatAmount(value: Double?, round: Boolean): String {
     return if (value != null) {
-        String.format("%.2f", value) + " грн."
+        AmountFormatter.format(value, round)
     } else {
         "0 грн."
     }

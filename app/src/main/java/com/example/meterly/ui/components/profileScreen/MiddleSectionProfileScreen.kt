@@ -23,6 +23,7 @@ import com.example.meterly.ui.components.profileScreen.middleSectionComponents.M
 import com.example.meterly.ui.components.profileScreen.middleSectionComponents.Other
 import com.example.meterly.ui.components.profileScreen.middleSectionComponents.PersonalDataComp
 import com.example.meterly.ui.components.profileScreen.middleSectionComponents.Settings
+import com.example.meterly.viewModel.SettingsViewModel
 
 @Composable
 fun MiddleSectionProfileScreen(
@@ -36,7 +37,8 @@ fun MiddleSectionProfileScreen(
     onClickPrivacy: () -> Unit,
     onClickProfileControl: () -> Unit,
     currentTheme: String,
-    onThemeClick: () -> Unit
+    onThemeClick: () -> Unit,
+    settingsViewModel: SettingsViewModel
 ) {
 
     Column(
@@ -102,6 +104,7 @@ fun MiddleSectionProfileScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Settings(
+                    settingsViewModel = settingsViewModel,
                     onClickProfileControl = onClickProfileControl,
                     currentTheme = currentTheme,
                     onThemeClick = onThemeClick

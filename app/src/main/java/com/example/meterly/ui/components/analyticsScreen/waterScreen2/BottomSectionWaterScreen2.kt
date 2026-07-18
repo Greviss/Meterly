@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meterly.model.Payment
+import com.example.meterly.util.AmountFormatter
 import java.util.Calendar
 
 private val monthNames = listOf(
@@ -46,7 +47,8 @@ private val monthNames = listOf(
 @Composable
 fun BottomSectionWaterScreen2(
     payment: Payment? = null,
-    allPayments: List<Payment> = emptyList()
+    allPayments: List<Payment> = emptyList(),
+    roundAmounts: Boolean = false
 ){
     val amountDue = payment?.amountDue ?: 0.0
     val consumption = payment?.consumption ?: 0.0
@@ -112,7 +114,7 @@ fun BottomSectionWaterScreen2(
             ) {
                 RowElementWater(titleWater1 = "Економія (грн.)",
                     subtitleWater1 = "Заощаджено",
-                    valueWater1 = "${String.format("%.2f", savings)} грн.",
+                    valueWater1 = AmountFormatter.format(savings, roundAmounts),
                     iconWater1 = Icons.Default.Eco, iconTintWater1 = Color(0xFF4CAF50), iconBgColorWater1 = Color(0xFFE8F5E9),
                     modifierWater1 = Modifier.weight(1f)
                 )
@@ -140,7 +142,7 @@ fun BottomSectionWaterScreen2(
 
                 RowElementWater(titleWater1 = "Витрачено (грн.)",
                     subtitleWater1 = "Щоденні витрати",
-                    valueWater1 = "${String.format("%.2f", dailyCost)} грн.",
+                    valueWater1 = AmountFormatter.format(dailyCost, roundAmounts),
                     iconWater1 = Icons.Default.Payments, iconTintWater1 = Color(0xFF9E8744), iconBgColorWater1 = Color(0xFFFFF0D7),
                     modifierWater1 = Modifier.weight(1f)
                 )
@@ -155,7 +157,7 @@ fun BottomSectionWaterScreen2(
                 ColumnElementWater(
                     titleWater2 = "Макс. витрат",
                     subtitleWater2 = "За ${formatMonthYear(maxPayment)}",
-                    valueWater2 = "${String.format("%.0f", maxPayment?.amountDue ?: 0.0)} грн.",
+                    valueWater2 = AmountFormatter.format(maxPayment?.amountDue ?: 0.0, roundAmounts),
                     iconWater2 = Icons.Default.ArrowCircleUp, iconTintWater2 = Color(0xFFA04B45), iconBgColorWater2 = Color(0xFFFFD7D5),
                     cardColorWater2 = Color(0xFFFFD7D5),
                     textColorWater2 = Color(0xFFF44336)
@@ -166,7 +168,7 @@ fun BottomSectionWaterScreen2(
                 ColumnElementWater(
                     titleWater2 = "Мін. витрат",
                     subtitleWater2 = "За ${formatMonthYear(minPayment)}",
-                    valueWater2 = "${String.format("%.0f", minPayment?.amountDue ?: 0.0)} грн.",
+                    valueWater2 = AmountFormatter.format(minPayment?.amountDue ?: 0.0, roundAmounts),
                     iconWater2 = Icons.Default.ArrowCircleDown, iconTintWater2 = Color(0xFF47954A), iconBgColorWater2 = Color(0xFFF1FFDE),
                     cardColorWater2 = Color(0xFFF1FFDE),
                     textColorWater2 = Color(0xFF4CAF50)
@@ -177,7 +179,7 @@ fun BottomSectionWaterScreen2(
                 ColumnElementWater(
                     titleWater2 = "За увесь рік",
                     subtitleWater2 = "За $selectedYear",
-                    valueWater2 = "${String.format("%.0f", yearTotal)} грн.",
+                    valueWater2 = AmountFormatter.format(yearTotal, roundAmounts),
                     iconWater2 = Icons.Default.Wallet, iconTintWater2 = Color(0xFF67489E), iconBgColorWater2 = Color(0xFFF3E1FF),
                     cardColorWater2 = Color(0xFFF3E1FF),
                     textColorWater2 = Color(0xFF673AB7)

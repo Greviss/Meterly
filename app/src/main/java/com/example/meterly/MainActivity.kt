@@ -1,6 +1,10 @@
 package com.example.meterly
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -25,6 +29,11 @@ import com.example.meterly.viewModel.ThemeViewModel
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        createNotificationChannel()
+
+        Log.d("MainActivity", "onCreate: notification channel created")
+
         setContent {
             val navController = rememberNavController()
 
@@ -71,6 +80,22 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "meterly_reminders",
+                "Нагадування",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Щомісячні нагадування про показники"
+                enableVibration(true)
+            }
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+            Log.d("MainActivity", "createNotificationChannel: channel created")
         }
     }
 }

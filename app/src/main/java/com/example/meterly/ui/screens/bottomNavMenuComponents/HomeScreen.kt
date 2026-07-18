@@ -33,6 +33,7 @@ import androidx.navigation.NavController
 import com.example.meterly.ui.components.homeScreen.BottomSectionHomeScreen
 import com.example.meterly.ui.components.homeScreen.MiddleSectionHomeScreen
 import com.example.meterly.ui.components.homeScreen.TopSectionHomeScreen
+import com.example.meterly.repository.SettingsRepository
 import com.example.meterly.ui.theme.secondaryGradient
 import com.example.meterly.viewModel.PaymentViewModel
 import com.example.meterly.viewModel.ProfileViewModel
@@ -53,6 +54,9 @@ fun HomeScreen(
 
     val paymentViewModel: PaymentViewModel = viewModel(viewModelStoreOwner = activity)
     val currentPayments by paymentViewModel.currentPayments.collectAsState()
+
+    val context = LocalContext.current
+    val roundAmounts by SettingsRepository.roundAmounts(context).collectAsState(initial = false)
 
     Box(
         modifier = modifier
@@ -96,7 +100,7 @@ fun HomeScreen(
                     color = MaterialTheme.colorScheme.onSurface
                 )
 
-                BottomSectionHomeScreen(currentPayments = currentPayments)
+                BottomSectionHomeScreen(currentPayments = currentPayments, roundAmounts = roundAmounts)
             }
         }
     }

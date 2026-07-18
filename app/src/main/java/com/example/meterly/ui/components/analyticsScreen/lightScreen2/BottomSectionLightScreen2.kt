@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meterly.model.Payment
+import com.example.meterly.util.AmountFormatter
 import java.util.Calendar
 
 private val monthNames = listOf(
@@ -46,7 +47,8 @@ private val monthNames = listOf(
 @Composable
 fun BottomSectionLightScreen2(
     payment: Payment? = null,
-    allPayments: List<Payment> = emptyList()
+    allPayments: List<Payment> = emptyList(),
+    roundAmounts: Boolean = false
 ){
     val amountDue = payment?.amountDue ?: 0.0
     val consumption = payment?.consumption ?: 0.0
@@ -112,7 +114,7 @@ fun BottomSectionLightScreen2(
             ) {
                 RowElementLight(titleLight1 = "Економія (грн.)",
                     subtitleLight1 = "Заощаджено",
-                    valueLight1 = "${String.format("%.2f", savings)} грн.",
+                    valueLight1 = AmountFormatter.format(savings, roundAmounts),
                     iconLight1 = Icons.Default.Eco, iconTintLight1 = Color(0xFF4CAF50), iconBgColorLight1 = Color(0xFFE8F5E9),
                     modifierLight1 = Modifier.weight(1f)
                 )
@@ -140,7 +142,7 @@ fun BottomSectionLightScreen2(
 
                 RowElementLight(titleLight1 = "Витрачено (грн.)",
                     subtitleLight1 = "Щоденні витрати",
-                    valueLight1 = "${String.format("%.2f", dailyCost)} грн.",
+                    valueLight1 = AmountFormatter.format(dailyCost, roundAmounts),
                     iconLight1 = Icons.Default.Payments, iconTintLight1 = Color(0xFF9E8744), iconBgColorLight1 = Color(0xFFFFF0D7),
                     modifierLight1 = Modifier.weight(1f)
                 )
@@ -155,7 +157,7 @@ fun BottomSectionLightScreen2(
                 ColumnElementLight(
                     titleLight2 = "Макс. витрат",
                     subtitleLight2 = "За ${formatMonthYear(maxPayment)}",
-                    valueLight2 = "${String.format("%.0f", maxPayment?.amountDue ?: 0.0)} грн.",
+                    valueLight2 = AmountFormatter.format(maxPayment?.amountDue ?: 0.0, roundAmounts),
                     iconLight2 = Icons.Default.ArrowCircleUp, iconTintLight2 = Color(0xFFA04B45), iconBgColorLight2 = Color(0xFFFFD7D5),
                     cardColorLight2 = Color(0xFFFFD7D5),
                     textColorLight2 = Color(0xFFF44336)
@@ -166,7 +168,7 @@ fun BottomSectionLightScreen2(
                 ColumnElementLight(
                     titleLight2 = "Мін. витрат",
                     subtitleLight2 = "За ${formatMonthYear(minPayment)}",
-                    valueLight2 = "${String.format("%.0f", minPayment?.amountDue ?: 0.0)} грн.",
+                    valueLight2 = AmountFormatter.format(minPayment?.amountDue ?: 0.0, roundAmounts),
                     iconLight2 = Icons.Default.ArrowCircleDown, iconTintLight2 = Color(0xFF47954A), iconBgColorLight2 = Color(0xFFF1FFDE),
                     cardColorLight2 = Color(0xFFF1FFDE),
                     textColorLight2 = Color(0xFF4CAF50)
@@ -177,7 +179,7 @@ fun BottomSectionLightScreen2(
                 ColumnElementLight(
                     titleLight2 = "За увесь рік",
                     subtitleLight2 = "За $selectedYear",
-                    valueLight2 = "${String.format("%.0f", yearTotal)} грн.",
+                    valueLight2 = AmountFormatter.format(yearTotal, roundAmounts),
                     iconLight2 = Icons.Default.Wallet, iconTintLight2 = Color(0xFF67489E), iconBgColorLight2 = Color(0xFFF3E1FF),
                     cardColorLight2 = Color(0xFFF3E1FF),
                     textColorLight2 = Color(0xFF673AB7)

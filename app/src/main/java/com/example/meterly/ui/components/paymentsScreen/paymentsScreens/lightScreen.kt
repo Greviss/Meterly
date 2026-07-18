@@ -29,6 +29,7 @@ import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.lightScr
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.lightScreenComp.MiddleSectionLightScreen
 import com.example.meterly.ui.components.paymentsScreen.paymentsScreens.lightScreenComp.TopSectionLightScreen
 import com.example.meterly.ui.theme.secondaryGradient
+import com.example.meterly.repository.SettingsRepository
 import com.example.meterly.viewModel.PaymentViewModel
 
 @Composable
@@ -39,6 +40,9 @@ fun LightScreen(onLeftArrowLight: () -> Unit = {},
     val paymentViewModel: PaymentViewModel = viewModel(viewModelStoreOwner = activity)
     val currentPayments by paymentViewModel.currentPayments.collectAsState()
     val previousPayments by paymentViewModel.previousPayments.collectAsState()
+
+    val context = LocalContext.current
+    val roundAmounts by SettingsRepository.roundAmounts(context).collectAsState(initial = false)
 
     val currentPayment = currentPayments[UtilityType.LIGHT]
     val previousPayment = previousPayments[UtilityType.LIGHT]
@@ -81,7 +85,8 @@ fun LightScreen(onLeftArrowLight: () -> Unit = {},
             BottomSectionLightScreen(
                 currentPayment = currentPayment,
                 previousPayment = previousPayment,
-                onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.LIGHT, isPaid) }
+                onPaidChange = { isPaid -> paymentViewModel.togglePaid(UtilityType.LIGHT, isPaid) },
+                roundAmounts = roundAmounts
             )
 
             ReceiptPickerItem(
